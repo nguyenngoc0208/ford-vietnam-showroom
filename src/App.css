@@ -508,8 +508,8 @@
 }
 
 .mega-vehicle-trigger {
-  background: transparent;
-  border: none;
+  background-color: #ffffff;
+  border: 1px solid transparent;
   padding: 8px 12px;
   border-radius: 10px;
   display: flex;
@@ -518,17 +518,19 @@
   text-align: center;
   cursor: pointer;
   width: 100%;
-  transition: transform 0.18s ease, background-color 0.18s ease;
+  transition: transform 0.18s ease, border-color 0.18s ease;
 }
 
 .mega-vehicle-trigger:hover {
   transform: translateY(-3px);
-  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  background-color: #ffffff;
 }
 
 .mega-vehicle-thumb {
   width: 165px;
-  height: 96px;
+  height: 85px;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -537,8 +539,9 @@
 
 .mega-vehicle-thumb img {
   width: 100%;
-  height: 100%;
+  height: 75px;
   object-fit: contain;
+  mix-blend-mode: multiply;
   display: block;
 }
 
@@ -692,8 +695,10 @@
 
 .mobile-car-row img {
   width: 64px;
-  height: 40px;
+  height: 42px;
+  background-color: #ffffff;
   object-fit: contain;
+  mix-blend-mode: multiply;
   flex-shrink: 0;
 }
 
@@ -779,12 +784,19 @@
 
 .hero-media-pane--top {
   background-color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 28px 14px;
 }
 
 .hero-media-pane--top img {
+  width: 82%;
+  max-height: 100%;
   object-fit: contain;
-  padding: 58px 36px 12px;
+  mix-blend-mode: multiply;
+  display: block;
 }
 
 .hero-top-scrim {
@@ -1236,33 +1248,30 @@
 
 .vehicle-card-media {
   position: relative;
-  height: 225px;
+  height: 248px;
   background-color: #ffffff;
   border-bottom: 1px solid #f1f5f9;
-  padding: 20px 22px 12px;
+  padding: 40px 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-}
-
-.vehicle-color-backdrop {
-  position: absolute;
-  inset: 0;
-  transition: background 0.35s ease;
-  pointer-events: none;
 }
 
 .vehicle-card-media img {
   position: relative;
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  width: 82%;
+  max-height: 166px;
   object-fit: contain;
+  margin: auto;
   display: block;
-  transition: transform 0.32s ease, opacity 0.22s ease, filter 0.25s ease;
+  mix-blend-mode: multiply;
+  transition: opacity 0.25s ease, transform 0.32s ease;
 }
 
-.vehicle-card-media img.is-color-switching {
-  opacity: 0.65;
-  transform: scale(0.97);
+.vehicle-card-media img.is-swapping {
+  opacity: 0.55;
 }
 
 .vehicle-card:hover .vehicle-card-media img {
@@ -1283,23 +1292,26 @@
 
 .vehicle-card-media .vehicle-card-segment {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background-color: rgba(255, 255, 255, 0.94);
+  top: 12px;
+  left: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
-  z-index: 2;
+  z-index: 20;
 }
 
 .vehicle-color-tag {
   position: absolute;
   bottom: 12px;
   right: 12px;
+  z-index: 20;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
   border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.94);
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
   font-size: 0.74rem;
   font-weight: 600;
@@ -1566,12 +1578,25 @@
   background-color: #ffffff;
 }
 
-.modal-overview-media img {
+.modal-image-wrapper {
+  background-color: #ffffff;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image-wrapper img {
   width: 100%;
-  height: 250px;
-  padding: 16px;
+  max-height: 240px;
   object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: opacity 0.25s ease;
   display: block;
+}
+
+.modal-image-wrapper img.is-swapping {
+  opacity: 0.55;
 }
 
 .modal-promo-banner {
@@ -2357,8 +2382,13 @@
     height: 410px;
   }
 
+  .hero-media-pane--top {
+    padding: 64px 20px 10px;
+  }
+
   .hero-media-pane--top img {
-    padding: 66px 24px 10px;
+    padding: 0;
+    width: 84%;
   }
 
   .hero-arrow-btn--left {
@@ -2634,8 +2664,13 @@
   }
 
   .vehicle-card-media {
-    height: 195px;
-    padding: 16px 18px 10px;
+    height: 226px;
+    padding: 36px 16px 36px;
+  }
+
+  .vehicle-card-media img {
+    width: 84%;
+    max-height: 152px;
   }
 
   .modal-overlay {
@@ -2648,8 +2683,12 @@
     max-height: 94vh;
   }
 
-  .modal-overview-media img {
-    height: 195px;
+  .modal-image-wrapper {
+    padding: 16px 12px;
+  }
+
+  .modal-image-wrapper img {
+    max-height: 190px;
   }
 
   .modal-title {

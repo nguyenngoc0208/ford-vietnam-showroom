@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   COLOR_SWATCHES,
   formatVND,
+  getColorOption,
   getTotalStock,
   handleCarImageError,
 } from '../data/fordCars';
@@ -25,13 +26,23 @@ export default function CarDetailModal({
     initialYear || car?.defaultYear || '',
   );
   const [selectedColor, setSelectedColor] = useState(
-    initialColor || car?.colors?.[0] || '',
+    initialColor || car?.colors?.[0]?.name || '',
   );
   const [holdBranchId, setHoldBranchId] = useState(null);
   const [holdColor, setHoldColor] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [holdSubmitted, setHoldSubmitted] = useState(null);
+  const [isSwapping, setIsSwapping] = useState(false);
+
+  useEffect(() => {
+    car?.colors?.forEach((colorObj) => {
+      if (colorObj.image) {
+        const preloader = new window.Image();
+        preloader.src = colorObj.image;
+      }
+    });
+  }, [car]);
 
   useEffect(() => {
     if (!car) return undefined;
@@ -54,6 +65,7 @@ export default function CarDetailModal({
 
   if (!car) return null;
 
+  const activeColorObj = getColorOption(car, selectedColor);
   const activeTrim = car.trims?.[selectedTrimIndex] || {
     name: car.name,
     price: car.price,
@@ -74,9 +86,9 @@ export default function CarDetailModal({
   const handleOpenHoldForm = (branchItem) => {
     setHoldSubmitted(null);
     setHoldBranchId(branchItem.branchId);
-    const defaultBranchColor = branchItem.colors.includes(selectedColor)
-      ? selectedColor
-      : branchItem.colors[0] || selectedColor;
+    const defaultBranchColor = branchItem.colors.includes(activeColorObj.name)
+      ? activeColorObj.name
+      : branchItem.colors[0] || activeColorObj.name;
     setHoldColor(defaultBranchColor);
   };
 
@@ -92,7 +104,7 @@ export default function CarDetailModal({
       trimName: activeTrim.name,
       year: selectedYear,
       price: effectivePrice,
-      color: holdColor || selectedColor || 'Tùy chọn tại đại lý',
+      color: holdColor || activeColorObj.name || 'Tùy chọn tại đại lý',
       customerName: customerName.trim(),
       customerPhone: customerPhone.trim(),
     });
@@ -129,13 +141,16 @@ export default function CarDetailModal({
         {/* Overview */}
         <div className="modal-overview">
           <div className="modal-overview-media">
-            <img
-              src={car.image}
-              alt={`${car.name} - ${activeTrim.name}`}
-              onError={(event) =>
-                handleCarImageError(event, car.name, car.category)
-              }
-            />
+            <div className="modal-image-wrapper">
+              <img
+                src={activeColorObj.image || car.image}
+                alt={`${car.name} - ${activeTrim.name} - ${activeColorObj.name}`}
+                className={isSwapping ? 'is-swapping' : ''}
+                onError={(event) =>
+                  handleCarImageError(event, car.name, car.category)
+                }
+              />
+            </div>
             <div className="modal-promo-banner">
               <strong>Ưu đãi hiện hành:</strong> {car.promo}
             </div>
@@ -149,7 +164,7 @@ export default function CarDetailModal({
               >
                 <span className="stock-dot" aria-hidden="true" />
                 {totalStock > 0
-                  ? `Toàn quốc còn ${totalStock} xe sẵn sàng giao`
+                  ? `TP.HCM còn ${totalStock} xe sẵn sàng giao`
                   : 'Tạm hết xe sẵn tại kho'}
               </span>
             </div>
@@ -201,26 +216,28 @@ export default function CarDetailModal({
 
             <div className="modal-option-block">
               <span className="modal-option-label">
-                Màu ngoại thất đang xem: <strong>{selectedColor}</strong>
+                Màu ngoại thất đang xem: <strong>{activeColorObj.name}</strong>
               </span>
               <div className="modal-color-swatches" role="group" aria-label="Chọn màu ngoại thất">
-                {car.colors.map((colorName) => {
-                  const isActive = selectedColor === colorName;
+                {car.colors.map((colorObj) => {
+                  const isActive = activeColorObj.name === colorObj.name;
                   return (
                     <button
-                      key={colorName}
+                      key={colorObj.name}
                       type="button"
                       className={`modal-swatch-btn ${isActive ? 'is-active' : ''}`}
-                      onClick={() => setSelectedColor(colorName)}
+                      onClick={() => {
+                        if (colorObj.name === activeColorObj.name) return;
+                        setIsSwapping(true);
+                        setSelectedColor(colorObj.name);
+                        window.setTimeout(() => setIsSwapping(false), 180);
+                      }}
                     >
                       <span
                         className="color-dot"
-                        style={{
-                          backgroundColor:
-                            COLOR_SWATCHES[colorName] || '#94a3b8',
-                        }}
+                        style={{ backgroundColor: colorObj.hex }}
                       />
-                      {colorName}
+                      {colorObj.name}
                     </button>
                   );
                 })}
@@ -249,10 +266,10 @@ export default function CarDetailModal({
           <div className="inventory-heading-row">
             <div>
               <h3 className="modal-section-title">
-                Tra cứu Tồn kho Theo Chi nhánh Đại lý
+                Tra cứu Tồn kho Hệ thống Showroom Ford TP.HCM
               </h3>
               <p className="inventory-subnote">
-                Nhấn &ldquo;Đặt giữ xe&rdquo; tại chi nhánh còn hàng để trừ tồn kho thời gian thực và nhận mã giữ chỗ.
+                Nhấn &ldquo;Đặt giữ xe&rdquo; tại showroom còn hàng để trừ tồn kho thời gian thực và nhận mã giữ chỗ.
               </p>
             </div>
           </div>
@@ -261,7 +278,7 @@ export default function CarDetailModal({
             <table className="inventory-table">
               <thead>
                 <tr>
-                  <th>Đại lý Ford</th>
+                  <th>Showroom Ford TP.HCM</th>
                   <th>Số lượng kho</th>
                   <th>Màu sắc sẵn có</th>
                   <th>Trạng thái</th>
@@ -423,7 +440,7 @@ export default function CarDetailModal({
                   >
                     {(activeHoldBranch.colors.length > 0
                       ? activeHoldBranch.colors
-                      : car.colors
+                      : car.colors.map((c) => c.name)
                     ).map((colorName) => (
                       <option key={colorName} value={colorName}>
                         Màu: {colorName}

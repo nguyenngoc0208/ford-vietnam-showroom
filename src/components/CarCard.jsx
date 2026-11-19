@@ -1,22 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  COLOR_SWATCHES,
   DEALER_BRANCHES,
   formatVND,
   getCarPriceForYear,
+  getColorOption,
   getTotalStock,
   handleCarImageError,
 } from '../data/fordCars';
 
 export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
-  const [selectedColor, setSelectedColor] = useState(car.colors[0] || '');
+  const [selectedColor, setSelectedColor] = useState(
+    car.colors?.[0]?.name || '',
+  );
   const [selectedYear, setSelectedYear] = useState(car.defaultYear || '');
-  const [isColorPulse, setIsColorPulse] = useState(false);
+  const [isSwapping, setIsSwapping] = useState(false);
 
+  // Preload all color images for this model to avoid white flash on switch
+  useEffect(() => {
+    car.colors?.forEach((colorObj) => {
+      if (colorObj.image) {
+        const preloader = new window.Image();
+        preloader.src = colorObj.image;
+      }
+    });
+  }, [car.colors]);
+
+  const activeColorObj = getColorOption(car, selectedColor);
   const displayedPrice = getCarPriceForYear(car, selectedYear);
   const stockCount = getTotalStock(car, activeBranchId);
   const isAvailable = stockCount > 0;
-  const selectedColorHex = COLOR_SWATCHES[selectedColor] || '#94a3b8';
 
   const activeBranchName =
     activeBranchId !== 'all'
@@ -29,51 +41,44 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
       : `Còn ${stockCount} xe sẵn sàng giao`
     : 'Hết xe sẵn — Đặt hàng trước';
 
-  const handleSelectSwatch = (colorName) => {
-    if (colorName === selectedColor) return;
+  const handleSelectColor = (colorName) => {
+    if (colorName === activeColorObj.name) return;
+    setIsSwapping(true);
     setSelectedColor(colorName);
-    setIsColorPulse(true);
-    window.setTimeout(() => setIsColorPulse(false), 260);
+    window.setTimeout(() => setIsSwapping(false), 180);
   };
 
   return (
     <article
       className="vehicle-card"
-      onClick={() => onSelect(car, selectedColor, selectedYear)}
+      onClick={() => onSelect(car, activeColorObj.name, selectedYear)}
       role="button"
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          onSelect(car, selectedColor, selectedYear);
+          onSelect(car, activeColorObj.name, selectedYear);
         }
       }}
     >
       <div className="vehicle-card-media">
-        <div
-          className="vehicle-color-backdrop"
-          style={{
-            background: `radial-gradient(circle at 50% 80%, ${selectedColorHex}38 0%, transparent 68%)`,
-          }}
-          aria-hidden="true"
-        />
         <span className="vehicle-card-segment">{car.category}</span>
         <img
-          src={car.image}
-          alt={`${car.name} - ${selectedColor}`}
-          className={isColorPulse ? 'is-color-switching' : ''}
+          src={activeColorObj.image || car.image}
+          alt={`${car.name} - ${activeColorObj.name}`}
+          className={isSwapping ? 'is-swapping' : ''}
           loading="lazy"
           onError={(event) =>
             handleCarImageError(event, car.name, car.category)
           }
         />
-        {selectedColor && (
+        {activeColorObj.name && (
           <span className="vehicle-color-tag">
             <span
               className="swatch-dot-mini"
-              style={{ backgroundColor: selectedColorHex }}
+              style={{ backgroundColor: activeColorObj.hex }}
             />
-            {selectedColor}
+            {activeColorObj.name}
           </span>
         )}
       </div>
@@ -119,23 +124,21 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
             aria-label={`Chọn màu ngoại thất ${car.name}`}
           >
             <span className="swatches-label">
-              Màu: <strong>{selectedColor}</strong>
+              Màu: <strong>{activeColorObj.name}</strong>
             </span>
             <div className="swatches-list">
-              {car.colors.map((colorName) => {
-                const isSelected = selectedColor === colorName;
+              {car.colors.map((colorObj) => {
+                const isSelected = activeColorObj.name === colorObj.name;
                 return (
                   <button
-                    key={colorName}
+                    key={colorObj.name}
                     type="button"
                     className={`swatch-btn ${isSelected ? 'is-selected' : ''}`}
-                    style={{
-                      backgroundColor: COLOR_SWATCHES[colorName] || '#94a3b8',
-                    }}
-                    title={colorName}
-                    aria-label={`Chọn màu ${colorName}`}
+                    style={{ backgroundColor: colorObj.hex }}
+                    title={colorObj.name}
+                    aria-label={`Chọn màu ${colorObj.name}`}
                     aria-pressed={isSelected}
-                    onClick={() => handleSelectSwatch(colorName)}
+                    onClick={() => handleSelectColor(colorObj.name)}
                   />
                 );
               })}
@@ -156,7 +159,7 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
             className="pill-btn pill-btn--navy vehicle-cta"
             onClick={(event) => {
               event.stopPropagation();
-              onSelect(car, selectedColor, selectedYear);
+              onSelect(car, activeColorObj.name, selectedYear);
             }}
           >
             Xem chi tiết &amp; Kho đại lý

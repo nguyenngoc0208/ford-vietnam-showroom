@@ -15,9 +15,9 @@ import {
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_stock_v1',
-  reservations: 'ford_vn_reservations_v1',
-  testDrives: 'ford_vn_test_drives_v1',
+  stock: 'ford_vn_hcm_stock_v2',
+  reservations: 'ford_vn_reservations_v2',
+  testDrives: 'ford_vn_test_drives_v2',
 };
 
 function readJsonStorage(key, fallback) {
@@ -137,7 +137,7 @@ export default function App() {
     const found = cars.find((item) => item.id === carId) || cars[0];
     setModalCarState({
       carId: found.id,
-      color: found.colors[0] || '',
+      color: found.colors?.[0]?.name || '',
       year: found.defaultYear || '',
     });
   };
@@ -263,7 +263,7 @@ export default function App() {
         onSelectCar={(car, year) =>
           setModalCarState({
             carId: car.id,
-            color: car.colors[0] || '',
+            color: car.colors?.[0]?.name || '',
             year: year || car.defaultYear || '',
           })
         }
@@ -431,9 +431,9 @@ export default function App() {
             </p>
           </div>
           <div className="footer-links-col">
-            <h4>Hệ thống Đại lý Ford</h4>
-            <p>Ford Bến Thành (TP.HCM) • Ford Thủ Đức (TP. Thủ Đức)</p>
-            <p>Ford Thăng Long (Hà Nội) • Ford Đà Nẵng (Đà Nẵng)</p>
+            <h4>Hệ thống Showroom Ford TP.HCM</h4>
+            <p>Bến Thành Ford • City Ford Bình Triệu • Gia Định Ford • Phú Mỹ Ford</p>
+            <p>Sài Gòn Ford (Cao Thắng, Phổ Quang, Nam Sài Gòn) • Western Ford An Lạc</p>
           </div>
           <div className="footer-links-col">
             <h4>Hỗ trợ Khách hàng</h4>
@@ -464,7 +464,7 @@ export default function App() {
         onSelectCar={(car, year) =>
           setModalCarState({
             carId: car.id,
-            color: car.colors[0] || '',
+            color: car.colors?.[0]?.name || '',
             year: year || car.defaultYear || '',
           })
         }
