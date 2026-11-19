@@ -1,0 +1,62 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --ford-navy: #00095B;
+  --ford-blue: #0068D7;
+  --ford-oval: #003478;
+  --bg-white: #ffffff;
+  --bg-gray: #f4f4f4;
+  --bg-gray-soft: #f7f7f7;
+  --text-main: #00095B;
+  --text-body: #2d3748;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --in-stock-bg: #e6f7ef;
+  --in-stock-text: #0f7a4a;
+  --out-stock-bg: #fef2f2;
+  --out-stock-text: #b91c1c;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  color: var(--text-body);
+  background-color: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-white);
+  color: var(--text-body);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,2218 @@
+.ford-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-white);
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* =========================================================
+   PILL BUTTONS (Ready Set Ford CTA System)
+   ========================================================= */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 11px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.18s ease;
+}
+
+.pill-btn:hover {
+  transform: translateY(-1px);
+}
+
+.pill-btn--white {
+  background-color: #ffffff;
+  color: var(--ford-navy);
+  border: 1.5px solid #ffffff;
+}
+
+.pill-btn--white:hover {
+  background-color: #e8effa;
+  border-color: #e8effa;
+}
+
+.pill-btn--outline-white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+}
+
+.pill-btn--outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.pill-btn--navy {
+  background-color: var(--ford-navy);
+  color: #ffffff;
+  border: 1.5px solid var(--ford-navy);
+}
+
+.pill-btn--navy:hover {
+  background-color: var(--ford-blue);
+  border-color: var(--ford-blue);
+}
+
+.pill-btn--blue {
+  background-color: var(--ford-blue);
+  color: #ffffff;
+  border: 1.5px solid var(--ford-blue);
+}
+
+.pill-btn--blue:hover {
+  background-color: var(--ford-navy);
+  border-color: var(--ford-navy);
+}
+
+.pill-btn--outline-navy {
+  background-color: transparent;
+  color: var(--ford-navy);
+  border: 1.5px solid var(--ford-navy);
+}
+
+.pill-btn--outline-navy:hover {
+  background-color: #eef4fc;
+}
+
+/* =========================================================
+   1. TOP UTILITY BAR & STICKY HEADER + MEGA MENU
+   ========================================================= */
+.site-header-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+}
+
+.top-utility-bar {
+  background-color: var(--bg-gray);
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 0.78rem;
+}
+
+.utility-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 6px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.utility-tagline {
+  font-weight: 600;
+  color: var(--ford-navy);
+  letter-spacing: 0.02em;
+}
+
+.utility-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.utility-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #374151;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.utility-link:hover {
+  color: var(--ford-blue);
+  text-decoration: underline;
+}
+
+.main-navbar {
+  position: relative;
+  height: 68px;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header-wrap.is-transparent .main-navbar {
+  background: linear-gradient(to bottom, rgba(0, 9, 60, 0.48), rgba(0, 9, 60, 0));
+  color: #ffffff;
+}
+
+.site-header-wrap.is-solid .main-navbar {
+  background-color: #ffffff;
+  color: var(--ford-navy);
+  box-shadow: 0 4px 18px rgba(0, 9, 91, 0.08);
+  border-bottom: 1px solid #eef2f6;
+}
+
+.navbar-inner {
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.navbar-left-group {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ford-oval-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 36px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, #155ab6, #003478);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+}
+
+.ford-oval-badge span {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.ford-oval-badge--sm {
+  width: 72px;
+  height: 32px;
+}
+
+.ford-oval-badge--sm span {
+  font-size: 17px;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-item-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  padding: 8px 2px;
+  color: inherit;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.is-open::after {
+  transform: scaleX(1);
+}
+
+.nav-chevron {
+  font-size: 0.78rem;
+  transition: transform 0.2s ease;
+}
+
+.nav-link.is-open .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.site-header-wrap.is-transparent .nav-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.site-header-wrap.is-solid .nav-icon-btn:hover {
+  background-color: #f1f5f9;
+}
+
+.nav-icon-btn--account {
+  position: relative;
+}
+
+.account-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background-color: var(--ford-blue);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 17px;
+  text-align: center;
+  border: 1.5px solid #ffffff;
+}
+
+.nav-mobile-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Mega Menu 2 Cột chuẩn Ford Việt Nam */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  color: var(--ford-navy);
+  border-top: 1px solid #eef2f6;
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 24px 48px rgba(0, 9, 91, 0.14);
+  z-index: 590;
+}
+
+.mega-menu-layout {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 28px 32px 38px;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.mega-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mega-cat-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 14px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #1f2937;
+  font-size: 1.02rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.mega-cat-btn:hover {
+  color: var(--ford-blue);
+}
+
+.mega-cat-btn.is-active {
+  color: var(--ford-blue);
+  font-weight: 600;
+  border-color: #93c5fd;
+}
+
+.mega-cat-btn.is-active::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--ford-blue);
+}
+
+.mega-cat-arrow {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.mega-right-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-banner {
+  position: relative;
+  height: 205px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.mega-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+}
+
+.mega-banner-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 32px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.78) 28%,
+    rgba(0, 0, 0, 0.96) 100%
+  );
+}
+
+.mega-banner-title {
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.mega-banner-cta {
+  padding: 10px 22px;
+  font-size: 0.88rem;
+}
+
+.mega-vehicles-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+
+.mega-vehicle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+}
+
+.mega-vehicle-years {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.mega-year-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 2px 6px 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.mega-year-tab:hover {
+  color: #111827;
+}
+
+.mega-year-tab.is-active {
+  color: #111827;
+  font-weight: 700;
+  border-bottom-color: #111827;
+}
+
+.mega-vehicle-trigger {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.mega-vehicle-trigger:hover {
+  transform: translateY(-3px);
+  background-color: #f8fafc;
+}
+
+.mega-vehicle-thumb {
+  width: 165px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.mega-vehicle-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.mega-vehicle-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.mega-vehicle-price {
+  margin-top: 3px;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.mobile-nav-drawer {
+  background-color: #ffffff;
+  color: var(--ford-navy);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-nav-link {
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  text-align: left;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+  cursor: pointer;
+}
+
+/* =========================================================
+   2. SPLIT HERO SLIDER (ford.com.vn style)
+   ========================================================= */
+.split-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 85vh;
+  min-height: 600px;
+  max-height: 860px;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 32px; /* space under top utility bar */
+}
+
+.hero-left {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background-color: #09132b;
+}
+
+.hero-media-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+.hero-media-pane {
+  overflow: hidden;
+}
+
+.hero-media-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-media-pane--top {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-media-pane--top img {
+  object-fit: contain;
+  padding: 58px 36px 12px;
+}
+
+.hero-top-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 112px;
+  background: linear-gradient(to bottom, rgba(0, 9, 60, 0.68), transparent);
+  pointer-events: none;
+}
+
+.hero-bottom-scrim {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 240px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 9, 45, 0.88) 0%,
+    rgba(0, 9, 45, 0.42) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.hero-left-content {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 36px;
+  z-index: 3;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #93c5fd;
+  margin-bottom: 6px;
+}
+
+.hero-model-title {
+  font-family: var(--font-display);
+  color: #ffffff;
+  font-size: clamp(1.55rem, 2.3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.hero-model-sub {
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 460px;
+}
+
+.hero-cta-group {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--ford-navy);
+  font-size: 26px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.2s ease;
+}
+
+.hero-arrow-btn:hover {
+  background-color: #ffffff;
+}
+
+.hero-arrow-btn--left {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+}
+
+.hero-arrow-btn--left:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+
+.hero-arrow-btn--right {
+  flex-shrink: 0;
+}
+
+.hero-arrow-btn--right:hover {
+  transform: scale(1.06);
+}
+
+.hero-right {
+  position: relative;
+  height: 100%;
+  background-color: var(--ford-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 44px 48px;
+}
+
+.hero-slogan-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 560px;
+}
+
+.hero-slogan {
+  font-family: var(--font-display);
+  color: var(--ford-navy);
+  font-size: clamp(2.1rem, 3.8vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hero-slide-dots {
+  position: absolute;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  border: none;
+  padding: 0;
+  background-color: rgba(0, 9, 91, 0.28);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-dot.is-active {
+  width: 28px;
+  background-color: #ffffff;
+}
+
+/* =========================================================
+   3. QUICK ACTIONS BAR (4 Horizontal Icon Cards)
+   ========================================================= */
+.quick-actions-strip {
+  background-color: var(--bg-gray-soft);
+  border-bottom: 1px solid #e6e9ef;
+  padding: 24px 0;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.quick-action-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.18s ease;
+}
+
+.quick-action-card:hover {
+  border-color: var(--ford-blue);
+  transform: translateY(-2px);
+}
+
+.quick-action-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  background-color: #eef4fc;
+  color: var(--ford-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quick-action-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.quick-action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.quick-action-text strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+  line-height: 1.25;
+}
+
+.quick-action-text span {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+}
+
+.quick-action-arrow {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ford-blue);
+}
+
+/* =========================================================
+   4. PRODUCT CATALOG SECTION (Khám Phá Các Dòng Xe Ford)
+   ========================================================= */
+.catalog-section {
+  background-color: #ffffff;
+  padding: 64px 0 88px;
+}
+
+.catalog-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.catalog-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ford-blue);
+  margin-bottom: 6px;
+}
+
+.catalog-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+  font-weight: 800;
+  color: var(--ford-navy);
+  letter-spacing: -0.02em;
+}
+
+.catalog-count {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.catalog-count strong {
+  color: var(--ford-navy);
+}
+
+.catalog-controls {
+  margin-top: 28px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.segment-tabs {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  overflow-x: auto;
+}
+
+.segment-tab {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 14px 2px;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.segment-tab:hover {
+  color: var(--ford-navy);
+}
+
+.segment-tab.is-active {
+  color: var(--ford-navy);
+  font-weight: 700;
+}
+
+.segment-tab.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background-color: var(--ford-blue);
+}
+
+.quick-search {
+  position: relative;
+  width: 310px;
+  max-width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.quick-search-icon {
+  position: absolute;
+  left: 14px;
+  width: 17px;
+  height: 17px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.quick-search-input {
+  width: 100%;
+  padding: 9px 36px 9px 40px;
+  border: 1px solid #d5dde7;
+  border-radius: 9999px;
+  background-color: var(--bg-gray-soft);
+  font-size: 0.88rem;
+  color: var(--ford-navy);
+}
+
+.quick-search-input:focus {
+  outline: none;
+  border-color: var(--ford-blue);
+  background-color: #ffffff;
+}
+
+.quick-search-clear {
+  position: absolute;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  border: none;
+  background: #e2e8f0;
+  color: var(--ford-navy);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Branch Filter Bar */
+.branch-filter-bar {
+  margin-top: 20px;
+  padding: 14px 18px;
+  background-color: var(--bg-gray-soft);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.branch-filter-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.branch-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.branch-pill {
+  padding: 7px 15px;
+  border-radius: 9999px;
+  border: 1px solid #d1d9e4;
+  background-color: #ffffff;
+  color: var(--text-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.branch-pill:hover {
+  border-color: var(--ford-blue);
+  color: var(--ford-navy);
+}
+
+.branch-pill.is-active {
+  background-color: var(--ford-navy);
+  border-color: var(--ford-navy);
+  color: #ffffff;
+}
+
+/* Vehicle Card Grid */
+.vehicle-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.vehicle-card {
+  background-color: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.vehicle-card:hover {
+  border-color: var(--ford-blue);
+}
+
+.vehicle-card:focus-visible {
+  outline: 2px solid var(--ford-blue);
+  outline-offset: 2px;
+}
+
+.vehicle-card-media {
+  position: relative;
+  height: 225px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 20px 22px 12px;
+  overflow: hidden;
+}
+
+.vehicle-color-backdrop {
+  position: absolute;
+  inset: 0;
+  transition: background 0.35s ease;
+  pointer-events: none;
+}
+
+.vehicle-card-media img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.32s ease, opacity 0.22s ease, filter 0.25s ease;
+}
+
+.vehicle-card-media img.is-color-switching {
+  opacity: 0.65;
+  transform: scale(0.97);
+}
+
+.vehicle-card:hover .vehicle-card-media img {
+  transform: scale(1.03);
+}
+
+.vehicle-card-segment {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 9999px;
+  background-color: #eaf2fd;
+  color: var(--ford-navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vehicle-card-media .vehicle-card-segment {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid #e2e8f0;
+  z-index: 2;
+}
+
+.vehicle-color-tag {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid #e2e8f0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ford-navy);
+}
+
+.swatch-dot-mini {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+.vehicle-card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.vehicle-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 54px;
+}
+
+.vehicle-card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  line-height: 1.28;
+}
+
+.card-year-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--bg-gray);
+  padding: 3px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.card-year-tab {
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.card-year-tab.is-active {
+  background-color: var(--ford-navy);
+  color: #ffffff;
+}
+
+.vehicle-card-desc {
+  margin-top: 8px;
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.48;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+  margin-bottom: 14px;
+}
+
+.vehicle-card-footer-stack {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-card-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.vehicle-price-label {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.vehicle-price-value {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--ford-blue);
+}
+
+/* Color Swatches on Card */
+.vehicle-swatches {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.swatches-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.swatches-list {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.swatch-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(15, 23, 42, 0.25);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.swatch-btn:hover {
+  transform: scale(1.12);
+}
+
+.swatch-btn.is-selected {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--ford-navy);
+}
+
+.vehicle-stock-row {
+  margin-top: 16px;
+}
+
+.vehicle-stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.79rem;
+  font-weight: 700;
+}
+
+.stock-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.vehicle-stock-badge.is-in {
+  background-color: var(--in-stock-bg);
+  color: var(--in-stock-text);
+}
+
+.vehicle-stock-badge.is-out {
+  background-color: var(--out-stock-bg);
+  color: var(--out-stock-text);
+}
+
+.vehicle-cta {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* Empty State */
+.catalog-empty {
+  margin-top: 32px;
+  padding: 56px 24px;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+  background-color: var(--bg-gray-soft);
+}
+
+.catalog-empty-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.catalog-empty-desc {
+  margin: 6px 0 18px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   5. MODAL CHI TIẾT XE & TỒN KHO CHI NHÁNH
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 9, 45, 0.64);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0, 9, 91, 0.28);
+}
+
+.utility-modal-content {
+  max-width: 720px;
+}
+
+.modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: var(--ford-navy);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.modal-close:hover {
+  background: #e2e8f0;
+}
+
+.modal-overview {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.modal-overview-media {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e6ebf2;
+  background-color: #ffffff;
+}
+
+.modal-overview-media img {
+  width: 100%;
+  height: 250px;
+  padding: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-promo-banner {
+  padding: 12px 14px;
+  background-color: #eef5ff;
+  border-top: 1px solid #d5e5fb;
+  font-size: 0.83rem;
+  color: var(--ford-navy);
+  line-height: 1.45;
+}
+
+.modal-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-title {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  line-height: 1.25;
+}
+
+.modal-price {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.modal-price strong {
+  font-size: 1.3rem;
+  color: var(--ford-blue);
+}
+
+.modal-description {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-body);
+}
+
+.modal-option-block {
+  margin-top: 16px;
+}
+
+.modal-option-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal-option-label strong {
+  color: var(--ford-navy);
+}
+
+.trim-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trim-pill {
+  padding: 7px 14px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--ford-navy);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.trim-pill.is-active {
+  background: var(--ford-navy);
+  border-color: var(--ford-navy);
+  color: #ffffff;
+}
+
+.modal-color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-swatch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.modal-swatch-btn.is-active {
+  border-color: var(--ford-blue);
+  background: #eef5ff;
+  color: var(--ford-navy);
+}
+
+.modal-section {
+  margin-top: 24px;
+}
+
+.modal-specs-box {
+  background-color: var(--bg-gray-soft);
+  border: 1px solid #e6ebf2;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.modal-section-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  margin-bottom: 12px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.spec-item {
+  background: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spec-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.spec-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.inventory-subnote {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: -6px;
+  margin-bottom: 12px;
+}
+
+.inventory-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.inventory-table th {
+  background: var(--bg-gray);
+  color: var(--ford-navy);
+  font-weight: 700;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.inventory-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.inventory-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.branch-name {
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.branch-address {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.branch-qty {
+  color: var(--ford-navy);
+  white-space: nowrap;
+}
+
+.branch-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.branch-status.is-in {
+  background-color: var(--in-stock-bg);
+  color: var(--in-stock-text);
+}
+
+.branch-status.is-out {
+  background-color: var(--out-stock-bg);
+  color: var(--out-stock-text);
+}
+
+.btn-table-hold {
+  padding: 7px 14px;
+  font-size: 0.78rem;
+}
+
+.color-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.color-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  padding: 3px 9px;
+  font-size: 0.78rem;
+  color: var(--text-body);
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 23, 42, 0.25);
+  flex-shrink: 0;
+}
+
+.no-colors {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Inline Hold Reservation Form */
+.hold-form-box {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background-color: #f0f6ff;
+  border: 1px solid #bfd7fa;
+}
+
+.hold-form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.hold-form-header h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+}
+
+.hold-form-header p {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  margin-top: 2px;
+}
+
+.hold-form-close {
+  border: none;
+  background: transparent;
+  color: var(--ford-blue);
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.hold-form-grid-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+}
+
+.hold-form-grid-v2 input,
+.hold-form-grid-v2 select {
+  padding: 10px 14px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.86rem;
+  background: #ffffff;
+}
+
+.hold-form-grid-v2 input:focus,
+.hold-form-grid-v2 select:focus {
+  outline: none;
+  border-color: var(--ford-blue);
+}
+
+.hold-receipt {
+  padding: 16px 18px;
+  border-radius: 12px;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.hold-receipt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.receipt-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background-color: #065f46;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.hold-receipt h4 {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #064e3b;
+}
+
+.hold-receipt-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  font-size: 0.86rem;
+}
+
+.hold-receipt-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hold-receipt-grid span {
+  font-size: 0.76rem;
+  color: #047857;
+}
+
+.hold-receipt-note {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: #065f46;
+  border-top: 1px solid #a7f3d0;
+  padding-top: 8px;
+}
+
+/* Rolling Cost Calculator in Utility Modal */
+.calc-controls-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.calc-year-row,
+.calc-region-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.calc-year-row > span,
+.calc-region-row > span {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.region-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.region-pill {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--ford-navy);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.region-pill.is-active {
+  background: var(--ford-navy);
+  border-color: var(--ford-navy);
+  color: #ffffff;
+}
+
+.estimate-card {
+  margin-top: 16px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.estimate-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.estimate-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #eef5ff;
+  color: var(--ford-navy);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.estimate-total strong {
+  color: var(--ford-blue);
+  font-size: 1.15rem;
+}
+
+.calc-promo-note {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background-color: var(--bg-gray-soft);
+  font-size: 0.84rem;
+  color: var(--ford-navy);
+}
+
+.calc-footer-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Account & Reservations Drawer Panel */
+.account-overlay {
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.account-panel {
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -12px 0 40px rgba(0, 9, 91, 0.22);
+}
+
+.account-panel-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.account-panel-title {
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+}
+
+.account-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.account-section-header h3 {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  margin-bottom: 12px;
+}
+
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.account-item-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background-color: var(--bg-gray-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.account-cancel-btn {
+  background: transparent;
+  border: none;
+  color: #b91c1c;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.account-cancel-btn:hover {
+  text-decoration: underline;
+}
+
+.account-car-title {
+  font-size: 0.96rem;
+  color: var(--ford-navy);
+}
+
+.account-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82rem;
+  color: var(--text-body);
+}
+
+.account-color-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.account-empty {
+  padding: 22px 16px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  text-align: center;
+  background-color: var(--bg-gray-soft);
+}
+
+.account-empty p {
+  font-weight: 700;
+  color: var(--ford-navy);
+  font-size: 0.92rem;
+}
+
+.account-empty span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.account-panel-footer {
+  padding: 18px 24px;
+  border-top: 1px solid var(--border-subtle);
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-storage-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.account-reset-btn {
+  width: 100%;
+}
+
+.utility-form {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.utility-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.utility-field span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.utility-field input,
+.utility-field select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  background-color: #ffffff;
+}
+
+.utility-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.utility-success {
+  margin-top: 18px;
+}
+
+/* Footer */
+.ford-footer {
+  background-color: var(--ford-navy);
+  color: rgba(255, 255, 255, 0.86);
+  padding: 44px 0;
+  font-size: 0.88rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 28px;
+}
+
+.footer-brand-note {
+  margin-top: 12px;
+  max-width: 380px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.footer-links-col h4 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.footer-links-col p {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 1120px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mega-menu-layout {
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+
+  .specs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .navbar-center,
+  .mega-menu {
+    display: none;
+  }
+
+  .nav-mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .split-hero {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: none;
+  }
+
+  .hero-left {
+    height: 540px;
+  }
+
+  .hero-right {
+    min-height: 270px;
+    padding: 36px 24px 54px;
+  }
+
+  .modal-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .hold-form-grid-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .container,
+  .navbar-inner,
+  .utility-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .utility-tagline {
+    display: none;
+  }
+
+  .utility-links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .quick-actions-grid,
+  .vehicle-grid,
+  .specs-grid,
+  .utility-field-row,
+  .calc-controls-grid,
+  .hold-receipt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left-content {
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+  }
+
+  .hero-slogan-wrap {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .promo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .promo-right {
+    align-items: flex-start;
+  }
+
+  .modal-content {
+    padding: 18px;
+  }
+}
