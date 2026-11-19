@@ -13,6 +13,7 @@ export default function Navbar({
   reservationCount = 0,
   onSelectCategoryAndScroll,
   onOpenSearch,
+  onOpenFinder,
   onSelectCar,
   onOpenUtilityModal,
   onOpenAccountModal,
@@ -174,6 +175,15 @@ export default function Navbar({
                 <circle cx="11" cy="11" r="7.5" />
                 <path d="m20.5 20.5-4.2-4.2" />
               </svg>
+            </button>
+
+            <button
+              type="button"
+              className="nav-finder-btn"
+              onClick={onOpenFinder}
+              title="Tư vấn chọn xe & phiên bản theo nhu cầu"
+            >
+              Tư vấn chọn xe ✨
             </button>
 
             <button
@@ -484,6 +494,16 @@ export default function Navbar({
               }}
             >
               Đăng Ký Lái Thử
+            </button>
+            <button
+              type="button"
+              className="mobile-drawer-link mobile-drawer-link--finder"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenFinder?.();
+              }}
+            >
+              Tư vấn chọn xe ✨
             </button>
             <button
               type="button"

@@ -9,6 +9,7 @@ import UtilityModal from './components/UtilityModal';
 import AccountModal from './components/AccountModal';
 import CompareBar from './components/CompareBar';
 import CompareModal from './components/CompareModal';
+import SmartCarFinderModal from './components/SmartCarFinderModal';
 import {
   CATEGORY_TABS,
   DEALER_BRANCHES,
@@ -97,7 +98,11 @@ export default function App() {
     carId: null,
     color: '',
     year: '',
+    trimIndex: 0,
+    engineIndex: 0,
+    city: null,
   });
+  const [finderOpen, setFinderOpen] = useState(false);
   const [utilityModalMode, setUtilityModalMode] = useState(null);
   const [accountOpen, setAccountOpen] = useState(false);
 
@@ -398,6 +403,7 @@ export default function App() {
           scrollToCatalog(false);
         }}
         onOpenSearch={() => scrollToCatalog(true)}
+        onOpenFinder={() => setFinderOpen(true)}
         onSelectCar={(car, year) =>
           setModalCarState({
             carId: car.id,
@@ -445,6 +451,22 @@ export default function App() {
                     ? ` có sẵn tại ${selectedCity}`
                     : ''}
               </p>
+            </div>
+
+            <div className="finder-promo-banner" role="region" aria-label="Tư vấn chọn xe Ford nhanh">
+              <div className="finder-promo-copy">
+                <span className="finder-promo-badge">GỢI Ý THÔNG MINH</span>
+                <p>
+                  Chưa biết chọn phiên bản Ford nào phù hợp? Trả lời 4 câu hỏi nhanh trong 15 giây để tìm cấu hình chuẩn nhất &amp; kiểm tra xe sẵn kho gần bạn.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="pill-btn pill-btn--white finder-promo-cta"
+                onClick={() => setFinderOpen(true)}
+              >
+                Bắt đầu tư vấn →
+              </button>
             </div>
 
             <div className="catalog-controls">
@@ -702,15 +724,60 @@ export default function App() {
       <CarDetailModal
         key={
           activeModalCar
-            ? `${activeModalCar.id}-${modalCarState.color}-${modalCarState.year}`
+            ? `${activeModalCar.id}-${modalCarState.color}-${modalCarState.year}-${modalCarState.trimIndex ?? 0}-${modalCarState.engineIndex ?? 0}-${modalCarState.city || selectedCity}`
             : 'closed'
         }
         car={activeModalCar}
         initialColor={modalCarState.color}
         initialYear={modalCarState.year}
-        initialCity={selectedCity}
+        initialTrimIndex={modalCarState.trimIndex ?? 0}
+        initialEngineIndex={modalCarState.engineIndex ?? 0}
+        initialCity={modalCarState.city || selectedCity}
         onReserveVehicle={handleReserveVehicle}
-        onClose={() => setModalCarState({ carId: null, color: '', year: '' })}
+        onClose={() =>
+          setModalCarState({
+            carId: null,
+            color: '',
+            year: '',
+            trimIndex: 0,
+            engineIndex: 0,
+            city: null,
+          })
+        }
+      />
+
+      <SmartCarFinderModal
+        key={finderOpen ? 'finder-open' : 'finder-closed'}
+        isOpen={finderOpen}
+        cars={cars}
+        initialCity={selectedCity}
+        onSelectRecommendation={({
+          car,
+          year,
+          trimIndex,
+          engineIndex,
+          color,
+          city,
+        }) => {
+          setFinderOpen(false);
+          if (city) {
+            setSelectedCity(city);
+            setSelectedBranchId('all');
+          }
+          setModalCarState({
+            carId: car.id,
+            color:
+              color ||
+              getCarYearVariant(car, year)?.defaultColor ||
+              car.colors?.[0]?.name ||
+              '',
+            year: year || car.defaultYear || '',
+            trimIndex: trimIndex ?? 0,
+            engineIndex: engineIndex ?? 0,
+            city: city || selectedCity,
+          });
+        }}
+        onClose={() => setFinderOpen(false)}
       />
 
       <UtilityModal

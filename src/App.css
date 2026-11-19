@@ -289,6 +289,49 @@
   background-color: #f1f5f9;
 }
 
+.nav-finder-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.18s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.site-header-wrap.is-transparent .nav-finder-btn {
+  background-color: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+}
+
+.site-header-wrap.is-transparent .nav-finder-btn:hover {
+  background-color: #ffffff;
+  color: var(--ford-navy);
+}
+
+.site-header-wrap.is-solid .nav-finder-btn {
+  background: linear-gradient(135deg, var(--ford-navy) 0%, #003478 100%);
+  border: 1.5px solid var(--ford-navy);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 9, 91, 0.18);
+}
+
+.site-header-wrap.is-solid .nav-finder-btn:hover {
+  background: linear-gradient(135deg, #003478 0%, var(--ford-blue) 100%);
+  transform: translateY(-1px);
+}
+
+.mobile-drawer-link--finder {
+  color: var(--ford-blue);
+  font-weight: 800;
+}
+
 .nav-icon-btn--account {
   position: relative;
 }
@@ -3258,6 +3301,429 @@
   .calc-controls-grid,
   .hold-receipt-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Smart Car & Trim Finder Banner + Modal */
+.finder-promo-banner {
+  margin-bottom: 22px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--ford-navy) 0%, #003478 65%, #0052b4 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 12px 30px rgba(0, 9, 91, 0.16);
+}
+
+.finder-promo-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.finder-promo-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.finder-promo-copy p {
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.finder-promo-cta {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+.finder-modal-content {
+  max-width: 960px;
+}
+
+.finder-modal-header {
+  padding-right: 36px;
+}
+
+.finder-progress-wrap {
+  margin-top: 14px;
+}
+
+.finder-progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.finder-step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  border: 1.5px solid #cbd5e1;
+  background-color: #ffffff;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.finder-step-dot.is-current {
+  background-color: var(--ford-navy);
+  border-color: var(--ford-navy);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 52, 120, 0.16);
+}
+
+.finder-step-dot.is-done {
+  background-color: #e6f0ff;
+  border-color: var(--ford-blue);
+  color: var(--ford-blue);
+}
+
+.finder-progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.finder-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--ford-navy) 0%, var(--ford-blue) 100%);
+  transition: width 0.25s ease;
+}
+
+.finder-step-body {
+  margin-top: 22px;
+}
+
+.finder-step-question {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  margin-bottom: 16px;
+}
+
+.finder-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.finder-options-grid--single {
+  grid-template-columns: 1fr;
+}
+
+.finder-option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 15px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-gray-soft);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+}
+
+.finder-option-card:hover {
+  border-color: var(--ford-blue);
+  background-color: #f4f8ff;
+  transform: translateY(-1px);
+}
+
+.finder-option-card.is-selected {
+  border-color: var(--ford-navy);
+  background-color: #eef5ff;
+  box-shadow: 0 0 0 1px var(--ford-navy);
+}
+
+.finder-option-card strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+}
+
+.finder-option-card span {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.finder-step-footer {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.finder-step-footer button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.finder-results-body {
+  margin-top: 16px;
+}
+
+.finder-criteria-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background-color: #f0f6ff;
+  border: 1px solid #d5e5fd;
+  font-size: 0.82rem;
+  color: var(--text-body);
+  margin-bottom: 18px;
+}
+
+.finder-criteria-summary strong {
+  color: var(--ford-navy);
+}
+
+.finder-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.finder-result-card {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 18px;
+  background-color: #ffffff;
+}
+
+.finder-result-card.is-top-pick {
+  border-color: var(--ford-navy);
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  box-shadow: 0 10px 26px rgba(0, 9, 91, 0.1);
+}
+
+.finder-result-top-badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.finder-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.finder-rank-badge.is-primary {
+  background: linear-gradient(135deg, var(--ford-navy) 0%, #003478 100%);
+  color: #ffffff;
+}
+
+.finder-rank-badge.is-alt {
+  background-color: #e2e8f0;
+  color: var(--ford-navy);
+}
+
+.finder-match-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 9999px;
+  background-color: #dcfce7;
+  color: #166534;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.finder-result-main {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.finder-result-media {
+  background-color: var(--bg-gray-soft);
+  border: 1px solid #e6ecf5;
+  border-radius: 12px;
+  padding: 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finder-result-media img {
+  width: 100%;
+  max-height: 148px;
+  object-fit: contain;
+  display: block;
+}
+
+.finder-result-title {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  line-height: 1.35;
+}
+
+.finder-result-price {
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.finder-result-price strong {
+  font-size: 1.04rem;
+  font-weight: 800;
+  color: var(--ford-blue);
+}
+
+.finder-reasons-box {
+  margin-top: 10px;
+}
+
+.finder-reasons-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+  margin-bottom: 5px;
+}
+
+.finder-reasons-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.finder-reasons-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-body);
+}
+
+.finder-reasons-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ford-blue);
+  font-weight: 800;
+}
+
+.finder-stock-box {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background-color: var(--bg-gray-soft);
+  border: 1px solid #e2e8f0;
+}
+
+.finder-stock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.finder-stock-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--ford-navy);
+}
+
+.finder-branches-preview {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.finder-branch-mini {
+  padding-top: 8px;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.finder-branch-mini-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.finder-branch-mini-top strong {
+  font-size: 0.82rem;
+  color: var(--ford-navy);
+}
+
+.finder-branch-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.finder-result-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .nav-finder-btn {
+    display: none;
+  }
+
+  .finder-promo-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 18px;
+  }
+
+  .finder-options-grid,
+  .finder-result-main {
+    grid-template-columns: 1fr;
+  }
+
+  .finder-step-footer {
+    flex-wrap: wrap;
   }
 }
 

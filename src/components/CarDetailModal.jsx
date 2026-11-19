@@ -25,12 +25,14 @@ export default function CarDetailModal({
   car,
   initialColor = '',
   initialYear = '',
+  initialTrimIndex = 0,
+  initialEngineIndex = 0,
   initialCity = 'Tất cả tỉnh/thành',
   onReserveVehicle,
   onClose,
 }) {
-  const [selectedTrimIndex, setSelectedTrimIndex] = useState(0);
-  const [selectedEngineIndex, setSelectedEngineIndex] = useState(0);
+  const [selectedTrimIndex, setSelectedTrimIndex] = useState(initialTrimIndex);
+  const [selectedEngineIndex, setSelectedEngineIndex] = useState(initialEngineIndex);
   const [selectedYear, setSelectedYear] = useState(
     initialYear || car?.defaultYear || '',
   );
