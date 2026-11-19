@@ -13,6 +13,7 @@ import {
   CATEGORY_TABS,
   DEALER_BRANCHES,
   DEALER_CITIES,
+  FORD_BRANCHES,
   fordCars,
   getBranchStockForTrim,
   getCarYearVariant,
@@ -21,7 +22,7 @@ import {
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_nationwide_stock_v17',
+  stock: 'ford_vn_nationwide_stock_v18',
   reservations: 'ford_vn_reservations_v3',
   testDrives: 'ford_vn_test_drives_v3',
 };
@@ -357,7 +358,7 @@ export default function App() {
     setTestDrives([]);
     showToast(
       'Đã khôi phục tồn kho',
-      'Số lượng xe tại 14 showroom toàn quốc đã trở về mặc định.',
+      `Số lượng xe tại ${FORD_BRANCHES.length} showroom toàn quốc đã trở về mặc định.`,
       'info',
     );
   };
@@ -587,7 +588,7 @@ export default function App() {
               <FordLogo className="ford-logo--footer" label="Ford Việt Nam" />
               <p className="footer-brand-note">
                 Ford Việt Nam — Hệ thống trưng bày, so sánh thông số và tra cứu tồn kho
-                thời gian thực tại 14 showroom Ford chính hãng trên toàn quốc.
+                thời gian thực tại {FORD_BRANCHES.length} showroom Ford chính hãng trên toàn quốc.
               </p>
               <div className="footer-hotline-box">
                 <span>Hotline Hỗ trợ Khách hàng 24/7</span>
@@ -650,7 +651,7 @@ export default function App() {
                 className="footer-link-btn"
                 onClick={() => setUtilityModalMode('dealers')}
               >
-                Tìm 14 Showroom toàn quốc &amp; Chỉ đường Maps
+                Tìm {FORD_BRANCHES.length} Showroom toàn quốc &amp; Chỉ đường Maps
               </button>
               <button
                 type="button"
@@ -662,10 +663,10 @@ export default function App() {
             </div>
 
             <div className="footer-links-col">
-              <h4>Hệ thống 14 Showroom Toàn Quốc</h4>
-              <p>TP.HCM (8): Bến Thành • City Ford • Sài Gòn Ford • Western • Gia Định • Phú Mỹ</p>
-              <p>Hà Nội (2): Hà Nội Ford • Thăng Long Ford</p>
-              <p>Tỉnh/Thành khác (4): Đà Nẵng • Hải Phòng • Cần Thơ • Bình Dương</p>
+              <h4>Hệ thống {FORD_BRANCHES.length} Showroom Toàn Quốc</h4>
+              <p>TP. Hồ Chí Minh (10): Bến Thành • City Ford • Sài Gòn Ford • Western • Gia Định • Phú Mỹ • Bình Dương • Vũng Tàu</p>
+              <p>Hà Nội (7): Hà Nội Ford • Thăng Long • Thanh Xuân • Long Biên • Thủ Đô • Hà Thành • An Đô</p>
+              <p>TP. trực thuộc TW khác (8): Hải Phòng (2) • Đà Nẵng (3) • Cần Thơ (2) • TP. Huế (1)</p>
             </div>
           </div>
 

@@ -31,10 +31,213 @@ export const DEALER_CITIES = [
   'Tất cả tỉnh/thành',
   'TP. Hồ Chí Minh',
   'Hà Nội',
-  'Đà Nẵng',
   'Hải Phòng',
+  'Đà Nẵng',
   'Cần Thơ',
-  'Bình Dương',
+  'TP. Huế',
+];
+
+export const FORD_BRANCHES = [
+  {
+    id: 'ben-thanh',
+    name: 'Bến Thành Ford',
+    city: 'TP. Hồ Chí Minh',
+    address: '39 Chế Lan Viên, P. Tây Thạnh, TP.HCM (Địa chỉ cũ: P. Tây Thạnh, Q. Tân Phú, TP.HCM)',
+    mapsQuery: 'Bến Thành Ford, 39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
+    hotline: '028 3815 8888',
+  },
+  {
+    id: 'city-binh-trieu',
+    name: 'City Ford Bình Triệu',
+    city: 'TP. Hồ Chí Minh',
+    address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP.HCM (Địa chỉ cũ: P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM)',
+    mapsQuery: 'City Ford Bình Triệu, 218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
+    hotline: '028 3726 9999',
+  },
+  {
+    id: 'saigon-cao-thang',
+    name: 'Sài Gòn Ford Cao Thắng',
+    city: 'TP. Hồ Chí Minh',
+    address: '61A Cao Thắng, Phường 3, TP.HCM (Địa chỉ cũ: Phường 3, Quận 3, TP.HCM)',
+    mapsQuery: 'Sài Gòn Ford Cao Thắng, 61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
+    hotline: '028 3830 8888',
+  },
+  {
+    id: 'saigon-pho-quang',
+    name: 'Sài Gòn Ford Phổ Quang',
+    city: 'TP. Hồ Chí Minh',
+    address: '104 Phổ Quang, Phường 2, TP.HCM (Địa chỉ cũ: Phường 2, Q. Tân Bình, TP.HCM)',
+    mapsQuery: 'Sài Gòn Ford Phổ Quang, 104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
+    hotline: '028 3844 8888',
+  },
+  {
+    id: 'saigon-nam-sg',
+    name: 'Sài Gòn Ford Nam Sài Gòn',
+    city: 'TP. Hồ Chí Minh',
+    address: '161F Dạ Nam / Nguyễn Văn Linh, TP.HCM (Địa chỉ cũ: Huyện Bình Chánh, TP.HCM)',
+    mapsQuery: 'Sài Gòn Ford Nam Sài Gòn, 161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
+    hotline: '028 3851 8888',
+  },
+  {
+    id: 'gia-dinh',
+    name: 'Gia Định Ford',
+    city: 'TP. Hồ Chí Minh',
+    address: '900 Quốc Lộ 1A, P. Thạnh Xuân, TP.HCM (Địa chỉ cũ: P. Thạnh Xuân, Quận 12, TP.HCM)',
+    mapsQuery: 'Gia Định Ford, 900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
+    hotline: '028 3716 8888',
+  },
+  {
+    id: 'western-an-lac',
+    name: 'Western Ford An Lạc',
+    city: 'TP. Hồ Chí Minh',
+    address: '530 Kinh Dương Vương, P. An Lạc, TP.HCM (Địa chỉ cũ: P. An Lạc, Q. Bình Tân, TP.HCM)',
+    mapsQuery: 'Western Ford An Lạc, 530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
+    hotline: '028 3752 8888',
+  },
+  {
+    id: 'phu-my',
+    name: 'Phú Mỹ Ford',
+    city: 'TP. Hồ Chí Minh',
+    address: 'Lô B1 Đường C2, KCN Cát Lái 2, TP.HCM (Địa chỉ cũ: P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM)',
+    mapsQuery: 'Phú Mỹ Ford, Lô B1 Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
+    hotline: '028 3742 8888',
+  },
+  {
+    id: 'binh-duong-ford',
+    name: 'Bình Dương Ford',
+    city: 'TP. Hồ Chí Minh',
+    address: 'Lô C13 Đường Hùng Vương, P. Hòa Phú, TP.HCM (Địa chỉ cũ: TP. Thủ Dầu Một, Tỉnh Bình Dương)',
+    mapsQuery: 'Bình Dương Ford, Lô C13 Đường Hùng Vương, P. Hòa Phú, TP. Thủ Dầu Một, Bình Dương',
+    hotline: '0274 3818 888',
+  },
+  {
+    id: 'vung-tau-ford',
+    name: 'Vũng Tàu Ford',
+    city: 'TP. Hồ Chí Minh',
+    address: '50 Đường 30/4, Phường 9, TP.HCM (Địa chỉ cũ: TP. Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu)',
+    mapsQuery: 'Vũng Tàu Ford, 50 Đường 30/4, Phường 9, TP. Vũng Tàu, Bà Rịa - Vũng Tàu',
+    hotline: '0254 3577 888',
+  },
+  {
+    id: 'ha-noi-ford',
+    name: 'Hà Nội Ford',
+    city: 'Hà Nội',
+    address: '311–313 Trường Chinh, P. Khương Mai, Hà Nội (Địa chỉ cũ: Q. Thanh Xuân, Hà Nội)',
+    mapsQuery: 'Hà Nội Ford, 311-313 Trường Chinh, P. Khương Mai, Q. Thanh Xuân, Hà Nội',
+    hotline: '024 3565 8888',
+  },
+  {
+    id: 'thang-long-ford',
+    name: 'Thăng Long Ford',
+    city: 'Hà Nội',
+    address: '105 Láng Hạ, P. Láng Hạ, Hà Nội (Địa chỉ cũ: Q. Đống Đa, Hà Nội)',
+    mapsQuery: 'Thăng Long Ford, 105 Láng Hạ, P. Láng Hạ, Q. Đống Đa, Hà Nội',
+    hotline: '024 3562 9999',
+  },
+  {
+    id: 'thanh-xuan-ford',
+    name: 'Thanh Xuân Ford',
+    city: 'Hà Nội',
+    address: '88 Nguyễn Xiển, P. Hạ Đình, Hà Nội (Địa chỉ cũ: Q. Thanh Xuân, Hà Nội)',
+    mapsQuery: 'Thanh Xuân Ford, 88 Nguyễn Xiển, P. Hạ Đình, Q. Thanh Xuân, Hà Nội',
+    hotline: '024 3552 8888',
+  },
+  {
+    id: 'long-bien-ford',
+    name: 'Long Biên Ford',
+    city: 'Hà Nội',
+    address: 'Số 3 Nguyễn Văn Linh, P. Gia Thụy, Hà Nội (Địa chỉ cũ: Q. Long Biên, Hà Nội)',
+    mapsQuery: 'Long Biên Ford, Số 3 Nguyễn Văn Linh, P. Gia Thụy, Q. Long Biên, Hà Nội',
+    hotline: '024 3875 8888',
+  },
+  {
+    id: 'thu-do-ford',
+    name: 'Thủ Đô Ford',
+    city: 'Hà Nội',
+    address: 'Km8 Giải Phóng, P. Hoàng Liệt, Hà Nội (Địa chỉ cũ: Q. Hoàng Mai, Hà Nội)',
+    mapsQuery: 'Thủ Đô Ford, Km8 Giải Phóng, P. Hoàng Liệt, Q. Hoàng Mai, Hà Nội',
+    hotline: '024 3681 8888',
+  },
+  {
+    id: 'ha-thanh-ford',
+    name: 'Hà Thành Ford',
+    city: 'Hà Nội',
+    address: 'Cụm CN Lai Xá, Xã Kim Chung, Hà Nội (Địa chỉ cũ: Huyện Hoài Đức, Hà Nội)',
+    mapsQuery: 'Hà Thành Ford, Cụm CN Lai Xá, Xã Kim Chung, Huyện Hoài Đức, Hà Nội',
+    hotline: '024 3386 8888',
+  },
+  {
+    id: 'an-do-ford',
+    name: 'An Đô Ford',
+    city: 'Hà Nội',
+    address: '168 Phạm Văn Đồng, P. Xuân Đỉnh, Hà Nội (Địa chỉ cũ: Q. Bắc Từ Liêm, Hà Nội)',
+    mapsQuery: 'An Đô Ford, 168 Phạm Văn Đồng, P. Xuân Đỉnh, Q. Bắc Từ Liêm, Hà Nội',
+    hotline: '024 3750 8888',
+  },
+  {
+    id: 'hai-phong-ford',
+    name: 'Hải Phòng Ford',
+    city: 'Hải Phòng',
+    address: 'Số 4 Bạch Đằng, P. Hạ Lý, Hải Phòng (Địa chỉ cũ: Q. Hồng Bàng, TP. Hải Phòng)',
+    mapsQuery: 'Hải Phòng Ford, Số 4 Bạch Đằng, P. Hạ Lý, Q. Hồng Bàng, Hải Phòng',
+    hotline: '0225 3282 888',
+  },
+  {
+    id: 'hai-duong-ford',
+    name: 'Hải Dương Ford',
+    city: 'Hải Phòng',
+    address: '118 An Định, P. Bình Hàn, Hải Phòng (Địa chỉ cũ: TP. Hải Dương, Tỉnh Hải Dương)',
+    mapsQuery: 'Hải Dương Ford, 118 An Định, P. Bình Hàn, TP. Hải Dương, Hải Dương',
+    hotline: '0220 3895 888',
+  },
+  {
+    id: 'da-nang-ford',
+    name: 'Đà Nẵng Ford',
+    city: 'Đà Nẵng',
+    address: '56 Điện Biên Phủ, P. Chính Gián, Đà Nẵng (Địa chỉ cũ: Q. Thanh Khê, TP. Đà Nẵng)',
+    mapsQuery: 'Đà Nẵng Ford, 56 Điện Biên Phủ, P. Chính Gián, Q. Thanh Khê, Đà Nẵng',
+    hotline: '0236 3646 888',
+  },
+  {
+    id: 'dana-ford',
+    name: 'Dana Ford',
+    city: 'Đà Nẵng',
+    address: '286 Phạm Hùng, Xã Hòa Phước, Đà Nẵng (Địa chỉ cũ: Huyện Hòa Vang, TP. Đà Nẵng)',
+    mapsQuery: 'Dana Ford, 286 Phạm Hùng, Xã Hòa Phước, Huyện Hòa Vang, Đà Nẵng',
+    hotline: '0236 3616 888',
+  },
+  {
+    id: 'quang-nam-ford',
+    name: 'Quảng Nam Ford',
+    city: 'Đà Nẵng',
+    address: 'Quốc Lộ 1A, P. Tân Thạnh, Đà Nẵng (Địa chỉ cũ: TP. Tam Kỳ, Tỉnh Quảng Nam)',
+    mapsQuery: 'Quảng Nam Ford, Quốc Lộ 1A, P. Tân Thạnh, TP. Tam Kỳ, Quảng Nam',
+    hotline: '0235 3828 888',
+  },
+  {
+    id: 'can-tho-ford',
+    name: 'Cần Thơ Ford',
+    city: 'Cần Thơ',
+    address: 'Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Cần Thơ (Địa chỉ cũ: Q. Cái Răng, TP. Cần Thơ)',
+    mapsQuery: 'Cần Thơ Ford, Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Q. Cái Răng, Cần Thơ',
+    hotline: '0292 3737 888',
+  },
+  {
+    id: 'soc-trang-ford',
+    name: 'Sóc Trăng Ford',
+    city: 'Cần Thơ',
+    address: '1139 Võ Văn Kiệt, Phường 10, Cần Thơ (Địa chỉ cũ: TP. Sóc Trăng, Tỉnh Sóc Trăng)',
+    mapsQuery: 'Sóc Trăng Ford, 1139 Võ Văn Kiệt, Phường 10, TP. Sóc Trăng, Sóc Trăng',
+    hotline: '0299 3628 888',
+  },
+  {
+    id: 'hue-ford',
+    name: 'Huế Ford',
+    city: 'TP. Huế',
+    address: 'Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, P. An Đông, Quận Thuận Hóa, TP. Huế (Địa chỉ cũ: TP. Huế, Tỉnh Thừa Thiên Huế)',
+    mapsQuery: 'Huế Ford, Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, P. An Đông, TP. Huế',
+    hotline: '0234 3818 888',
+  },
 ];
 
 export const DEALER_BRANCHES = [
@@ -42,114 +245,18 @@ export const DEALER_BRANCHES = [
     id: 'all',
     name: 'Tất cả chi nhánh',
     city: 'Tất cả tỉnh/thành',
-    address: 'Hệ thống 14 Showroom Ford chính hãng trên toàn quốc',
+    address: `Hệ thống ${FORD_BRANCHES.length} Showroom Ford chính hãng tại 6 Thành phố trực thuộc Trung ương`,
     hotline: '1800 588 888',
   },
-  {
-    id: 'ben-thanh',
-    name: 'Bến Thành Ford',
-    city: 'TP. Hồ Chí Minh',
-    address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-    hotline: '028 3815 8888',
-  },
-  {
-    id: 'city-binh-trieu',
-    name: 'City Ford Bình Triệu',
-    city: 'TP. Hồ Chí Minh',
-    address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-    hotline: '028 3726 9999',
-  },
-  {
-    id: 'saigon-cao-thang',
-    name: 'Sài Gòn Ford Cao Thắng',
-    city: 'TP. Hồ Chí Minh',
-    address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-    hotline: '028 3830 8888',
-  },
-  {
-    id: 'saigon-pho-quang',
-    name: 'Sài Gòn Ford Phổ Quang',
-    city: 'TP. Hồ Chí Minh',
-    address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-    hotline: '028 3844 8888',
-  },
-  {
-    id: 'saigon-nam-sg',
-    name: 'Sài Gòn Ford Nam Sài Gòn',
-    city: 'TP. Hồ Chí Minh',
-    address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-    hotline: '028 3851 8888',
-  },
-  {
-    id: 'western-an-lac',
-    name: 'Western Ford An Lạc',
-    city: 'TP. Hồ Chí Minh',
-    address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-    hotline: '028 3752 8888',
-  },
-  {
-    id: 'gia-dinh',
-    name: 'Gia Định Ford',
-    city: 'TP. Hồ Chí Minh',
-    address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-    hotline: '028 3716 8888',
-  },
-  {
-    id: 'phu-my',
-    name: 'Phú Mỹ Ford',
-    city: 'TP. Hồ Chí Minh',
-    address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-    hotline: '028 3742 8888',
-  },
-  {
-    id: 'ha-noi-ford',
-    name: 'Hà Nội Ford',
-    city: 'Hà Nội',
-    address: '311-313 Trường Chinh, P. Khương Mai, Q. Thanh Xuân, Hà Nội',
-    hotline: '024 3565 8888',
-  },
-  {
-    id: 'thang-long-ford',
-    name: 'Thăng Long Ford',
-    city: 'Hà Nội',
-    address: '105 Láng Hạ, P. Láng Hạ, Q. Đống Đa, Hà Nội',
-    hotline: '024 3562 9999',
-  },
-  {
-    id: 'da-nang-ford',
-    name: 'Đà Nẵng Ford',
-    city: 'Đà Nẵng',
-    address: '56 Điện Biên Phủ, P. Chính Gián, Q. Thanh Khê, TP. Đà Nẵng',
-    hotline: '0236 3646 888',
-  },
-  {
-    id: 'hai-phong-ford',
-    name: 'Hải Phòng Ford',
-    city: 'Hải Phòng',
-    address: 'Tổ 3 Khu An Trì, P. Hùng Vương, Q. Hồng Bàng, TP. Hải Phòng',
-    hotline: '0225 3282 888',
-  },
-  {
-    id: 'can-tho-ford',
-    name: 'Cần Thơ Ford',
-    city: 'Cần Thơ',
-    address: 'Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Q. Cái Răng, TP. Cần Thơ',
-    hotline: '0292 3737 888',
-  },
-  {
-    id: 'binh-duong-ford',
-    name: 'Bình Dương Ford',
-    city: 'Bình Dương',
-    address: 'Lô C13 Đường Hùng Vương, P. Hòa Phú, TP. Thủ Dầu Một, Bình Dương',
-    hotline: '0274 3818 888',
-  },
+  ...FORD_BRANCHES,
 ];
 
 const BRANCH_BY_ID = Object.fromEntries(
-  DEALER_BRANCHES.filter((branch) => branch.id !== 'all').map((branch) => [
-    branch.id,
-    branch,
-  ]),
+  FORD_BRANCHES.map((branch) => [branch.id, branch]),
+);
+
+const BRANCH_ORDER = Object.fromEntries(
+  FORD_BRANCHES.map((branch, index) => [branch.id, index]),
 );
 
 function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = null) {
@@ -160,6 +267,7 @@ function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = nu
     branch: info.name,
     city: info.city,
     address: info.address,
+    mapsQuery: info.mapsQuery,
     stock,
     stockByTrim,
     colors: stock > 0 ? colors : [],
@@ -498,6 +606,127 @@ const RAW_FORD_CARS = [
         },
         ['Xanh Thạch Anh', 'Đen', 'Trắng'],
       ),
+      createBranchStock(
+        'vung-tau-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Đen', 'Xanh Thạch Anh'],
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
+        },
+        ['Đen', 'Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
+        },
+        ['Trắng', 'Xám', 'Xanh Thạch Anh'],
+      ),
+      createBranchStock(
+        'thu-do-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Đen', 'Trắng', 'Xám'],
+      ),
+      createBranchStock(
+        'ha-thanh-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'an-do-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Xanh Thạch Anh', 'Đen', 'Trắng'],
+      ),
+      createBranchStock(
+        'hai-duong-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'dana-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Bạc', 'Xám'],
+      ),
+      createBranchStock(
+        'quang-nam-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Đen', 'Trắng'],
+      ),
+      createBranchStock(
+        'soc-trang-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'hue-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Xám', 'Đen'],
+      ),
     ],
   },
   {
@@ -734,6 +963,116 @@ const RAW_FORD_CARS = [
         },
         ['Trắng', 'Đen', 'Xanh'],
       ),
+      createBranchStock(
+        'vung-tau-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đỏ', 'Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        {
+          'Territory Platinum 1.5L AT': 2,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đỏ', 'Trắng', 'Đen', 'Xanh'],
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Trắng', 'Xanh', 'Đen'],
+      ),
+      createBranchStock(
+        'thu-do-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đen', 'Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'ha-thanh-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Đỏ', 'Trắng', 'Xanh'],
+      ),
+      createBranchStock(
+        'an-do-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Đen', 'Đỏ'],
+      ),
+      createBranchStock(
+        'hai-duong-ford',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'dana-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đỏ', 'Trắng', 'Xanh'],
+      ),
+      createBranchStock(
+        'quang-nam-ford',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'soc-trang-ford',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'hue-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đỏ', 'Trắng', 'Đen'],
+      ),
     ],
   },
   {
@@ -945,6 +1284,105 @@ const RAW_FORD_CARS = [
           'Transit Trend 16 chỗ': 2,
         },
         ['Trắng', 'Bạc', 'Nâu', 'Đen'],
+      ),
+      createBranchStock(
+        'vung-tau-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Vàng Cát', 'Bạc'],
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 2,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Vàng Cát', 'Nâu'],
+      ),
+      createBranchStock(
+        'thu-do-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'ha-thanh-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Vàng Cát'],
+      ),
+      createBranchStock(
+        'an-do-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'hai-duong-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'dana-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Vàng Cát', 'Nâu'],
+      ),
+      createBranchStock(
+        'quang-nam-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'soc-trang-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Vàng Cát'],
+      ),
+      createBranchStock(
+        'hue-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Vàng Cát', 'Bạc'],
       ),
     ],
   },
@@ -1687,6 +2125,226 @@ const RAW_FORD_CARS = [
           '2025': ['Đen', 'Xám Meteor', 'Đỏ Cam', 'Vàng Luxe'],
         },
       ),
+      createBranchStock(
+        'vung-tau-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Trắng', 'Đen'],
+        {
+          '2026': ['Cam', 'Trắng', 'Đen'],
+          '2025': ['Vàng Luxe', 'Trắng', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 2,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 2,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Đen', 'Trắng', 'Xám'],
+        {
+          '2026': ['Cam', 'Đen', 'Trắng', 'Xám'],
+          '2025': ['Vàng Luxe', 'Đen', 'Trắng', 'Xám Meteor'],
+        },
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Trắng', 'Đỏ', 'Xám'],
+        {
+          '2026': ['Trắng', 'Đỏ', 'Xám'],
+          '2025': ['Trắng', 'Đỏ Cam', 'Xám Meteor'],
+        },
+      ),
+      createBranchStock(
+        'thu-do-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 0,
+        },
+        ['Đen', 'Bạc', 'Trắng'],
+        {
+          '2026': ['Đen', 'Bạc', 'Trắng'],
+          '2025': ['Đen', 'Bạc', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'ha-thanh-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Xám', 'Bạc Ánh Kim'],
+        {
+          '2026': ['Cam', 'Xám', 'Bạc Ánh Kim'],
+          '2025': ['Vàng Luxe', 'Xám Meteor', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'an-do-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Đen', 'Trắng Tuyết', 'Đỏ'],
+        {
+          '2026': ['Đen', 'Trắng Tuyết', 'Đỏ'],
+          '2025': ['Đen', 'Trắng', 'Đỏ Cam'],
+        },
+      ),
+      createBranchStock(
+        'hai-duong-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 0,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Trắng', 'Bạc'],
+        {
+          '2026': ['Trắng', 'Bạc'],
+          '2025': ['Trắng', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'dana-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 0,
+        },
+        ['Cam', 'Trắng', 'Đen'],
+        {
+          '2026': ['Cam', 'Trắng', 'Đen'],
+          '2025': ['Vàng Luxe', 'Trắng', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'quang-nam-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 0,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Trắng', 'Xám'],
+        {
+          '2026': ['Trắng', 'Xám', 'Bạc'],
+          '2025': ['Trắng', 'Xám Meteor', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'soc-trang-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 0,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Bạc', 'Trắng', 'Đen'],
+        {
+          '2026': ['Bạc', 'Trắng', 'Đen'],
+          '2025': ['Bạc', 'Trắng', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'hue-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Trắng', 'Xám', 'Đen'],
+        {
+          '2026': ['Cam', 'Trắng', 'Xám', 'Đen'],
+          '2025': ['Vàng Luxe', 'Trắng', 'Xám Meteor', 'Đen'],
+        },
+      ),
     ],
   },
   {
@@ -2011,6 +2669,105 @@ const RAW_FORD_CARS = [
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
+      createBranchStock(
+        'vung-tau-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Trắng'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Trắng'],
+          '2025': ['Xám Conquer', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Xanh Dương', 'Đen'],
+        {
+          '2026': ['Xanh Dương', 'Đen'],
+          '2025': ['Xanh Dương', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'thu-do-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đen', 'Trắng'],
+        {
+          '2026': ['Đen', 'Trắng'],
+          '2025': ['Đen', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'ha-thanh-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Đỏ Cam'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam'],
+          '2025': ['Xám Conquer', 'Cam Code'],
+        },
+      ),
+      createBranchStock(
+        'an-do-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đỏ Cam', 'Trắng'],
+        {
+          '2026': ['Đỏ Cam', 'Trắng'],
+          '2025': ['Cam Code', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'hai-duong-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Trắng'],
+        {
+          '2026': ['Trắng'],
+          '2025': ['Trắng'],
+        },
+      ),
+      createBranchStock(
+        'dana-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Đỏ Cam'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam'],
+          '2025': ['Xám Conquer', 'Cam Code'],
+        },
+      ),
+      createBranchStock(
+        'quang-nam-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đen'],
+        {
+          '2026': ['Đen'],
+          '2025': ['Đen'],
+        },
+      ),
+      createBranchStock(
+        'soc-trang-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 0 },
+        [],
+        {
+          '2026': [],
+          '2025': [],
+        },
+      ),
+      createBranchStock(
+        'hue-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Xanh Dương'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2025': ['Xám Conquer', 'Xanh Dương'],
+        },
+      ),
     ],
   },
   {
@@ -2127,23 +2884,71 @@ const RAW_FORD_CARS = [
         { 'Mustang Mach-E Premium AWD': 2 },
         ['Đỏ Thể Thao', 'Trắng Ánh Sao'],
       ),
+      createBranchStock(
+        'vung-tau-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đỏ Thể Thao'],
+      ),
+      createBranchStock(
+        'thanh-xuan-ford',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Đỏ Thể Thao', 'Đen Huyền Bí'],
+      ),
+      createBranchStock(
+        'long-bien-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Trắng Ánh Sao'],
+      ),
+      createBranchStock('thu-do-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock(
+        'ha-thanh-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Xanh Mãnh Liệt'],
+      ),
+      createBranchStock(
+        'an-do-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đen Huyền Bí'],
+      ),
+      createBranchStock('hai-duong-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock(
+        'dana-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đỏ Thể Thao'],
+      ),
+      createBranchStock('quang-nam-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock('soc-trang-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock(
+        'hue-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Trắng Ánh Sao'],
+      ),
     ],
   },
 ];
 
 export const fordCars = RAW_FORD_CARS.map((car) => ({
   ...car,
-  inventory: car.inventory.map((item) => ({
-    ...item,
-    city: item.city || BRANCH_BY_ID[item.branchId]?.city || 'TP. Hồ Chí Minh',
-  })),
+  inventory: car.inventory
+    .map((item) => ({
+      ...item,
+      city: item.city || BRANCH_BY_ID[item.branchId]?.city || 'TP. Hồ Chí Minh',
+    }))
+    .sort(
+      (a, b) =>
+        (BRANCH_ORDER[a.branchId] ?? 999) - (BRANCH_ORDER[b.branchId] ?? 999),
+    ),
 }));
 
 export function getGoogleMapsUrl(branch) {
+  const info = branch?.branchId || branch?.id ? BRANCH_BY_ID[branch.branchId || branch.id] : null;
+  const preferredQuery = branch?.mapsQuery || info?.mapsQuery;
+  if (preferredQuery) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(preferredQuery)}`;
+  }
   const label = branch?.name || branch?.branch || '';
-  const query = encodeURIComponent(
-    [label, branch?.address].filter(Boolean).join(', '),
-  );
+  const cleanAddress = (branch?.address || '').replace(/\s*\(Địa chỉ cũ:.*?\)/g, '').trim();
+  const query = encodeURIComponent([label, cleanAddress].filter(Boolean).join(', '));
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 

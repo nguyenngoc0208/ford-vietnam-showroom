@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   DEALER_BRANCHES,
   DEALER_CITIES,
+  FORD_BRANCHES,
   formatVND,
   getCarYearVariant,
   getGoogleMapsUrl,
@@ -206,7 +207,7 @@ export default function UtilityModal({
               Tìm Đại Lý Showroom Ford ({filteredDealers.length} Chi Nhánh)
             </h2>
             <p className="modal-description">
-              Tra cứu địa chỉ 14 showroom Ford chính hãng tại TP.HCM, Hà Nội, Đà Nẵng, Hải Phòng, Cần Thơ và Bình Dương; mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
+              Tra cứu địa chỉ {FORD_BRANCHES.length} showroom Ford chính hãng tại 6 thành phố trực thuộc Trung ương (TP. Hồ Chí Minh, Hà Nội, Hải Phòng, Đà Nẵng, Cần Thơ và TP. Huế); mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
             </p>
 
             <div
