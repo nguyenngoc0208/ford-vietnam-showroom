@@ -185,35 +185,23 @@
   flex-shrink: 0;
 }
 
-.ford-oval-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 84px;
+.ford-logo {
+  display: block;
+  width: auto;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.ford-logo--navbar {
+  height: 34px;
+}
+
+.ford-logo--drawer {
+  height: 28px;
+}
+
+.ford-logo--footer {
   height: 36px;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 30% 30%, #155ab6, #003478);
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
-}
-
-.ford-oval-badge span {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: 0.4px;
-  color: #ffffff;
-  line-height: 1;
-}
-
-.ford-oval-badge--sm {
-  width: 72px;
-  height: 32px;
-}
-
-.ford-oval-badge--sm span {
-  font-size: 17px;
 }
 
 .navbar-center {
@@ -465,7 +453,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 44px;
+  gap: 36px;
   flex-wrap: wrap;
 }
 
@@ -502,9 +490,9 @@
 }
 
 .mega-year-tab.is-active {
-  color: #111827;
+  color: var(--ford-navy);
   font-weight: 700;
-  border-bottom-color: #111827;
+  border-bottom-color: var(--ford-navy);
 }
 
 .mega-vehicle-trigger {
@@ -528,8 +516,8 @@
 }
 
 .mega-vehicle-thumb {
-  width: 165px;
-  height: 85px;
+  width: 148px;
+  height: 82px;
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -1179,15 +1167,27 @@
   background-color: var(--bg-gray-soft);
   border-radius: 12px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.branch-filter-row {
+  display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
+.branch-filter-row + .branch-filter-row {
+  padding-top: 10px;
+  border-top: 1px solid #e5eaf1;
+}
+
 .branch-filter-label {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   font-weight: 700;
   color: var(--ford-navy);
+  min-width: 158px;
 }
 
 .branch-filter-pills {
@@ -1195,6 +1195,7 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .branch-pill {
@@ -1218,6 +1219,16 @@
   background-color: var(--ford-navy);
   border-color: var(--ford-navy);
   color: #ffffff;
+}
+
+.branch-pill--city.is-active {
+  background-color: var(--ford-blue);
+  border-color: var(--ford-blue);
+}
+
+.modal-city-filter {
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 /* Vehicle Card Grid */
@@ -1710,6 +1721,22 @@
   color: var(--ford-navy);
 }
 
+.modal-color-price-note {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.modal-color-price-note.is-premium {
+  background-color: #e8f1ff;
+  color: var(--ford-blue);
+}
+
 .trim-pills {
   display: flex;
   flex-wrap: wrap;
@@ -1731,6 +1758,62 @@
   background: var(--ford-navy);
   border-color: var(--ford-navy);
   color: #ffffff;
+}
+
+.engine-radio-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.engine-radio-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.engine-radio-card:hover {
+  border-color: var(--ford-blue);
+}
+
+.engine-radio-card.is-active {
+  border-color: var(--ford-navy);
+  background-color: #f0f6ff;
+  box-shadow: 0 0 0 1px var(--ford-navy);
+}
+
+.engine-radio-card input[type='radio'] {
+  accent-color: var(--ford-navy);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.engine-radio-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.engine-radio-body strong {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.engine-radio-body span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ford-blue);
 }
 
 .modal-color-swatches {
@@ -1858,9 +1941,27 @@
   border-bottom: none;
 }
 
+.branch-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .branch-name {
   font-weight: 700;
   color: var(--ford-navy);
+}
+
+.branch-city-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: #eef3fb;
+  color: var(--ford-navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .branch-address {
@@ -2868,6 +2969,10 @@
     height: 60px;
   }
 
+  .ford-logo--navbar {
+    height: 28px;
+  }
+
   .container,
   .navbar-inner {
     padding-left: 16px;
@@ -3018,6 +3123,17 @@
     gap: 10px;
   }
 
+  .branch-filter-row {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .branch-filter-label {
+    min-width: 0;
+  }
+
   .branch-filter-pills {
     width: 100%;
     flex-wrap: nowrap;
@@ -3136,21 +3252,13 @@
     min-height: auto;
   }
 
-  .specs-grid {
+  .specs-grid,
+  .engine-radio-group {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
-  .ford-oval-badge {
-    width: 74px;
-    height: 32px;
-  }
-
-  .ford-oval-badge span {
-    font-size: 17px;
-  }
-
   .nav-icon-btn--dealer {
     display: none;
   }

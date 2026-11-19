@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import FordLogo from './FordLogo';
 import {
   MEGA_CATEGORIES,
   formatVND,
-  getCarPriceForYear,
+  getCarYearVariant,
   handleCarImageError,
 } from '../data/fordCars';
 
@@ -115,9 +116,7 @@ export default function Navbar({
               className="navbar-brand"
               aria-label="Ford Việt Nam Trang chủ"
             >
-              <span className="ford-oval-badge">
-                <span>Ford</span>
-              </span>
+              <FordLogo className="ford-logo--navbar" decorative />
             </a>
 
             <nav className="navbar-center" aria-label="Menu chính">
@@ -181,7 +180,7 @@ export default function Navbar({
               type="button"
               className="nav-icon-btn nav-icon-btn--dealer"
               onClick={() => onOpenUtilityModal('dealers')}
-              aria-label="Tìm đại lý Ford TP.HCM"
+              aria-label="Tìm đại lý Ford toàn quốc"
               title="Tìm đại lý Ford"
             >
               <svg
@@ -292,7 +291,7 @@ export default function Navbar({
                 <div className="mega-vehicles-row">
                   {categoryCars.map((car) => {
                     const activeYear = getActiveYear(car);
-                    const displayedPrice = getCarPriceForYear(car, activeYear);
+                    const variant = getCarYearVariant(car, activeYear);
 
                     return (
                       <div key={car.id} className="mega-vehicle-card">
@@ -322,16 +321,16 @@ export default function Navbar({
                         >
                           <div className="mega-vehicle-thumb">
                             <img
-                              src={car.image}
-                              alt={car.name}
+                              src={variant.image}
+                              alt={variant.name}
                               onError={(event) =>
-                                handleCarImageError(event, car.name, car.category)
+                                handleCarImageError(event, variant.name, car.category)
                               }
                             />
                           </div>
-                          <strong className="mega-vehicle-name">{car.name}</strong>
+                          <strong className="mega-vehicle-name">{variant.name}</strong>
                           <span className="mega-vehicle-price">
-                            Giá từ : {formatVND(displayedPrice)}
+                            Giá từ : {formatVND(variant.price)}
                           </span>
                         </button>
                       </div>
@@ -359,9 +358,7 @@ export default function Navbar({
           aria-label="Menu điều hướng di động"
         >
           <div className="mobile-drawer-header">
-            <span className="ford-oval-badge ford-oval-badge--sm">
-              <span>Ford</span>
-            </span>
+            <FordLogo className="ford-logo--drawer" label="Ford Việt Nam" />
             <button
               type="button"
               className="mobile-drawer-close"
@@ -411,35 +408,35 @@ export default function Navbar({
 
                         {isGroupOpen && (
                           <div className="mobile-cat-cars">
-                            {groupCars.map((car) => (
-                              <button
-                                key={car.id}
-                                type="button"
-                                className="mobile-car-row"
-                                onClick={() => handleSelectFromMenu(car)}
-                              >
-                                <img
-                                  src={car.image}
-                                  alt={car.name}
-                                  onError={(event) =>
-                                    handleCarImageError(
-                                      event,
-                                      car.name,
-                                      car.category,
-                                    )
-                                  }
-                                />
-                                <div>
-                                  <strong>{car.name}</strong>
-                                  <span>
-                                    Từ{' '}
-                                    {formatVND(
-                                      getCarPriceForYear(car, car.defaultYear),
-                                    )}
-                                  </span>
-                                </div>
-                              </button>
-                            ))}
+                            {groupCars.map((car) => {
+                              const variant = getCarYearVariant(car, car.defaultYear);
+                              return (
+                                <button
+                                  key={car.id}
+                                  type="button"
+                                  className="mobile-car-row"
+                                  onClick={() => handleSelectFromMenu(car)}
+                                >
+                                  <img
+                                    src={variant.image}
+                                    alt={variant.name}
+                                    onError={(event) =>
+                                      handleCarImageError(
+                                        event,
+                                        variant.name,
+                                        car.category,
+                                      )
+                                    }
+                                  />
+                                  <div>
+                                    <strong>{variant.name}</strong>
+                                    <span>
+                                      Từ {formatVND(variant.price)}
+                                    </span>
+                                  </div>
+                                </button>
+                              );
+                            })}
                             <button
                               type="button"
                               className="mobile-cat-all-link"

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
   DEALER_BRANCHES,
+  DEALER_CITIES,
   formatVND,
+  getCarYearVariant,
   getGoogleMapsUrl,
   getTotalStock,
 } from '../data/fordCars';
@@ -36,7 +38,7 @@ const REGION_CONFIG = {
 function computeOnRoadCost(car, basePrice, regionKey) {
   const region = REGION_CONFIG[regionKey] || REGION_CONFIG.hcm;
   const isEv = car.category === 'Xe Điện';
-  const isPickup = car.id === 'ranger' || car.id === 'raptor';
+  const isPickup = car.id.includes('ranger') || car.id.includes('raptor');
   const isTransit = car.id === 'transit';
 
   let taxRate = region.suvTaxRate;
@@ -86,6 +88,7 @@ export default function UtilityModal({
   const [regionKey, setRegionKey] = useState('hcm');
 
   const [selectedBranchId, setSelectedBranchId] = useState(DEALER_BRANCHES[1].id);
+  const [selectedDealerCity, setSelectedDealerCity] = useState('Tất cả tỉnh/thành');
   const [appointmentDate, setAppointmentDate] = useState(getDefaultDateString);
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
@@ -110,11 +113,24 @@ export default function UtilityModal({
   const isCalculator = mode === 'calculator';
   const isDealers = mode === 'dealers';
   const activeCar = cars.find((c) => c.id === selectedCarId) || cars[0];
-  const trims = activeCar.trims || [{ name: activeCar.name, price: activeCar.price }];
-  const activeTrim = trims[selectedTrimIndex] || trims[0];
   const effectiveYear = selectedYear || activeCar.defaultYear || '';
+  const yearVariant = getCarYearVariant(activeCar, effectiveYear);
+  const rawTrims = yearVariant?.trims?.length
+    ? yearVariant.trims
+    : [{ name: activeCar.name, price: activeCar.price }];
+  const trims = rawTrims.flatMap((trim) =>
+    trim.engineOptions?.length
+      ? trim.engineOptions.map((opt) => ({
+          name: `${trim.name} — ${opt.label}`,
+          price: opt.price,
+        }))
+      : [trim],
+  );
+  const activeTrim = trims[selectedTrimIndex] || trims[0];
   const yearDelta =
-    effectiveYear && activeCar.yearPrices?.[effectiveYear]
+    !activeCar.yearVariants &&
+    effectiveYear &&
+    activeCar.yearPrices?.[effectiveYear]
       ? activeCar.yearPrices[effectiveYear] - activeCar.price
       : 0;
   const listedPrice = activeTrim.price + yearDelta;
@@ -156,7 +172,12 @@ export default function UtilityModal({
     );
   };
 
-  const hcmBranches = DEALER_BRANCHES.filter((b) => b.id !== 'all');
+  const allBranches = DEALER_BRANCHES.filter((b) => b.id !== 'all');
+  const filteredDealers =
+    selectedDealerCity === 'Tất cả tỉnh/thành'
+      ? allBranches
+      : allBranches.filter((b) => b.city === selectedDealerCity);
+  const cityGroups = DEALER_CITIES.filter((c) => c !== 'Tất cả tỉnh/thành');
 
   return (
     <div
@@ -180,16 +201,33 @@ export default function UtilityModal({
 
         {isDealers ? (
           <div>
-            <p className="catalog-eyebrow">HỆ THỐNG ĐẠI LÝ ỦY QUYỀN</p>
+            <p className="catalog-eyebrow">HỆ THỐNG ĐẠI LÝ ỦY QUYỀN TOÀN QUỐC</p>
             <h2 id="utility-modal-title" className="modal-title">
-              Tìm Đại Lý Showroom Ford TP.HCM
+              Tìm Đại Lý Showroom Ford ({filteredDealers.length} Chi Nhánh)
             </h2>
             <p className="modal-description">
-              Tra cứu địa chỉ 8 showroom Ford chính hãng tại TP. Hồ Chí Minh, mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
+              Tra cứu địa chỉ 14 showroom Ford chính hãng tại TP.HCM, Hà Nội, Đà Nẵng, Hải Phòng, Cần Thơ và Bình Dương; mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
             </p>
 
+            <div
+              className="modal-city-filter branch-filter-pills"
+              role="group"
+              aria-label="Lọc đại lý theo tỉnh thành"
+            >
+              {DEALER_CITIES.map((city) => (
+                <button
+                  key={city}
+                  type="button"
+                  className={`branch-pill ${selectedDealerCity === city ? 'is-active' : ''}`}
+                  onClick={() => setSelectedDealerCity(city)}
+                >
+                  {city}
+                </button>
+              ))}
+            </div>
+
             <div className="dealers-modal-list">
-              {hcmBranches.map((branch) => {
+              {filteredDealers.map((branch) => {
                 const branchTotalCars = cars.reduce(
                   (sum, c) => sum + getTotalStock(c, branch.id),
                   0,
@@ -199,6 +237,9 @@ export default function UtilityModal({
                     <div className="dealer-modal-info">
                       <div className="dealer-modal-top">
                         <strong>{branch.name}</strong>
+                        {branch.city && (
+                          <span className="branch-city-badge">{branch.city}</span>
+                        )}
                         <span
                           className={`branch-status ${branchTotalCars > 0 ? 'is-in' : 'is-out'}`}
                         >
@@ -289,7 +330,10 @@ export default function UtilityModal({
                       key={year}
                       type="button"
                       className={`region-pill ${effectiveYear === year ? 'is-active' : ''}`}
-                      onClick={() => setSelectedYear(year)}
+                      onClick={() => {
+                        setSelectedYear(year);
+                        setSelectedTrimIndex(0);
+                      }}
                     >
                       {year}
                     </button>
@@ -368,7 +412,7 @@ export default function UtilityModal({
               Đăng Ký Lái Thử Xe Ford
             </h2>
             <p className="modal-description">
-              Chọn mẫu xe, showroom Ford TP.HCM và ngày hẹn phù hợp để trải nghiệm thực tế.
+              Chọn mẫu xe, showroom Ford chính hãng toàn quốc và ngày hẹn phù hợp để trải nghiệm thực tế.
             </p>
 
             {testDriveReceipt ? (
@@ -430,15 +474,21 @@ export default function UtilityModal({
                 </div>
 
                 <label className="utility-field">
-                  <span>Chọn showroom Ford TP.HCM</span>
+                  <span>Chọn showroom Ford toàn quốc</span>
                   <select
                     value={selectedBranchId}
                     onChange={(event) => setSelectedBranchId(event.target.value)}
                   >
-                    {hcmBranches.map((branch) => (
-                      <option key={branch.id} value={branch.id}>
-                        {branch.name} — {branch.address}
-                      </option>
+                    {cityGroups.map((city) => (
+                      <optgroup key={city} label={city}>
+                        {allBranches
+                          .filter((branch) => branch.city === city)
+                          .map((branch) => (
+                            <option key={branch.id} value={branch.id}>
+                              {branch.name} — {branch.address}
+                            </option>
+                          ))}
+                      </optgroup>
                     ))}
                   </select>
                 </label>

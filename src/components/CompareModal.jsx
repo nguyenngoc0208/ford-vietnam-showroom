@@ -15,9 +15,15 @@ const COMPARE_ROWS = [
   },
   {
     key: 'stock',
-    label: 'Tồn kho TP.HCM',
+    label: 'Tồn kho toàn quốc',
     render: (car) => {
-      const stock = getTotalStock(car);
+      const stock = getTotalStock(
+        car,
+        'all',
+        '',
+        'Tất cả tỉnh/thành',
+        car.defaultYear || '',
+      );
       return (
         <span className={`branch-status ${stock > 0 ? 'is-in' : 'is-out'}`}>
           {stock > 0 ? `Còn ${stock} chiếc` : 'Đặt hàng trước'}
@@ -39,6 +45,11 @@ const COMPARE_ROWS = [
     key: 'power',
     label: 'Công suất',
     render: (car) => car.specs.power,
+  },
+  {
+    key: 'torque',
+    label: 'Mô-men xoắn',
+    render: (car) => car.specs.torque || '—',
   },
   {
     key: 'transmission',

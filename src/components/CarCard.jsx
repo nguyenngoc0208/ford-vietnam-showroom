@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   DEALER_BRANCHES,
   formatVND,
-  getCarPriceForYear,
+  getCarYearVariant,
   getColorOption,
   getTotalStock,
   handleCarImageError,
@@ -11,14 +11,18 @@ import {
 export default function CarCard({
   car,
   activeBranchId = 'all',
+  activeCity = 'Tất cả tỉnh/thành',
   isCompared = false,
   onToggleCompare,
   onSelect,
 }) {
-  const [selectedColor, setSelectedColor] = useState(
-    car.colors?.[0]?.name || '',
-  );
   const [selectedYear, setSelectedYear] = useState(car.defaultYear || '');
+  const [selectedColor, setSelectedColor] = useState(
+    () =>
+      getCarYearVariant(car, car.defaultYear)?.defaultColor ||
+      car.colors?.[0]?.name ||
+      '',
+  );
 
   useEffect(() => {
     car.colors?.forEach((colorObj) => {
@@ -29,16 +33,34 @@ export default function CarCard({
     });
   }, [car.colors]);
 
-  const activeColorObj = getColorOption(car, selectedColor);
-  const displayedPrice = getCarPriceForYear(car, selectedYear);
-  const stockCount = getTotalStock(car, activeBranchId);
+  const yearVariant = getCarYearVariant(car, selectedYear);
+  const yearColors = yearVariant.cardColors || yearVariant.colors || car.colors;
+  const activeColorObj = getColorOption(car, selectedColor, selectedYear);
+  const displayedPrice = yearVariant.price;
+  const stockCount = getTotalStock(
+    car,
+    activeBranchId,
+    '',
+    activeCity,
+    selectedYear,
+  );
   const isAvailable = stockCount > 0;
-  const activeImageSrc = activeColorObj.image || car.image;
+  const activeImageSrc = activeColorObj.image || yearVariant.image;
+
+  const handleSelectYear = (year) => {
+    setSelectedYear(year);
+    const nextVariant = getCarYearVariant(car, year);
+    if (nextVariant?.defaultColor) {
+      setSelectedColor(nextVariant.defaultColor);
+    }
+  };
 
   const activeBranchName =
     activeBranchId !== 'all'
       ? DEALER_BRANCHES.find((b) => b.id === activeBranchId)?.name
-      : null;
+      : activeCity && activeCity !== 'Tất cả tỉnh/thành'
+        ? activeCity
+        : null;
 
   const stockLabel = isAvailable
     ? activeBranchName
@@ -77,11 +99,11 @@ export default function CarCard({
         <img
           key={activeImageSrc}
           src={activeImageSrc}
-          alt={`${car.name} - ${activeColorObj.name}`}
+          alt={`${yearVariant.name} - ${activeColorObj.name}`}
           className="car-fade-img"
           loading="lazy"
           onError={(event) =>
-            handleCarImageError(event, car.name, car.category)
+            handleCarImageError(event, yearVariant.name, car.category)
           }
         />
 
@@ -98,20 +120,20 @@ export default function CarCard({
 
       <div className="vehicle-card-body">
         <div className="vehicle-card-title-row">
-          <h3 className="vehicle-card-title">{car.name}</h3>
+          <h3 className="vehicle-card-title">{yearVariant.name}</h3>
           {car.availableYears && (
             <div
               className="card-year-tabs"
               onClick={(event) => event.stopPropagation()}
               role="group"
-              aria-label={`Chọn năm phiên bản ${car.name}`}
+              aria-label={`Chọn năm phiên bản ${yearVariant.name}`}
             >
               {car.availableYears.map((year) => (
                 <button
                   key={year}
                   type="button"
                   className={`card-year-tab ${selectedYear === year ? 'is-active' : ''}`}
-                  onClick={() => setSelectedYear(year)}
+                  onClick={() => handleSelectYear(year)}
                 >
                   {year}
                 </button>
@@ -120,7 +142,7 @@ export default function CarCard({
           )}
         </div>
 
-        <p className="vehicle-card-desc">{car.shortDesc}</p>
+        <p className="vehicle-card-desc">{yearVariant.shortDesc}</p>
 
         <div className="vehicle-card-footer-stack">
           <div className="vehicle-card-price-row">
@@ -140,7 +162,7 @@ export default function CarCard({
               Màu: <strong>{activeColorObj.name}</strong>
             </span>
             <div className="swatches-list">
-              {car.colors.map((colorObj) => {
+              {yearColors.map((colorObj) => {
                 const isSelected = activeColorObj.name === colorObj.name;
                 return (
                   <button

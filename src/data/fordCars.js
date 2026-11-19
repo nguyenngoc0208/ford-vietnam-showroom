@@ -8,73 +8,172 @@ export const COLOR_SWATCHES = {
   Đen: '#141414',
   'Trắng Tuyết': '#FFFFFF',
   'Nâu Equinox': '#4A3728',
-  'Đỏ Cam': '#C2410C',
+  'Đỏ Cam': '#EA580C',
   Trắng: '#FFFFFF',
-  Đỏ: '#991B1B',
+  Đỏ: '#DC2626',
   'Xanh Khói': '#475569',
+  Xanh: '#64829A',
   'Xanh Dương': '#1D4ED8',
   'Vàng Luxe': '#CA8A04',
   'Xám Conquer': '#64748B',
   'Cam Code': '#EA580C',
   'Ghi Xám': '#52525B',
+  Xám: '#64748B',
+  'Xanh Thạch Anh': '#52645D',
+  'Vàng Cát': '#9E9584',
+  Nâu: '#4A3F39',
+  'Ghi Ánh Thép': '#6B7280',
+  'Bạc Ánh Kim': '#CBD5E1',
+  Cam: '#EA580C',
 };
+
+export const DEALER_CITIES = [
+  'Tất cả tỉnh/thành',
+  'TP. Hồ Chí Minh',
+  'Hà Nội',
+  'Đà Nẵng',
+  'Hải Phòng',
+  'Cần Thơ',
+  'Bình Dương',
+];
 
 export const DEALER_BRANCHES = [
   {
     id: 'all',
-    name: 'Tất cả chi nhánh TP.HCM',
-    address: 'Hệ thống 8 Showroom Ford chính hãng tại TP. Hồ Chí Minh',
+    name: 'Tất cả chi nhánh',
+    city: 'Tất cả tỉnh/thành',
+    address: 'Hệ thống 14 Showroom Ford chính hãng trên toàn quốc',
     hotline: '1800 588 888',
   },
   {
     id: 'ben-thanh',
     name: 'Bến Thành Ford',
+    city: 'TP. Hồ Chí Minh',
     address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
     hotline: '028 3815 8888',
   },
   {
     id: 'city-binh-trieu',
     name: 'City Ford Bình Triệu',
+    city: 'TP. Hồ Chí Minh',
     address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
     hotline: '028 3726 9999',
   },
   {
     id: 'saigon-cao-thang',
     name: 'Sài Gòn Ford Cao Thắng',
+    city: 'TP. Hồ Chí Minh',
     address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
     hotline: '028 3830 8888',
   },
   {
     id: 'saigon-pho-quang',
     name: 'Sài Gòn Ford Phổ Quang',
+    city: 'TP. Hồ Chí Minh',
     address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
     hotline: '028 3844 8888',
   },
   {
     id: 'saigon-nam-sg',
     name: 'Sài Gòn Ford Nam Sài Gòn',
+    city: 'TP. Hồ Chí Minh',
     address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
     hotline: '028 3851 8888',
   },
   {
     id: 'western-an-lac',
     name: 'Western Ford An Lạc',
+    city: 'TP. Hồ Chí Minh',
     address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
     hotline: '028 3752 8888',
   },
   {
     id: 'gia-dinh',
     name: 'Gia Định Ford',
+    city: 'TP. Hồ Chí Minh',
     address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
     hotline: '028 3716 8888',
   },
   {
     id: 'phu-my',
     name: 'Phú Mỹ Ford',
+    city: 'TP. Hồ Chí Minh',
     address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
     hotline: '028 3742 8888',
   },
+  {
+    id: 'ha-noi-ford',
+    name: 'Hà Nội Ford',
+    city: 'Hà Nội',
+    address: '311-313 Trường Chinh, P. Khương Mai, Q. Thanh Xuân, Hà Nội',
+    hotline: '024 3565 8888',
+  },
+  {
+    id: 'thang-long-ford',
+    name: 'Thăng Long Ford',
+    city: 'Hà Nội',
+    address: '105 Láng Hạ, P. Láng Hạ, Q. Đống Đa, Hà Nội',
+    hotline: '024 3562 9999',
+  },
+  {
+    id: 'da-nang-ford',
+    name: 'Đà Nẵng Ford',
+    city: 'Đà Nẵng',
+    address: '56 Điện Biên Phủ, P. Chính Gián, Q. Thanh Khê, TP. Đà Nẵng',
+    hotline: '0236 3646 888',
+  },
+  {
+    id: 'hai-phong-ford',
+    name: 'Hải Phòng Ford',
+    city: 'Hải Phòng',
+    address: 'Tổ 3 Khu An Trì, P. Hùng Vương, Q. Hồng Bàng, TP. Hải Phòng',
+    hotline: '0225 3282 888',
+  },
+  {
+    id: 'can-tho-ford',
+    name: 'Cần Thơ Ford',
+    city: 'Cần Thơ',
+    address: 'Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Q. Cái Răng, TP. Cần Thơ',
+    hotline: '0292 3737 888',
+  },
+  {
+    id: 'binh-duong-ford',
+    name: 'Bình Dương Ford',
+    city: 'Bình Dương',
+    address: 'Lô C13 Đường Hùng Vương, P. Hòa Phú, TP. Thủ Dầu Một, Bình Dương',
+    hotline: '0274 3818 888',
+  },
 ];
+
+const BRANCH_BY_ID = Object.fromEntries(
+  DEALER_BRANCHES.filter((branch) => branch.id !== 'all').map((branch) => [
+    branch.id,
+    branch,
+  ]),
+);
+
+function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = null) {
+  const info = BRANCH_BY_ID[branchId];
+  const stock = Object.values(stockByTrim).reduce((sum, qty) => sum + qty, 0);
+  const entry = {
+    branchId,
+    branch: info.name,
+    city: info.city,
+    address: info.address,
+    stock,
+    stockByTrim,
+    colors: stock > 0 ? colors : [],
+  };
+  if (colorsByYear) {
+    entry.colorsByYear = Object.fromEntries(
+      Object.entries(colorsByYear).map(([year, list]) => [
+        year,
+        stock > 0 ? list : [],
+      ]),
+    );
+  }
+  return entry;
+}
 
 export const MEGA_CATEGORIES = [
   {
@@ -106,7 +205,7 @@ export const HERO_SLIDES = [
     title: 'Ford Territory',
     subtitle: 'SUV 5 chỗ đô thị với động cơ 1.5L EcoBoost và khoang lái kép thông minh.',
     slogan: 'MỞ HÀNH TRÌNH ĐÁNG GIÁ',
-    studioImage: '/images/cars/territory-slate.png',
+    studioImage: '/images/cars/territory-red.png',
     lifestyleImage: '/images/cars/banner-suv.png',
   },
   {
@@ -115,41 +214,46 @@ export const HERO_SLIDES = [
     title: 'Ford Everest',
     subtitle: 'SUV 7 chỗ khung gầm rời mạnh mẽ, làm chủ mọi cung đường cùng gia đình.',
     slogan: 'CHINH PHỤC MỌI ĐỊA HÌNH',
-    studioImage: '/images/cars/everest-grey.png',
+    studioImage: '/images/cars/everest-white.png',
     lifestyleImage: '/images/cars/banner-suv.png',
   },
   {
     id: 'ranger',
     carId: 'ranger',
-    title: 'Ford Ranger 2026',
-    subtitle: 'Bán tải biểu tượng thế hệ mới với các phiên bản XLS, Sport, Wildtrak, Stormtrak.',
+    title: 'Ford Ranger Mới',
+    subtitle: 'Bán tải biểu tượng thế hệ mới với 2 phiên bản Wildtrak & XLS, tùy chọn động cơ dầu 2.0L / 3.0L 10AT.',
     slogan: 'SỐNG CHẤT NHƯ RANGER',
     studioImage: '/images/cars/ranger-orange.png',
     lifestyleImage: '/images/cars/banner-commercial.png',
   },
 ];
 
-export const fordCars = [
+const RAW_FORD_CARS = [
   {
     id: 'everest',
     name: 'Ford Everest',
     category: 'Xe SUV',
     price: 1129000000,
     promo: 'Ưu đãi gói bảo dưỡng & phụ kiện chính hãng trị giá 30 triệu đồng.',
-    image: '/images/cars/everest-grey.png',
+    image: '/images/cars/everest-white.png',
     shortDesc:
-      'SUV 7 chỗ khung gầm rời, động cơ Diesel 2.0L Single-Turbo / Bi-Turbo, hộp số 6AT / 10AT.',
+      'SUV 7 chỗ khung gầm rời, động cơ Xăng 2.3L EcoBoost & Dầu 2.0L Turbo, hộp số tự động 10 cấp.',
     description:
       'Ford Everest thế hệ mới sở hữu khung gầm rời chắc chắn, lưới tản nhiệt chữ C đặc trưng, 6 chế độ kiểm soát địa hình và không gian 7 chỗ sang trọng.',
     colors: [
+      {
+        name: 'Trắng',
+        hex: '#FFFFFF',
+        image: '/images/cars/everest-white.png',
+      },
       {
         name: 'Bạc',
         hex: '#CBD5E1',
         image: '/images/cars/everest-silver.png',
       },
       {
-        name: 'Xám Meteor',
-        hex: '#52525B',
+        name: 'Xám',
+        hex: '#64748B',
         image: '/images/cars/everest-grey.png',
       },
       {
@@ -158,188 +262,242 @@ export const fordCars = [
         image: '/images/cars/everest-black.png',
       },
       {
-        name: 'Trắng Tuyết',
-        hex: '#FFFFFF',
-        image: '/images/cars/everest-white.png',
-      },
-      {
-        name: 'Nâu Equinox',
-        hex: '#4A3728',
-        image: '/images/cars/everest-brown.png',
-      },
-      {
-        name: 'Đỏ Cam',
-        hex: '#C2410C',
-        image: '/images/cars/everest-orange.png',
+        name: 'Xanh Thạch Anh',
+        hex: '#52645D',
+        image: '/images/cars/everest-quartz-green.png',
       },
     ],
     trims: [
       {
-        name: 'Ambiente 4x2 AT',
+        name: 'Platinum+',
+        price: 1629000000,
+        engine: 'Xăng 2.3L EcoBoost 10AT 4x4',
+        power: '300 PS',
+        torque: '446 Nm',
+        transmission: 'Tự động 10 cấp điện tử (10AT)',
+        drivetrain: 'Hai cầu chủ động (4x4)',
+        seats: '7 chỗ ngồi',
+        availableColors: ['Trắng', 'Bạc', 'Xám', 'Đen', 'Xanh Thạch Anh'],
+      },
+      {
+        name: 'Platinum',
+        price: 1335000000,
+        engine: 'Dầu 2.0L Turbo 10AT 4x2',
+        power: '170 PS',
+        torque: '405 Nm',
+        transmission: 'Tự động 10 cấp điện tử (10AT)',
+        drivetrain: 'Cầu sau (4x2)',
+        seats: '7 chỗ ngồi',
+        availableColors: ['Đen', 'Trắng', 'Bạc', 'Xanh Thạch Anh', 'Xám'],
+        engineOptions: [
+          {
+            label: 'Dầu 2.0L Turbo 10AT 4x2',
+            stockKey: 'Platinum 4x2',
+            price: 1335000000,
+            engine: 'Dầu 2.0L Turbo 10AT 4x2',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp điện tử (10AT)',
+            drivetrain: 'Cầu sau (4x2)',
+          },
+          {
+            label: 'Dầu 2.0L Turbo 10AT 4x4',
+            stockKey: 'Platinum 4x4',
+            price: 1335000000,
+            engine: 'Dầu 2.0L Turbo 10AT 4x4',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp điện tử (10AT)',
+            drivetrain: 'Hai cầu toàn thời gian (4x4)',
+          },
+        ],
+      },
+      {
+        name: 'Sport',
+        price: 1209000000,
+        engine: 'Dầu 2.0L Turbo 10AT 4x2',
+        power: '170 PS',
+        torque: '405 Nm',
+        transmission: 'Tự động 10 cấp điện tử (10AT)',
+        drivetrain: 'Cầu sau (4x2)',
+        seats: '7 chỗ ngồi',
+        availableColors: ['Trắng', 'Xám', 'Đen'],
+      },
+      {
+        name: 'Active',
         price: 1129000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
-        drivetrain: 'Cầu sau (4x2)',
-        seats: '7 chỗ ngồi',
-      },
-      {
-        name: 'Sport 4x2 AT',
-        price: 1178000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
-        drivetrain: 'Cầu sau (4x2)',
-        seats: '7 chỗ ngồi',
-      },
-      {
-        name: 'Titanium 4x2 AT',
-        price: 1299000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
-        drivetrain: 'Cầu sau (4x2)',
-        seats: '7 chỗ ngồi',
-      },
-      {
-        name: 'Titanium+ 4x4 AT',
-        price: 1468000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
+        engine: 'Dầu 2.0L Turbo 10AT 4x2',
+        power: '170 PS',
+        torque: '405 Nm',
         transmission: 'Tự động 10 cấp điện tử (10AT)',
-        drivetrain: 'Hai cầu chủ động (4WD)',
+        drivetrain: 'Cầu sau (4x2)',
         seats: '7 chỗ ngồi',
-      },
-      {
-        name: 'Platinum 4x4 AT',
-        price: 1545000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
-        transmission: 'Tự động 10 cấp điện tử (10AT)',
-        drivetrain: 'Hai cầu chủ động (4WD)',
-        seats: '7 chỗ ngồi',
+        availableColors: ['Đen', 'Trắng'],
       },
     ],
     specs: {
-      engine: '2.0L Single-Turbo / Bi-Turbo Diesel',
-      power: '170 - 210 mã lực',
-      transmission: 'Tự động 6 cấp / 10 cấp',
-      drivetrain: '4x2 / 4WD toàn thời gian',
+      engine: 'Xăng 2.3L EcoBoost / Dầu 2.0L Turbo',
+      power: '170 - 300 PS',
+      torque: '405 - 446 Nm',
+      transmission: 'Tự động 10 cấp (10AT)',
+      drivetrain: '4x2 / 4x4 toàn thời gian',
       seats: '7 chỗ ngồi',
     },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 2,
-          'Titanium 4x2 AT': 1,
-          'Titanium+ 4x4 AT': 1,
-          'Platinum 4x4 AT': 1,
+      createBranchStock(
+        'ben-thanh',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
         },
-        colors: ['Xám Meteor', 'Trắng Tuyết', 'Đen'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 1,
-          'Titanium 4x2 AT': 2,
-          'Titanium+ 4x4 AT': 1,
-          'Platinum 4x4 AT': 0,
+        ['Xanh Thạch Anh', 'Trắng', 'Xám', 'Đen'],
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 2,
+          Active: 1,
         },
-        colors: ['Trắng Tuyết', 'Nâu Equinox', 'Bạc'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 0,
-          'Sport 4x2 AT': 1,
-          'Titanium 4x2 AT': 1,
-          'Titanium+ 4x4 AT': 1,
-          'Platinum 4x4 AT': 1,
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 0,
+          'Platinum 4x4': 1,
+          Sport: 1,
+          Active: 1,
         },
-        colors: ['Đen', 'Xám Meteor'],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 2,
-          'Sport 4x2 AT': 1,
-          'Titanium 4x2 AT': 1,
-          'Titanium+ 4x4 AT': 2,
-          'Platinum 4x4 AT': 0,
+        ['Đen', 'Xám', 'Xanh Thạch Anh'],
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
         },
-        colors: ['Trắng Tuyết', 'Đen', 'Bạc'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 0,
-          'Titanium 4x2 AT': 1,
-          'Titanium+ 4x4 AT': 0,
-          'Platinum 4x4 AT': 0,
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'saigon-nam-sg',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
         },
-        colors: ['Nâu Equinox', 'Đỏ Cam'],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 1,
-          'Titanium 4x2 AT': 0,
-          'Titanium+ 4x4 AT': 1,
-          'Platinum 4x4 AT': 1,
+        ['Xám', 'Trắng'],
+      ),
+      createBranchStock(
+        'western-an-lac',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
         },
-        colors: ['Xám Meteor', 'Trắng Tuyết'],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 0,
-          'Titanium 4x2 AT': 0,
-          'Titanium+ 4x4 AT': 0,
-          'Platinum 4x4 AT': 0,
+        ['Xám', 'Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'gia-dinh',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 0,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
         },
-        colors: ['Trắng Tuyết'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'Ambiente 4x2 AT': 1,
-          'Sport 4x2 AT': 1,
-          'Titanium 4x2 AT': 1,
-          'Titanium+ 4x4 AT': 1,
-          'Platinum 4x4 AT': 1,
+        ['Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'phu-my',
+        {
+          'Platinum+': 2,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 1,
+          Active: 1,
         },
-        colors: ['Trắng Tuyết', 'Xám Meteor', 'Đỏ Cam'],
-      },
+        ['Xanh Thạch Anh', 'Trắng', 'Bạc', 'Xám'],
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        {
+          'Platinum+': 2,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 3,
+          Active: 2,
+        },
+        ['Xanh Thạch Anh', 'Đen', 'Trắng', 'Xám', 'Bạc'],
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
+        },
+        ['Đen', 'Trắng', 'Xanh Thạch Anh'],
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 2,
+          Active: 1,
+        },
+        ['Bạc', 'Trắng', 'Xám'],
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 0,
+          'Platinum 4x4': 1,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Đen', 'Xám', 'Bạc'],
+      ),
+      createBranchStock(
+        'can-tho-ford',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'binh-duong-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 2,
+        },
+        ['Xanh Thạch Anh', 'Đen', 'Trắng'],
+      ),
     ],
   },
   {
@@ -348,171 +506,234 @@ export const fordCars = [
     category: 'Xe SUV',
     price: 739000000,
     promo: 'Hỗ trợ 100% lệ phí trước bạ và tặng 1 năm bảo hiểm vật chất.',
-    image: '/images/cars/territory-white.png',
+    image: '/images/cars/territory-red.png',
     shortDesc:
-      'SUV 5 chỗ đô thị, động cơ xăng 1.5L EcoBoost, hộp số tự động 7 cấp ly hợp kép.',
+      'SUV 5 chỗ đô thị, động cơ xăng 1.5L EcoBoost tăng áp I4, hộp số tự động 7 cấp ly hợp kép.',
     description:
       'Ford Territory mang thiết kế hiện đại, màn hình kép 12.3 inch, cửa sổ trời Panorama và công nghệ an toàn thông minh Ford Co-Pilot360.',
     colors: [
       {
-        name: 'Trắng',
-        hex: '#FFFFFF',
-        image: '/images/cars/territory-white.png',
+        name: 'Đỏ',
+        hex: '#DC2626',
+        priceDelta: 0,
+        image: '/images/cars/territory-red.png',
       },
       {
-        name: 'Đen',
-        hex: '#141414',
-        image: '/images/cars/territory-black.png',
+        name: 'Trắng',
+        hex: '#FFFFFF',
+        priceDelta: 0,
+        image: '/images/cars/territory-white.png',
       },
       {
         name: 'Bạc',
         hex: '#CBD5E1',
+        priceDelta: 0,
         image: '/images/cars/territory-silver.png',
       },
       {
-        name: 'Đỏ',
-        hex: '#991B1B',
-        image: '/images/cars/territory-red.png',
+        name: 'Đen',
+        hex: '#141414',
+        priceDelta: 0,
+        image: '/images/cars/territory-black.png',
       },
       {
-        name: 'Xanh Khói',
-        hex: '#475569',
+        name: 'Xanh',
+        hex: '#64829A',
+        priceDelta: 8000000,
         image: '/images/cars/territory-slate.png',
       },
     ],
     trims: [
       {
-        name: 'Trend 1.5L AT',
+        name: 'Territory Platinum 1.5L AT',
+        price: 916000000,
+        engine: 'Xăng 1.5L EcoBoost',
+        power: '160 PS @ 5.400–5.700 vòng/phút',
+        torque: '248 Nm',
+        transmission: 'Tự động 7 cấp',
+        drivetrain: 'Dẫn động một cầu 4x2 • Chế độ lái tùy chọn',
+        seats: '5 chỗ ngồi',
+      },
+      {
+        name: 'Territory Titanium X 1.5L AT',
+        price: 875000000,
+        engine: 'Xăng 1.5L EcoBoost',
+        power: '160 PS @ 5.400–5.700 vòng/phút',
+        torque: '248 Nm',
+        transmission: 'Tự động 7 cấp',
+        drivetrain: 'Dẫn động một cầu 4x2',
+        seats: '5 chỗ ngồi',
+      },
+      {
+        name: 'Territory Titanium 1.5L AT',
+        price: 819000000,
+        engine: 'Xăng 1.5L EcoBoost',
+        power: '160 PS @ 5.400–5.700 vòng/phút',
+        torque: '248 Nm',
+        transmission: 'Tự động 7 cấp',
+        drivetrain: 'Dẫn động một cầu 4x2 • Chế độ lái tùy chọn',
+        seats: '5 chỗ ngồi',
+      },
+      {
+        name: 'Territory Trend 1.5L AT',
         price: 739000000,
-        engine: '1.5L EcoBoost Turbo Xăng',
-        power: '160 mã lực @ 5.400 vòng/phút',
-        transmission: 'Tự động 7 cấp ly hợp kép (7DCT)',
-        drivetrain: 'Dẫn động cầu trước (FWD)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Titanium 1.5L AT',
-        price: 829000000,
-        engine: '1.5L EcoBoost Turbo Xăng',
-        power: '160 mã lực @ 5.400 vòng/phút',
-        transmission: 'Tự động 7 cấp ly hợp kép (7DCT)',
-        drivetrain: 'Dẫn động cầu trước (FWD)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Titanium X 1.5L AT',
-        price: 889000000,
-        engine: '1.5L EcoBoost Turbo Xăng',
-        power: '160 mã lực @ 5.400 vòng/phút',
-        transmission: 'Tự động 7 cấp ly hợp kép (7DCT)',
-        drivetrain: 'Dẫn động cầu trước (FWD)',
+        engine: 'Xăng 1.5L EcoBoost',
+        power: '160 PS @ 5.400–5.700 vòng/phút',
+        torque: '248 Nm',
+        transmission: 'Tự động 7 cấp',
+        drivetrain: 'Dẫn động một cầu 4x2',
         seats: '5 chỗ ngồi',
       },
     ],
     specs: {
-      engine: '1.5L EcoBoost Turbo Xăng',
-      power: '160 mã lực @ 5.400 vòng/phút',
-      transmission: 'Tự động 7 cấp ly hợp kép (7DCT)',
-      drivetrain: 'Dẫn động cầu trước (FWD)',
+      engine: 'Xăng 1.5L EcoBoost',
+      power: '160 PS @ 5.400–5.700 vòng/phút',
+      torque: '248 Nm',
+      transmission: 'Tự động 7 cấp',
+      drivetrain: 'Dẫn động một cầu 4x2',
       seats: '5 chỗ ngồi',
     },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'Trend 1.5L AT': 2,
-          'Titanium 1.5L AT': 2,
-          'Titanium X 1.5L AT': 2,
+      createBranchStock(
+        'ben-thanh',
+        {
+          'Territory Platinum 1.5L AT': 2,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 2,
         },
-        colors: ['Trắng', 'Đen', 'Xanh Khói'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'Trend 1.5L AT': 1,
-          'Titanium 1.5L AT': 2,
-          'Titanium X 1.5L AT': 1,
+        ['Đỏ', 'Trắng', 'Đen', 'Xanh'],
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 1,
         },
-        colors: ['Trắng', 'Bạc', 'Đỏ'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'Trend 1.5L AT': 1,
-          'Titanium 1.5L AT': 1,
-          'Titanium X 1.5L AT': 1,
+        ['Trắng', 'Bạc', 'Đỏ'],
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
         },
-        colors: ['Xanh Khói', 'Đen'],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'Trend 1.5L AT': 2,
-          'Titanium 1.5L AT': 1,
-          'Titanium X 1.5L AT': 2,
+        ['Xanh', 'Đen', 'Đỏ'],
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 2,
         },
-        colors: ['Trắng', 'Xanh Khói', 'Đỏ'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Trend 1.5L AT': 1,
-          'Titanium 1.5L AT': 1,
-          'Titanium X 1.5L AT': 0,
+        ['Trắng', 'Xanh', 'Đỏ'],
+      ),
+      createBranchStock(
+        'saigon-nam-sg',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
         },
-        colors: ['Bạc', 'Trắng'],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'Trend 1.5L AT': 2,
-          'Titanium 1.5L AT': 1,
-          'Titanium X 1.5L AT': 1,
+        ['Bạc', 'Trắng'],
+      ),
+      createBranchStock(
+        'western-an-lac',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 2,
         },
-        colors: ['Xanh Khói', 'Đen'],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'Trend 1.5L AT': 1,
-          'Titanium 1.5L AT': 2,
-          'Titanium X 1.5L AT': 0,
+        ['Xanh', 'Đen'],
+      ),
+      createBranchStock(
+        'gia-dinh',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 0,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 1,
         },
-        colors: ['Trắng', 'Đỏ'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'Trend 1.5L AT': 1,
-          'Titanium 1.5L AT': 2,
-          'Titanium X 1.5L AT': 2,
+        ['Trắng', 'Đỏ'],
+      ),
+      createBranchStock(
+        'phu-my',
+        {
+          'Territory Platinum 1.5L AT': 2,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 1,
         },
-        colors: ['Xanh Khói', 'Trắng', 'Bạc'],
-      },
+        ['Xanh', 'Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        {
+          'Territory Platinum 1.5L AT': 2,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 3,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Đỏ', 'Trắng', 'Đen', 'Xanh'],
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 2,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Trắng', 'Bạc', 'Đỏ'],
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Xanh', 'Đen'],
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Bạc', 'Đen', 'Trắng'],
+      ),
+      createBranchStock(
+        'can-tho-ford',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Trắng', 'Đỏ'],
+      ),
+      createBranchStock(
+        'binh-duong-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Trắng', 'Đen', 'Xanh'],
+      ),
     ],
   },
   {
@@ -521,166 +742,215 @@ export const fordCars = [
     category: 'Xe Thương mại',
     price: 907000000,
     promo: 'Ưu đãi lãi suất doanh nghiệp 0% trong 6 tháng đầu cho lô xe vận tải.',
-    image: '/images/cars/transit-silver.png',
+    image: '/images/cars/transit-white.png',
     shortDesc:
-      'Xe thương mại 16-18 chỗ thế hệ mới với khoang hành khách rộng rãi và màn hình kép 12.3 inch.',
+      'Xe thương mại 16-18 chỗ thế hệ mới với động cơ 2.3L Turbo Diesel và khoang hành khách rộng rãi.',
     description:
-      'Transit Hoàn Toàn Mới là giải pháp vận chuyển hành khách hàng đầu tại Việt Nam với động cơ 2.3L TDCi bền bỉ, cửa trượt điện và chi phí vận hành tối ưu.',
+      'Transit Hoàn Toàn Mới là giải pháp vận chuyển hành khách hàng đầu tại Việt Nam với động cơ 2.3L Turbo Diesel bền bỉ, màn hình kép 12.3 inch, cửa trượt điện và chi phí vận hành tối ưu.',
     colors: [
-      {
-        name: 'Bạc',
-        hex: '#CBD5E1',
-        image: '/images/cars/transit-silver.png',
-      },
       {
         name: 'Trắng',
         hex: '#FFFFFF',
+        priceDelta: 0,
         image: '/images/cars/transit-white.png',
       },
       {
-        name: 'Ghi Xám',
-        hex: '#52525B',
-        image: '/images/cars/transit-grey.png',
+        name: 'Vàng Cát',
+        hex: '#9E9584',
+        priceDelta: 0,
+        image: '/images/cars/transit-sand.png',
+      },
+      {
+        name: 'Bạc',
+        hex: '#CBD5E1',
+        priceDelta: 0,
+        image: '/images/cars/transit-silver.png',
+      },
+      {
+        name: 'Nâu',
+        hex: '#4A3F39',
+        priceDelta: 0,
+        image: '/images/cars/transit-brown.png',
+      },
+      {
+        name: 'Đen',
+        hex: '#141414',
+        priceDelta: 0,
+        image: '/images/cars/transit-black.png',
       },
     ],
     trims: [
       {
-        name: 'Trend 16 Chỗ',
-        price: 907000000,
-        engine: '2.3L Turbo Diesel TDCi',
-        power: '171 mã lực @ 3.200 vòng/phút',
-        transmission: 'Số sàn 6 cấp (6MT)',
-        drivetrain: 'Dẫn động cầu sau (RWD)',
-        seats: '16 chỗ ngồi',
-      },
-      {
-        name: 'Premium 16 Chỗ',
-        price: 999000000,
-        engine: '2.3L Turbo Diesel TDCi',
-        power: '171 mã lực @ 3.200 vòng/phút',
-        transmission: 'Số sàn 6 cấp (6MT)',
-        drivetrain: 'Dẫn động cầu sau (RWD)',
-        seats: '16 chỗ ngồi',
-      },
-      {
-        name: 'Premium+ 18 Chỗ',
+        name: 'Transit Premium+ 18 chỗ',
         price: 1091000000,
-        engine: '2.3L Turbo Diesel TDCi',
-        power: '171 mã lực @ 3.200 vòng/phút',
-        transmission: 'Số sàn 6 cấp (6MT)',
+        engine: '2.3L Turbo Diesel',
+        power: '171 PS @ 3.200 vòng/phút',
+        torque: '425 Nm @ 1.400–2.400 vòng/phút',
+        transmission: 'Số sàn 6 cấp',
         drivetrain: 'Dẫn động cầu sau (RWD)',
         seats: '18 chỗ ngồi',
       },
+      {
+        name: 'Transit Premium 16 chỗ',
+        price: 999000000,
+        engine: '2.3L Turbo Diesel',
+        power: '171 PS @ 3.200 vòng/phút',
+        torque: '425 Nm @ 1.400–2.400 vòng/phút',
+        transmission: 'Số sàn 6 cấp',
+        drivetrain: 'Dẫn động cầu sau (RWD)',
+        seats: '16 chỗ ngồi',
+      },
+      {
+        name: 'Transit Trend 16 chỗ',
+        price: 907000000,
+        engine: '2.3L Turbo Diesel',
+        power: '171 PS @ 3.200 vòng/phút',
+        torque: '425 Nm @ 1.400–2.400 vòng/phút',
+        transmission: 'Số sàn 6 cấp',
+        drivetrain: 'Dẫn động cầu sau (RWD)',
+        seats: '16 chỗ ngồi',
+      },
     ],
     specs: {
-      engine: '2.3L Turbo Diesel TDCi',
-      power: '171 mã lực @ 3.200 vòng/phút',
-      transmission: 'Số sàn 6 cấp (6MT)',
+      engine: '2.3L Turbo Diesel',
+      power: '171 PS @ 3.200 vòng/phút',
+      torque: '425 Nm @ 1.400–2.400 vòng/phút',
+      transmission: 'Số sàn 6 cấp',
       drivetrain: 'Dẫn động cầu sau (RWD)',
       seats: '16 - 18 chỗ ngồi',
     },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'Trend 16 Chỗ': 2,
-          'Premium 16 Chỗ': 1,
-          'Premium+ 18 Chỗ': 0,
+      createBranchStock(
+        'ben-thanh',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
         },
-        colors: ['Bạc', 'Trắng'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'Trend 16 Chỗ': 2,
-          'Premium 16 Chỗ': 2,
-          'Premium+ 18 Chỗ': 1,
+        ['Trắng', 'Vàng Cát', 'Bạc'],
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 2,
+          'Transit Trend 16 chỗ': 2,
         },
-        colors: ['Trắng', 'Ghi Xám', 'Bạc'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 0,
-        stockByTrim: {
-          'Trend 16 Chỗ': 0,
-          'Premium 16 Chỗ': 0,
-          'Premium+ 18 Chỗ': 0,
+        ['Trắng', 'Bạc', 'Nâu'],
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
         },
-        colors: [],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Trend 16 Chỗ': 1,
-          'Premium 16 Chỗ': 1,
-          'Premium+ 18 Chỗ': 0,
+        ['Vàng Cát', 'Đen'],
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
         },
-        colors: ['Trắng', 'Ghi Xám'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Trend 16 Chỗ': 1,
-          'Premium 16 Chỗ': 0,
-          'Premium+ 18 Chỗ': 1,
+        ['Trắng', 'Nâu', 'Đen'],
+      ),
+      createBranchStock(
+        'saigon-nam-sg',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 0,
+          'Transit Trend 16 chỗ': 1,
         },
-        colors: ['Bạc'],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'Trend 16 Chỗ': 3,
-          'Premium 16 Chỗ': 2,
-          'Premium+ 18 Chỗ': 1,
+        ['Bạc', 'Vàng Cát'],
+      ),
+      createBranchStock(
+        'western-an-lac',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 2,
+          'Transit Trend 16 chỗ': 3,
         },
-        colors: ['Trắng', 'Bạc', 'Ghi Xám'],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'Trend 16 Chỗ': 2,
-          'Premium 16 Chỗ': 1,
-          'Premium+ 18 Chỗ': 1,
+        ['Trắng', 'Vàng Cát', 'Bạc', 'Nâu'],
+      ),
+      createBranchStock(
+        'gia-dinh',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
         },
-        colors: ['Trắng', 'Bạc'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'Trend 16 Chỗ': 1,
-          'Premium 16 Chỗ': 1,
-          'Premium+ 18 Chỗ': 1,
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'phu-my',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
         },
-        colors: ['Ghi Xám', 'Bạc'],
-      },
+        ['Vàng Cát', 'Nâu', 'Bạc'],
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        {
+          'Transit Premium+ 18 chỗ': 2,
+          'Transit Premium 16 chỗ': 2,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Vàng Cát', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Bạc', 'Nâu'],
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Vàng Cát', 'Bạc'],
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Bạc', 'Đen'],
+      ),
+      createBranchStock(
+        'can-tho-ford',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Vàng Cát'],
+      ),
+      createBranchStock(
+        'binh-duong-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Bạc', 'Nâu', 'Đen'],
+      ),
     ],
   },
   {
     id: 'ranger',
-    name: 'Ford Ranger',
+    name: 'Ford Ranger Mới',
     category: 'Xe Thương mại',
     price: 726000000,
     defaultYear: '2026',
@@ -692,213 +962,669 @@ export const fordCars = [
     promo: 'Hỗ trợ 50% lệ phí trước bạ và tặng nắp thùng cuộn chính hãng.',
     image: '/images/cars/ranger-orange.png',
     shortDesc:
-      'Xe bán tải đa dụng với các phiên bản XLS, Sport, Wildtrak, Stormtrak mạnh mẽ.',
+      'Xe bán tải đa dụng thế hệ mới với 2 phiên bản Wildtrak & XLS cùng các tùy chọn động cơ dầu 2.0L / 3.0L.',
     description:
-      'Ford Ranger thế hệ mới là mẫu bán tải hàng đầu Việt Nam với màn hình dọc 12 inch SYNC 4A, cụm đèn LED Matrix và khả năng lội nước 800mm.',
+      'Ford Ranger thế hệ mới là mẫu bán tải hàng đầu Việt Nam với màn hình dọc 12 inch SYNC 4A, cụm đèn LED Matrix, Ford Co-Pilot360 và khả năng lội nước 800mm.',
     colors: [
       {
-        name: 'Bạc',
-        hex: '#CBD5E1',
-        image: '/images/cars/ranger-silver.png',
-      },
-      {
-        name: 'Xám Meteor',
-        hex: '#52525B',
-        image: '/images/cars/ranger-grey.png',
+        name: 'Cam',
+        hex: '#EA580C',
+        priceDelta: 8000000,
+        image: '/images/cars/ranger-orange.png',
       },
       {
         name: 'Đen',
         hex: '#141414',
+        priceDelta: 0,
         image: '/images/cars/ranger-black.png',
       },
       {
         name: 'Trắng',
         hex: '#FFFFFF',
+        priceDelta: 0,
         image: '/images/cars/ranger-white.png',
       },
       {
-        name: 'Xanh Dương',
-        hex: '#1D4ED8',
-        image: '/images/cars/ranger-blue.png',
+        name: 'Xám',
+        hex: '#64748B',
+        priceDelta: 0,
+        image: '/images/cars/ranger-grey.png',
       },
       {
-        name: 'Đỏ Cam',
-        hex: '#C2410C',
-        image: '/images/cars/ranger-orange.png',
+        name: 'Bạc Ánh Kim',
+        hex: '#CBD5E1',
+        priceDelta: 0,
+        image: '/images/cars/ranger-silver.png',
       },
       {
-        name: 'Vàng Luxe',
-        hex: '#CA8A04',
-        image: '/images/cars/ranger-yellow.png',
+        name: 'Trắng Tuyết',
+        hex: '#FFFFFF',
+        priceDelta: 0,
+        image: '/images/cars/ranger-white.png',
+      },
+      {
+        name: 'Ghi Ánh Thép',
+        hex: '#6B7280',
+        priceDelta: 0,
+        image: '/images/cars/ranger-grey.png',
+      },
+      {
+        name: 'Bạc',
+        hex: '#CBD5E1',
+        priceDelta: 0,
+        image: '/images/cars/ranger-silver.png',
+      },
+      {
+        name: 'Đỏ',
+        hex: '#DC2626',
+        priceDelta: 8000000,
+        image: '/images/cars/ranger-red.png',
       },
     ],
     trims: [
       {
-        name: 'XLS 4x2 AT',
+        name: 'Ranger Wildtrak',
+        price: 973000000,
+        engine: 'Diesel 2.0L Single-Turbo',
+        power: '170 PS',
+        torque: '405 Nm',
+        transmission: 'Tự động 10 cấp (10AT)',
+        drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+        seats: '5 chỗ ngồi',
+        availableColors: ['Đen', 'Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam'],
+        engineOptions: [
+          {
+            label: 'Dầu 2.0L 10AT 4x4',
+            stockKey: 'Ranger Wildtrak 2.0L 4X4 AT',
+            price: 973000000,
+            engine: 'Diesel 2.0L Single-Turbo',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+          },
+          {
+            label: 'Dầu 3.0L 10AT 4x4',
+            stockKey: 'Ranger Wildtrak 3.0L 4X4 AT',
+            price: 1093000000,
+            engine: 'Diesel 3.0L V6',
+            power: '250 PS',
+            torque: '600 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+          },
+        ],
+      },
+      {
+        name: 'Ranger XLS',
         price: 726000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
+        engine: 'Diesel 2.0L Single-Turbo',
+        power: '170 PS',
+        torque: '405 Nm',
+        transmission: 'Tự động 10 cấp (10AT)',
         drivetrain: 'Cầu sau (4x2)',
         seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'XLS 4x4 AT',
-        price: 795000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
-        drivetrain: 'Hai cầu bán thời gian (4x4)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Sport 4x4 AT',
-        price: 882000000,
-        engine: '2.0L Single-Turbo Diesel i4',
-        power: '170 mã lực @ 3.500 vòng/phút',
-        transmission: 'Tự động 6 cấp (6AT)',
-        drivetrain: 'Hai cầu bán thời gian (4x4)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Wildtrak 4x4 AT',
-        price: 998000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
-        transmission: 'Tự động 10 cấp (10AT)',
-        drivetrain: 'Hai cầu bán thời gian (4x4)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Stormtrak 4x4 AT',
-        price: 1059000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
-        transmission: 'Tự động 10 cấp điện tử (10AT)',
-        drivetrain: 'Hai cầu bán thời gian (4x4)',
-        seats: '5 chỗ ngồi',
+        availableColors: ['Đen', 'Trắng Tuyết', 'Ghi Ánh Thép', 'Bạc', 'Đỏ'],
+        engineOptions: [
+          {
+            label: 'Dầu 2.0L 10AT 4x2',
+            stockKey: 'Ranger XLS 2.0L 4x2 AT',
+            price: 726000000,
+            engine: 'Diesel 2.0L Single-Turbo',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Cầu sau (4x2)',
+          },
+          {
+            label: 'Dầu 2.0L 10AT 4x4',
+            stockKey: 'Ranger XLS 2.0L 4x4 AT',
+            price: 795000000,
+            engine: 'Diesel 2.0L Single-Turbo',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu bán thời gian (4x4)',
+          },
+        ],
       },
     ],
     specs: {
-      engine: '2.0L Single-Turbo / Bi-Turbo Diesel',
-      power: '170 - 210 mã lực',
-      transmission: 'Tự động 6 cấp / 10 cấp',
-      drivetrain: '4x2 / 4x4 bán thời gian',
+      engine: 'Diesel 2.0L Single-Turbo / Diesel 3.0L V6',
+      power: '170 - 250 PS',
+      torque: '405 - 600 Nm',
+      transmission: 'Tự động 10 cấp (10AT)',
+      drivetrain: '4x2 / 4x4 • Ford Co-Pilot360',
       seats: '5 chỗ ngồi',
     },
+    yearVariants: {
+      '2026': {
+        name: 'Ford Ranger Mới',
+        price: 726000000,
+        defaultColor: 'Cam',
+        image: '/images/cars/ranger-orange.png',
+        shortDesc:
+          'Xe bán tải đa dụng thế hệ mới với 2 phiên bản Wildtrak & XLS, tùy chọn động cơ dầu 2.0L / 3.0L 10AT.',
+        colors: [
+          {
+            name: 'Đen',
+            hex: '#141414',
+            priceDelta: 0,
+            image: '/images/cars/ranger-black.png',
+          },
+          {
+            name: 'Trắng',
+            hex: '#FFFFFF',
+            priceDelta: 0,
+            image: '/images/cars/ranger-white.png',
+          },
+          {
+            name: 'Xám',
+            hex: '#64748B',
+            priceDelta: 0,
+            image: '/images/cars/ranger-grey.png',
+          },
+          {
+            name: 'Bạc Ánh Kim',
+            hex: '#CBD5E1',
+            priceDelta: 0,
+            image: '/images/cars/ranger-silver.png',
+          },
+          {
+            name: 'Cam',
+            hex: '#EA580C',
+            priceDelta: 8000000,
+            image: '/images/cars/ranger-orange.png',
+          },
+          {
+            name: 'Trắng Tuyết',
+            hex: '#FFFFFF',
+            priceDelta: 0,
+            image: '/images/cars/ranger-white.png',
+          },
+          {
+            name: 'Ghi Ánh Thép',
+            hex: '#6B7280',
+            priceDelta: 0,
+            image: '/images/cars/ranger-grey.png',
+          },
+          {
+            name: 'Bạc',
+            hex: '#CBD5E1',
+            priceDelta: 0,
+            image: '/images/cars/ranger-silver.png',
+          },
+          {
+            name: 'Đỏ',
+            hex: '#DC2626',
+            priceDelta: 8000000,
+            image: '/images/cars/ranger-red.png',
+          },
+        ],
+        cardColors: [
+          {
+            name: 'Cam',
+            hex: '#EA580C',
+            priceDelta: 8000000,
+            image: '/images/cars/ranger-orange.png',
+          },
+          {
+            name: 'Đen',
+            hex: '#141414',
+            priceDelta: 0,
+            image: '/images/cars/ranger-black.png',
+          },
+          {
+            name: 'Trắng',
+            hex: '#FFFFFF',
+            priceDelta: 0,
+            image: '/images/cars/ranger-white.png',
+          },
+          {
+            name: 'Xám',
+            hex: '#64748B',
+            priceDelta: 0,
+            image: '/images/cars/ranger-grey.png',
+          },
+          {
+            name: 'Bạc Ánh Kim',
+            hex: '#CBD5E1',
+            priceDelta: 0,
+            image: '/images/cars/ranger-silver.png',
+          },
+          {
+            name: 'Đỏ',
+            hex: '#DC2626',
+            priceDelta: 8000000,
+            image: '/images/cars/ranger-red.png',
+          },
+        ],
+        specs: {
+          engine: 'Diesel 2.0L Single-Turbo / Diesel 3.0L V6',
+          power: '170 - 250 PS',
+          torque: '405 - 600 Nm',
+          transmission: 'Tự động 10 cấp (10AT)',
+          drivetrain: '4x2 / 4x4 • Ford Co-Pilot360',
+          seats: '5 chỗ ngồi',
+        },
+        trims: [
+          {
+            name: 'Ranger Wildtrak',
+            price: 973000000,
+            engine: 'Diesel 2.0L Single-Turbo',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+            seats: '5 chỗ ngồi',
+            availableColors: ['Đen', 'Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam'],
+            engineOptions: [
+              {
+                label: 'Dầu 2.0L 10AT 4x4',
+                stockKey: 'Ranger Wildtrak 2.0L 4X4 AT',
+                price: 973000000,
+                engine: 'Diesel 2.0L Single-Turbo',
+                power: '170 PS',
+                torque: '405 Nm',
+                transmission: 'Tự động 10 cấp (10AT)',
+                drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+              },
+              {
+                label: 'Dầu 3.0L 10AT 4x4',
+                stockKey: 'Ranger Wildtrak 3.0L 4X4 AT',
+                price: 1093000000,
+                engine: 'Diesel 3.0L V6',
+                power: '250 PS',
+                torque: '600 Nm',
+                transmission: 'Tự động 10 cấp (10AT)',
+                drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
+              },
+            ],
+          },
+          {
+            name: 'Ranger XLS',
+            price: 726000000,
+            engine: 'Diesel 2.0L Single-Turbo',
+            power: '170 PS',
+            torque: '405 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Cầu sau (4x2)',
+            seats: '5 chỗ ngồi',
+            availableColors: ['Đen', 'Trắng Tuyết', 'Ghi Ánh Thép', 'Bạc', 'Đỏ'],
+            engineOptions: [
+              {
+                label: 'Dầu 2.0L 10AT 4x2',
+                stockKey: 'Ranger XLS 2.0L 4x2 AT',
+                price: 726000000,
+                engine: 'Diesel 2.0L Single-Turbo',
+                power: '170 PS',
+                torque: '405 Nm',
+                transmission: 'Tự động 10 cấp (10AT)',
+                drivetrain: 'Cầu sau (4x2)',
+              },
+              {
+                label: 'Dầu 2.0L 10AT 4x4',
+                stockKey: 'Ranger XLS 2.0L 4x4 AT',
+                price: 795000000,
+                engine: 'Diesel 2.0L Single-Turbo',
+                power: '170 PS',
+                torque: '405 Nm',
+                transmission: 'Tự động 10 cấp (10AT)',
+                drivetrain: 'Hai cầu bán thời gian (4x4)',
+              },
+            ],
+          },
+        ],
+      },
+      '2025': {
+        name: 'Ford Ranger',
+        price: 707000000,
+        defaultColor: 'Vàng Luxe',
+        image: '/images/cars/ranger-yellow.png',
+        shortDesc:
+          'Bán tải đa dụng 2025 với các phiên bản Stormtrak, Wildtrak, Sport, XLS bền bỉ và tối ưu chi phí.',
+        colors: [
+          {
+            name: 'Vàng Luxe',
+            hex: '#CA8A04',
+            image: '/images/cars/ranger-yellow.png',
+          },
+          {
+            name: 'Bạc',
+            hex: '#CBD5E1',
+            image: '/images/cars/ranger-silver.png',
+          },
+          {
+            name: 'Xám Meteor',
+            hex: '#52525B',
+            image: '/images/cars/ranger-grey.png',
+          },
+          {
+            name: 'Đen',
+            hex: '#141414',
+            image: '/images/cars/ranger-black.png',
+          },
+          {
+            name: 'Trắng',
+            hex: '#FFFFFF',
+            image: '/images/cars/ranger-white.png',
+          },
+          {
+            name: 'Xanh Dương',
+            hex: '#1D4ED8',
+            image: '/images/cars/ranger-blue.png',
+          },
+          {
+            name: 'Đỏ Cam',
+            hex: '#EA580C',
+            image: '/images/cars/ranger-orange.png',
+          },
+        ],
+        specs: {
+          engine: 'Diesel 2.0L Single-Turbo / Bi-Turbo',
+          power: '170 - 210 PS',
+          torque: '405 - 500 Nm',
+          transmission: 'Tự động 6 cấp / 10 cấp',
+          drivetrain: '4x2 / 4x4 bán thời gian',
+          seats: '5 chỗ ngồi',
+        },
+        trims: [
+          {
+            name: 'Stormtrak',
+            price: 1039000000,
+            engine: 'Diesel 2.0L Bi-Turbo 10AT 4x4',
+            power: '210 PS @ 3.750 vòng/phút',
+            torque: '500 Nm',
+            transmission: 'Tự động 10 cấp điện tử (10AT)',
+            drivetrain: 'Hai cầu chủ động (4x4)',
+            seats: '5 chỗ ngồi',
+          },
+          {
+            name: 'Wildtrak',
+            price: 979000000,
+            engine: 'Diesel 2.0L Bi-Turbo 10AT 4x4',
+            power: '210 PS @ 3.750 vòng/phút',
+            torque: '500 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu bán thời gian (4x4)',
+            seats: '5 chỗ ngồi',
+          },
+          {
+            name: 'Sport',
+            price: 864000000,
+            engine: 'Diesel 2.0L Single-Turbo 6AT 4x4',
+            power: '170 PS @ 3.500 vòng/phút',
+            torque: '405 Nm',
+            transmission: 'Tự động 6 cấp (6AT)',
+            drivetrain: 'Hai cầu bán thời gian (4x4)',
+            seats: '5 chỗ ngồi',
+          },
+          {
+            name: 'XLS',
+            price: 707000000,
+            engine: 'Diesel 2.0L Single-Turbo 6AT 4x2',
+            power: '170 PS @ 3.500 vòng/phút',
+            torque: '405 Nm',
+            transmission: 'Tự động 6 cấp (6AT)',
+            drivetrain: 'Cầu sau (4x2)',
+            seats: '5 chỗ ngồi',
+          },
+        ],
+      },
+    },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'XLS 4x2 AT': 2,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 1,
+      createBranchStock(
+        'ben-thanh',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
         },
-        colors: ['Đỏ Cam', 'Vàng Luxe', 'Bạc', 'Trắng'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 6,
-        stockByTrim: {
-          'XLS 4x2 AT': 2,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 2,
-          'Stormtrak 4x4 AT': 0,
+        ['Cam', 'Đen', 'Trắng', 'Xám', 'Đỏ'],
+        {
+          '2026': ['Cam', 'Đen', 'Trắng', 'Xám', 'Đỏ'],
+          '2025': ['Vàng Luxe', 'Đen', 'Trắng', 'Xám Meteor', 'Đỏ Cam'],
         },
-        colors: ['Đỏ Cam', 'Đen', 'Xanh Dương'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'XLS 4x2 AT': 1,
-          'XLS 4x4 AT': 0,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 0,
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 2,
+          Sport: 1,
+          XLS: 2,
         },
-        colors: ['Trắng', 'Xám Meteor'],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'XLS 4x2 AT': 1,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 1,
+        ['Cam', 'Bạc Ánh Kim', 'Đen', 'Trắng Tuyết'],
+        {
+          '2026': ['Cam', 'Bạc Ánh Kim', 'Đen', 'Trắng Tuyết'],
+          '2025': ['Vàng Luxe', 'Bạc', 'Đen', 'Trắng'],
         },
-        colors: ['Đỏ Cam', 'Vàng Luxe', 'Trắng', 'Đen'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'XLS 4x2 AT': 1,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 0,
-          'Wildtrak 4x4 AT': 0,
-          'Stormtrak 4x4 AT': 0,
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          Stormtrak: 0,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 1,
         },
-        colors: ['Xanh Dương', 'Bạc'],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 5,
-        stockByTrim: {
-          'XLS 4x2 AT': 2,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 0,
+        ['Trắng', 'Ghi Ánh Thép'],
+        {
+          '2026': ['Trắng', 'Ghi Ánh Thép'],
+          '2025': ['Trắng', 'Xám Meteor', 'Xanh Dương'],
         },
-        colors: ['Đỏ Cam', 'Xám Meteor', 'Đen'],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'XLS 4x2 AT': 1,
-          'XLS 4x4 AT': 0,
-          'Sport 4x4 AT': 1,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 0,
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
         },
-        colors: ['Trắng', 'Xanh Dương'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 4,
-        stockByTrim: {
-          'XLS 4x2 AT': 1,
-          'XLS 4x4 AT': 1,
-          'Sport 4x4 AT': 0,
-          'Wildtrak 4x4 AT': 1,
-          'Stormtrak 4x4 AT': 1,
+        ['Cam', 'Trắng', 'Đen', 'Đỏ'],
+        {
+          '2026': ['Cam', 'Trắng', 'Đen', 'Đỏ'],
+          '2025': ['Vàng Luxe', 'Trắng', 'Đen', 'Đỏ Cam'],
         },
-        colors: ['Đỏ Cam', 'Đen', 'Bạc'],
-      },
+      ),
+      createBranchStock(
+        'saigon-nam-sg',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 0,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          Stormtrak: 0,
+          Wildtrak: 0,
+          Sport: 0,
+          XLS: 2,
+        },
+        ['Bạc', 'Ghi Ánh Thép'],
+        {
+          '2026': ['Bạc', 'Ghi Ánh Thép'],
+          '2025': ['Bạc', 'Xám Meteor'],
+        },
+      ),
+      createBranchStock(
+        'western-an-lac',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 0,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Cam', 'Xám', 'Đen', 'Trắng Tuyết'],
+        {
+          '2026': ['Cam', 'Xám', 'Đen', 'Trắng Tuyết'],
+          '2025': ['Đỏ Cam', 'Xám Meteor', 'Đen', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'gia-dinh',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          Stormtrak: 0,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 1,
+        },
+        ['Trắng Tuyết', 'Đỏ'],
+        {
+          '2026': ['Trắng Tuyết', 'Đỏ'],
+          '2025': ['Trắng', 'Xanh Dương'],
+        },
+      ),
+      createBranchStock(
+        'phu-my',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          Stormtrak: 1,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Cam', 'Đen', 'Bạc Ánh Kim'],
+        {
+          '2026': ['Cam', 'Đen', 'Bạc Ánh Kim'],
+          '2025': ['Vàng Luxe', 'Đen', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 2,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 2,
+          'Ranger XLS 2.0L 4x2 AT': 3,
+          Stormtrak: 1,
+          Wildtrak: 2,
+          Sport: 2,
+          XLS: 3,
+        },
+        ['Cam', 'Đen', 'Trắng', 'Đỏ', 'Xám'],
+        {
+          '2026': ['Cam', 'Đen', 'Trắng', 'Đỏ', 'Xám'],
+          '2025': ['Vàng Luxe', 'Đen', 'Trắng', 'Đỏ Cam', 'Xám Meteor'],
+        },
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 2,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 2,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Bạc Ánh Kim', 'Ghi Ánh Thép', 'Cam'],
+        {
+          '2026': ['Bạc Ánh Kim', 'Ghi Ánh Thép', 'Cam'],
+          '2025': ['Bạc', 'Xám Meteor', 'Vàng Luxe'],
+        },
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Xám', 'Trắng Tuyết', 'Đỏ'],
+        {
+          '2026': ['Xám', 'Trắng Tuyết', 'Đỏ'],
+          '2025': ['Xám Meteor', 'Trắng', 'Xanh Dương'],
+        },
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 0,
+          Wildtrak: 1,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Bạc', 'Đen', 'Trắng'],
+        {
+          '2026': ['Bạc', 'Đen', 'Trắng'],
+          '2025': ['Bạc', 'Đen', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'can-tho-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 0,
+          Wildtrak: 1,
+          Sport: 0,
+          XLS: 2,
+        },
+        ['Trắng', 'Cam', 'Bạc'],
+        {
+          '2026': ['Trắng', 'Cam', 'Bạc'],
+          '2025': ['Trắng', 'Vàng Luxe', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'binh-duong-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 2,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          Stormtrak: 1,
+          Wildtrak: 2,
+          Sport: 1,
+          XLS: 2,
+        },
+        ['Đen', 'Xám', 'Đỏ', 'Cam'],
+        {
+          '2026': ['Đen', 'Xám', 'Đỏ', 'Cam'],
+          '2025': ['Đen', 'Xám Meteor', 'Đỏ Cam', 'Vàng Luxe'],
+        },
+      ),
     ],
   },
   {
@@ -915,152 +1641,314 @@ export const fordCars = [
     promo: 'Tặng gói bảo dưỡng định kỳ 3 năm tại đại lý Ford toàn quốc.',
     image: '/images/cars/raptor-grey.png',
     shortDesc:
-      'Bán tải hiệu năng cao Ford Performance trang bị giảm xóc FOX 2.5 inch và 7 chế độ lái.',
+      'Bán tải hiệu năng cao Ford Performance với động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5" và 7 chế độ lái.',
     description:
-      'Ford Ranger Raptor Mới mang DNA đua địa hình Baja với hệ thống treo FOX Live Valve 2.5 inch, khung gầm gia cường và lưới tản nhiệt chữ FORD đặc trưng.',
+      'Ford Ranger Raptor mang DNA đua địa hình Baja với động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5", khung gầm gia cường và 7 chế độ lái chuyên dụng.',
     colors: [
-      {
-        name: 'Xám Conquer',
-        hex: '#64748B',
-        image: '/images/cars/raptor-grey.png',
-      },
-      {
-        name: 'Cam Code',
-        hex: '#EA580C',
-        image: '/images/cars/raptor-orange.png',
-      },
       {
         name: 'Đen',
         hex: '#141414',
+        priceDelta: 0,
         image: '/images/cars/raptor-black.png',
       },
       {
         name: 'Trắng',
         hex: '#FFFFFF',
+        priceDelta: 0,
         image: '/images/cars/raptor-white.png',
       },
       {
         name: 'Xanh Dương',
-        hex: '#1E40AF',
+        hex: '#1D4ED8',
+        priceDelta: 0,
         image: '/images/cars/raptor-blue.png',
+      },
+      {
+        name: 'Ghi Ánh Thép',
+        hex: '#6B7280',
+        priceDelta: 8000000,
+        image: '/images/cars/raptor-grey.png',
+      },
+      {
+        name: 'Đỏ Cam',
+        hex: '#EA580C',
+        priceDelta: 8000000,
+        image: '/images/cars/raptor-orange.png',
       },
     ],
     trims: [
       {
-        name: 'Raptor 2.0L Bi-Turbo 4WD',
+        name: 'Raptor 3.0L V6 4X4 AT',
         price: 1448000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
+        engine: 'Xăng 3.0L V6 Twin-Turbo EcoBoost',
+        power: '397 PS (292 kW @ 5.650 vòng/phút)',
+        torque: '583 Nm',
         transmission: 'Tự động 10 cấp (10AT)',
-        drivetrain: 'Hai cầu toàn thời gian (4WD)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Raptor Xám Conquer Đặc Biệt',
-        price: 1455000000,
-        engine: '2.0L Bi-Turbo Diesel i4',
-        power: '210 mã lực @ 3.750 vòng/phút',
-        transmission: 'Tự động 10 cấp (10AT)',
-        drivetrain: 'Hai cầu toàn thời gian (4WD)',
+        drivetrain: 'Hai cầu toàn thời gian (4x4) • Giảm xóc FOX 2.5" • 7 chế độ lái',
         seats: '5 chỗ ngồi',
       },
     ],
     specs: {
-      engine: '2.0L Bi-Turbo Diesel i4',
-      power: '210 mã lực @ 3.750 vòng/phút',
+      engine: 'Xăng 3.0L V6 Twin-Turbo EcoBoost',
+      power: '397 PS (292 kW @ 5.650 vòng/phút)',
+      torque: '583 Nm',
       transmission: 'Tự động 10 cấp (10AT)',
-      drivetrain: 'Hai cầu toàn thời gian (4WD)',
+      drivetrain: 'Hai cầu toàn thời gian (4x4) • Giảm xóc FOX 2.5" • 7 chế độ lái',
       seats: '5 chỗ ngồi',
     },
+    yearVariants: {
+      '2026': {
+        name: 'Ford Ranger Raptor Mới',
+        price: 1448000000,
+        defaultColor: 'Ghi Ánh Thép',
+        image: '/images/cars/raptor-grey.png',
+        shortDesc:
+          'Siêu bán tải 2026 trang bị động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5" và 7 chế độ lái.',
+        description:
+          'Ford Ranger Raptor mang DNA đua địa hình Baja với động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5", khung gầm gia cường và 7 chế độ lái chuyên dụng.',
+        colors: [
+          {
+            name: 'Đen',
+            hex: '#141414',
+            priceDelta: 0,
+            image: '/images/cars/raptor-black.png',
+          },
+          {
+            name: 'Trắng',
+            hex: '#FFFFFF',
+            priceDelta: 0,
+            image: '/images/cars/raptor-white.png',
+          },
+          {
+            name: 'Xanh Dương',
+            hex: '#1D4ED8',
+            priceDelta: 0,
+            image: '/images/cars/raptor-blue.png',
+          },
+          {
+            name: 'Ghi Ánh Thép',
+            hex: '#6B7280',
+            priceDelta: 8000000,
+            image: '/images/cars/raptor-grey.png',
+          },
+          {
+            name: 'Đỏ Cam',
+            hex: '#EA580C',
+            priceDelta: 8000000,
+            image: '/images/cars/raptor-orange.png',
+          },
+        ],
+        specs: {
+          engine: 'Xăng 3.0L V6 Twin-Turbo EcoBoost',
+          power: '397 PS (292 kW @ 5.650 vòng/phút)',
+          torque: '583 Nm',
+          transmission: 'Tự động 10 cấp (10AT)',
+          drivetrain: 'Hai cầu toàn thời gian (4x4) • Giảm xóc FOX 2.5" • 7 chế độ lái',
+          seats: '5 chỗ ngồi',
+        },
+        trims: [
+          {
+            name: 'Raptor 3.0L V6 4X4 AT',
+            price: 1448000000,
+            engine: 'Xăng 3.0L V6 Twin-Turbo EcoBoost',
+            power: '397 PS (292 kW @ 5.650 vòng/phút)',
+            torque: '583 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu toàn thời gian (4x4) • Giảm xóc FOX 2.5" • 7 chế độ lái',
+            seats: '5 chỗ ngồi',
+          },
+        ],
+      },
+      '2025': {
+        name: 'Ford Ranger Raptor',
+        price: 1299000000,
+        defaultColor: 'Cam Code',
+        image: '/images/cars/raptor-orange.png',
+        shortDesc:
+          'Bán tải hiệu năng cao 2025 trang bị động cơ Diesel 2.0L Bi-Turbo 10AT 4x4 và giảm xóc FOX 2.5".',
+        description:
+          'Ford Ranger Raptor 2025 sở hữu động cơ Diesel 2.0L Bi-Turbo mạnh mẽ kết hợp hộp số tự động 10 cấp, khung gầm gia cường và 7 chế độ lái địa hình chuyên dụng.',
+        colors: [
+          {
+            name: 'Xám Conquer',
+            hex: '#64748B',
+            priceDelta: 8000000,
+            image: '/images/cars/raptor-grey.png',
+          },
+          {
+            name: 'Cam Code',
+            hex: '#EA580C',
+            priceDelta: 8000000,
+            image: '/images/cars/raptor-orange.png',
+          },
+          {
+            name: 'Đen',
+            hex: '#141414',
+            priceDelta: 0,
+            image: '/images/cars/raptor-black.png',
+          },
+          {
+            name: 'Trắng',
+            hex: '#FFFFFF',
+            priceDelta: 0,
+            image: '/images/cars/raptor-white.png',
+          },
+          {
+            name: 'Xanh Dương',
+            hex: '#1D4ED8',
+            priceDelta: 0,
+            image: '/images/cars/raptor-blue.png',
+          },
+        ],
+        specs: {
+          engine: 'Diesel 2.0L Bi-Turbo',
+          power: '210 PS',
+          torque: '500 Nm',
+          transmission: 'Tự động 10 cấp (10AT)',
+          drivetrain: 'Hai cầu toàn thời gian (4x4)',
+          seats: '5 chỗ ngồi',
+        },
+        trims: [
+          {
+            name: 'Raptor 2.0L Bi-Turbo 4X4 AT',
+            price: 1299000000,
+            engine: 'Diesel 2.0L Bi-Turbo',
+            power: '210 PS',
+            torque: '500 Nm',
+            transmission: 'Tự động 10 cấp (10AT)',
+            drivetrain: 'Hai cầu toàn thời gian (4x4)',
+            seats: '5 chỗ ngồi',
+          },
+        ],
+      },
+    },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 1,
+      createBranchStock(
+        'ben-thanh',
+        { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
-        colors: ['Xám Conquer', 'Cam Code'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 0,
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đen', 'Đỏ Cam'],
+        {
+          '2026': ['Đen', 'Đỏ Cam'],
+          '2025': ['Đen', 'Cam Code'],
         },
-        colors: ['Đen'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 0,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 0,
-          'Raptor Xám Conquer Đặc Biệt': 0,
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Trắng'],
+        {
+          '2026': ['Trắng'],
+          '2025': ['Trắng'],
         },
-        colors: [],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 1,
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Trắng'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Trắng'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Trắng'],
         },
-        colors: ['Xám Conquer', 'Trắng'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 0,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 0,
-          'Raptor Xám Conquer Đặc Biệt': 0,
+      ),
+      createBranchStock(
+        'saigon-nam-sg',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 0 },
+        [],
+        {
+          '2026': [],
+          '2025': [],
         },
-        colors: [],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 0,
+      ),
+      createBranchStock(
+        'western-an-lac',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Xanh Dương'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2025': ['Xám Conquer', 'Xanh Dương'],
         },
-        colors: ['Xanh Dương'],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 0,
+      ),
+      createBranchStock(
+        'gia-dinh',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đỏ Cam'],
+        {
+          '2026': ['Đỏ Cam'],
+          '2025': ['Cam Code'],
         },
-        colors: ['Cam Code'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Raptor 2.0L Bi-Turbo 4WD': 1,
-          'Raptor Xám Conquer Đặc Biệt': 1,
+      ),
+      createBranchStock(
+        'phu-my',
+        { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
-        colors: ['Xám Conquer', 'Đen'],
-      },
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Ghi Ánh Thép', 'Xanh Dương'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2025': ['Xám Conquer', 'Xanh Dương'],
+        },
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đỏ Cam', 'Ghi Ánh Thép'],
+        {
+          '2026': ['Đỏ Cam', 'Ghi Ánh Thép'],
+          '2025': ['Cam Code', 'Xám Conquer'],
+        },
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đen', 'Trắng'],
+        {
+          '2026': ['Đen', 'Trắng'],
+          '2025': ['Đen', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'can-tho-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Trắng'],
+        {
+          '2026': ['Trắng'],
+          '2025': ['Trắng'],
+        },
+      ),
+      createBranchStock(
+        'binh-duong-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        {
+          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
+        },
+      ),
     ],
   },
   {
@@ -1098,143 +1986,102 @@ export const fordCars = [
     ],
     trims: [
       {
-        name: 'Select Standard Range RWD',
+        name: 'Mustang Mach-E Premium AWD',
         price: 1699000000,
-        engine: 'Mô-tơ điện (72 kWh)',
-        power: '266 mã lực • Mô-men xoắn 430 Nm',
-        transmission: 'Hộp số 1 cấp truyền động trực tiếp',
-        drivetrain: 'Dẫn động cầu sau (RWD)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'Premium Extended Range AWD',
-        price: 1999000000,
-        engine: 'Mô-tơ điện kép (91 kWh)',
-        power: '346 mã lực • Mô-men xoắn 580 Nm',
-        transmission: 'Hộp số 1 cấp truyền động trực tiếp',
-        drivetrain: 'Dẫn động 4 bánh toàn thời gian (eAWD)',
-        seats: '5 chỗ ngồi',
-      },
-      {
-        name: 'GT Performance AWD',
-        price: 2399000000,
-        engine: 'Mô-tơ điện kép hiệu năng cao (91 kWh)',
-        power: '480 mã lực • Mô-men xoắn 860 Nm',
-        transmission: 'Hộp số 1 cấp truyền động trực tiếp',
-        drivetrain: 'Dẫn động 4 bánh toàn thời gian (eAWD)',
+        engine: 'Động cơ điện kép (Dual Motor AWD)',
+        power: '395 PS',
+        torque: '627 Nm',
+        range: '~550 km (chuẩn WLTP)',
+        transmission: 'Truyền động điện 1 cấp',
+        drivetrain: 'Hai cầu toàn thời gian (AWD)',
         seats: '5 chỗ ngồi',
       },
     ],
     specs: {
-      engine: 'Động cơ thuần điện (72 - 91 kWh)',
-      power: '266 - 480 mã lực',
+      engine: 'Động cơ điện kép (Dual Motor AWD)',
+      power: '395 PS',
+      torque: '627 Nm',
+      range: '~550 km (chuẩn WLTP)',
       transmission: 'Truyền động điện 1 cấp',
-      drivetrain: 'RWD / eAWD toàn thời gian',
+      drivetrain: 'Hai cầu toàn thời gian (AWD)',
       seats: '5 chỗ ngồi',
     },
     inventory: [
-      {
-        branchId: 'ben-thanh',
-        branch: 'Bến Thành Ford',
-        address: '39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
-        stock: 3,
-        stockByTrim: {
-          'Select Standard Range RWD': 1,
-          'Premium Extended Range AWD': 1,
-          'GT Performance AWD': 1,
-        },
-        colors: ['Đỏ Thể Thao', 'Đen Huyền Bí'],
-      },
-      {
-        branchId: 'city-binh-trieu',
-        branch: 'City Ford Bình Triệu',
-        address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Select Standard Range RWD': 1,
-          'Premium Extended Range AWD': 1,
-          'GT Performance AWD': 0,
-        },
-        colors: ['Trắng Ánh Sao'],
-      },
-      {
-        branchId: 'saigon-cao-thang',
-        branch: 'Sài Gòn Ford Cao Thắng',
-        address: '61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Select Standard Range RWD': 1,
-          'Premium Extended Range AWD': 0,
-          'GT Performance AWD': 1,
-        },
-        colors: ['Đỏ Thể Thao', 'Xanh Mãnh Liệt'],
-      },
-      {
-        branchId: 'saigon-pho-quang',
-        branch: 'Sài Gòn Ford Phổ Quang',
-        address: '104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Select Standard Range RWD': 0,
-          'Premium Extended Range AWD': 1,
-          'GT Performance AWD': 0,
-        },
-        colors: ['Xanh Mãnh Liệt'],
-      },
-      {
-        branchId: 'saigon-nam-sg',
-        branch: 'Sài Gòn Ford Nam Sài Gòn',
-        address: '161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
-        stock: 0,
-        stockByTrim: {
-          'Select Standard Range RWD': 0,
-          'Premium Extended Range AWD': 0,
-          'GT Performance AWD': 0,
-        },
-        colors: [],
-      },
-      {
-        branchId: 'western-an-lac',
-        branch: 'Western Ford An Lạc',
-        address: '530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
-        stock: 0,
-        stockByTrim: {
-          'Select Standard Range RWD': 0,
-          'Premium Extended Range AWD': 0,
-          'GT Performance AWD': 0,
-        },
-        colors: [],
-      },
-      {
-        branchId: 'gia-dinh',
-        branch: 'Gia Định Ford',
-        address: '900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
-        stock: 1,
-        stockByTrim: {
-          'Select Standard Range RWD': 1,
-          'Premium Extended Range AWD': 0,
-          'GT Performance AWD': 0,
-        },
-        colors: ['Đỏ Thể Thao'],
-      },
-      {
-        branchId: 'phu-my',
-        branch: 'Phú Mỹ Ford',
-        address: 'Lô B1, Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
-        stock: 2,
-        stockByTrim: {
-          'Select Standard Range RWD': 1,
-          'Premium Extended Range AWD': 1,
-          'GT Performance AWD': 0,
-        },
-        colors: ['Trắng Ánh Sao', 'Xanh Mãnh Liệt'],
-      },
+      createBranchStock(
+        'ben-thanh',
+        { 'Mustang Mach-E Premium AWD': 3 },
+        ['Đỏ Thể Thao', 'Đen Huyền Bí'],
+      ),
+      createBranchStock(
+        'city-binh-trieu',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Trắng Ánh Sao'],
+      ),
+      createBranchStock(
+        'saigon-cao-thang',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Đỏ Thể Thao', 'Xanh Mãnh Liệt'],
+      ),
+      createBranchStock(
+        'saigon-pho-quang',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Xanh Mãnh Liệt'],
+      ),
+      createBranchStock('saigon-nam-sg', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock('western-an-lac', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock(
+        'gia-dinh',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đỏ Thể Thao'],
+      ),
+      createBranchStock(
+        'phu-my',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Trắng Ánh Sao', 'Xanh Mãnh Liệt'],
+      ),
+      createBranchStock(
+        'ha-noi-ford',
+        { 'Mustang Mach-E Premium AWD': 4 },
+        ['Đỏ Thể Thao', 'Đen Huyền Bí', 'Trắng Ánh Sao'],
+      ),
+      createBranchStock(
+        'thang-long-ford',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Xanh Mãnh Liệt', 'Trắng Ánh Sao'],
+      ),
+      createBranchStock(
+        'da-nang-ford',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Đỏ Thể Thao', 'Xanh Mãnh Liệt'],
+      ),
+      createBranchStock(
+        'hai-phong-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đen Huyền Bí'],
+      ),
+      createBranchStock('can-tho-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
+      createBranchStock(
+        'binh-duong-ford',
+        { 'Mustang Mach-E Premium AWD': 2 },
+        ['Đỏ Thể Thao', 'Trắng Ánh Sao'],
+      ),
     ],
   },
 ];
 
+export const fordCars = RAW_FORD_CARS.map((car) => ({
+  ...car,
+  inventory: car.inventory.map((item) => ({
+    ...item,
+    city: item.city || BRANCH_BY_ID[item.branchId]?.city || 'TP. Hồ Chí Minh',
+  })),
+}));
+
 export function getGoogleMapsUrl(branch) {
-  const query = encodeURIComponent(`${branch.name}, ${branch.address}`);
+  const label = branch?.name || branch?.branch || '';
+  const query = encodeURIComponent(
+    [label, branch?.address].filter(Boolean).join(', '),
+  );
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
@@ -1246,34 +2093,92 @@ export function getBranchStockForTrim(branchItem, trimName) {
   return branchItem.stock;
 }
 
-export function getColorOption(car, colorName) {
-  if (!car?.colors?.length) {
+export function getColorOption(car, colorName, year = '') {
+  const palette =
+    (year && car?.yearVariants?.[year]?.colors) || car?.colors || [];
+  if (!palette.length) {
     return {
       name: colorName || '',
       hex: COLOR_SWATCHES[colorName] || '#94a3b8',
       image: car?.image || '',
     };
   }
-  const found = car.colors.find((c) => c.name === colorName);
-  return found || car.colors[0];
+  const found = palette.find((c) => c.name === colorName);
+  return found || palette[0];
 }
 
 export function getCarPriceForYear(car, year) {
+  if (year && car.yearVariants?.[year]?.price) {
+    return car.yearVariants[year].price;
+  }
   if (year && car.yearPrices?.[year]) {
     return car.yearPrices[year];
   }
   return car.price;
 }
 
-export function getTotalStock(car, branchId = 'all', trimName = '') {
+export function getCarYearVariant(car, year) {
+  if (!car) return null;
+  const resolvedYear = year || car.defaultYear || '';
+  const variant =
+    resolvedYear && car.yearVariants?.[resolvedYear]
+      ? car.yearVariants[resolvedYear]
+      : null;
+
+  const colors = variant?.colors || car.colors || [];
+  const cardColors = variant?.cardColors || colors;
+
+  return {
+    year: resolvedYear,
+    name: variant?.name || car.name,
+    price: variant?.price ?? getCarPriceForYear(car, resolvedYear),
+    defaultColor: variant?.defaultColor || cardColors[0]?.name || '',
+    colors,
+    cardColors,
+    image: variant?.image || car.image,
+    shortDesc: variant?.shortDesc || car.shortDesc,
+    description: variant?.description || car.description,
+    specs: variant?.specs || car.specs,
+    trims: variant?.trims || car.trims || [],
+  };
+}
+
+export function getTotalStock(
+  car,
+  branchId = 'all',
+  trimName = '',
+  city = 'Tất cả tỉnh/thành',
+  year = '',
+) {
+  const yearTrimKeys =
+    !trimName && year && car.yearVariants?.[year]?.trims
+      ? car.yearVariants[year].trims.flatMap((trim) =>
+          trim.engineOptions?.length
+            ? trim.engineOptions.map((opt) => opt.stockKey || trim.name)
+            : [trim.name],
+        )
+      : null;
+
+  const computeEntryStock = (branchEntry) => {
+    if (!branchEntry) return 0;
+    if (yearTrimKeys) {
+      return yearTrimKeys.reduce(
+        (sum, key) => sum + getBranchStockForTrim(branchEntry, key),
+        0,
+      );
+    }
+    return getBranchStockForTrim(branchEntry, trimName);
+  };
+
   if (branchId && branchId !== 'all') {
     const branchEntry = car.inventory.find((item) => item.branchId === branchId);
-    return getBranchStockForTrim(branchEntry, trimName);
+    return computeEntryStock(branchEntry);
   }
-  return car.inventory.reduce(
-    (sum, item) => sum + getBranchStockForTrim(item, trimName),
-    0,
-  );
+  const items =
+    city && city !== 'Tất cả tỉnh/thành'
+      ? car.inventory.filter((item) => item.city === city)
+      : car.inventory;
+  return items.reduce((sum, item) => sum + computeEntryStock(item), 0);
 }
 
 export function formatVND(price) {

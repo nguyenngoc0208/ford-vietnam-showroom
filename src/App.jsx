@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
+import FordLogo from './components/FordLogo';
 import SplitHero from './components/SplitHero';
 import QuickActionsBar from './components/QuickActionsBar';
 import CarCard from './components/CarCard';
@@ -11,14 +12,16 @@ import CompareModal from './components/CompareModal';
 import {
   CATEGORY_TABS,
   DEALER_BRANCHES,
+  DEALER_CITIES,
   fordCars,
   getBranchStockForTrim,
+  getCarYearVariant,
   getTotalStock,
 } from './data/fordCars';
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_hcm_stock_v3',
+  stock: 'ford_vn_nationwide_stock_v15',
   reservations: 'ford_vn_reservations_v3',
   testDrives: 'ford_vn_test_drives_v3',
 };
@@ -87,6 +90,7 @@ export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
+  const [selectedCity, setSelectedCity] = useState('Tất cả tỉnh/thành');
   const [selectedBranchId, setSelectedBranchId] = useState('all');
   const [modalCarState, setModalCarState] = useState({
     carId: null,
@@ -147,6 +151,25 @@ export default function App() {
     }
   };
 
+  const visibleBranches = useMemo(() => {
+    const allOption = DEALER_BRANCHES[0];
+    const cityBranches =
+      selectedCity === 'Tất cả tỉnh/thành'
+        ? DEALER_BRANCHES.slice(1)
+        : DEALER_BRANCHES.slice(1).filter((b) => b.city === selectedCity);
+    return [allOption, ...cityBranches];
+  }, [selectedCity]);
+
+  const handleSelectCity = (city) => {
+    setSelectedCity(city);
+    if (selectedBranchId !== 'all' && city !== 'Tất cả tỉnh/thành') {
+      const current = DEALER_BRANCHES.find((b) => b.id === selectedBranchId);
+      if (!current || current.city !== city) {
+        setSelectedBranchId('all');
+      }
+    }
+  };
+
   const filteredCars = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
     return cars.filter((car) => {
@@ -158,10 +181,13 @@ export default function App() {
         car.category.toLowerCase().includes(normalizedQuery) ||
         car.shortDesc.toLowerCase().includes(normalizedQuery);
       const matchesBranch =
-        selectedBranchId === 'all' || getTotalStock(car, selectedBranchId) > 0;
+        selectedBranchId !== 'all'
+          ? getTotalStock(car, selectedBranchId) > 0
+          : selectedCity === 'Tất cả tỉnh/thành' ||
+            getTotalStock(car, 'all', '', selectedCity) > 0;
       return matchesCategory && matchesSearch && matchesBranch;
     });
-  }, [cars, searchQuery, selectedCategory, selectedBranchId]);
+  }, [cars, searchQuery, selectedCategory, selectedCity, selectedBranchId]);
 
   const compareCars = useMemo(
     () =>
@@ -210,16 +236,21 @@ export default function App() {
     car,
     branchItem,
     trimName,
+    stockKey,
     year,
     price,
     color,
     customerName,
     customerPhone,
   }) => {
+    const resolvedStockKey = stockKey || trimName;
     const targetBranch = car.inventory.find(
       (b) => b.branchId === branchItem.branchId,
     );
-    const currentTrimStock = getBranchStockForTrim(targetBranch, trimName);
+    const currentTrimStock = getBranchStockForTrim(
+      targetBranch,
+      resolvedStockKey,
+    );
     if (!targetBranch || currentTrimStock <= 0) return null;
 
     const nextCars = cars.map((item) => {
@@ -230,7 +261,7 @@ export default function App() {
           if (b.branchId !== branchItem.branchId) return b;
           const nextByTrim = {
             ...(b.stockByTrim || {}),
-            [trimName]: Math.max(0, currentTrimStock - 1),
+            [resolvedStockKey]: Math.max(0, currentTrimStock - 1),
           };
           return {
             ...b,
@@ -241,12 +272,14 @@ export default function App() {
       };
     });
 
+    const variantName = getCarYearVariant(car, year)?.name || car.name;
     const newReservation = {
       id: `res-${Date.now()}`,
       code: `FORD-${car.id.slice(0, 3).toUpperCase()}-${String(Date.now()).slice(-4)}`,
       carId: car.id,
-      carName: car.name,
+      carName: variantName,
       trimName,
+      stockKey: resolvedStockKey,
       year,
       price,
       branchId: branchItem.branchId,
@@ -266,7 +299,7 @@ export default function App() {
 
     showToast(
       `Đặt giữ xe thành công (${newReservation.code})`,
-      `${car.name} — ${trimName} tại ${branchItem.branch}`,
+      `${variantName} — ${trimName} tại ${branchItem.branch}`,
       'success',
     );
 
@@ -283,10 +316,11 @@ export default function App() {
         ...item,
         inventory: item.inventory.map((b) => {
           if (b.branchId !== target.branchId) return b;
-          const prevQty = getBranchStockForTrim(b, target.trimName);
+          const restoreKey = target.stockKey || target.trimName;
+          const prevQty = getBranchStockForTrim(b, restoreKey);
           const nextByTrim = {
             ...(b.stockByTrim || {}),
-            [target.trimName]: prevQty + 1,
+            [restoreKey]: prevQty + 1,
           };
           return {
             ...b,
@@ -323,7 +357,7 @@ export default function App() {
     setTestDrives([]);
     showToast(
       'Đã khôi phục tồn kho',
-      'Số lượng xe tại 8 showroom TP.HCM đã trở về mặc định.',
+      'Số lượng xe tại 14 showroom toàn quốc đã trở về mặc định.',
       'info',
     );
   };
@@ -366,7 +400,10 @@ export default function App() {
         onSelectCar={(car, year) =>
           setModalCarState({
             carId: car.id,
-            color: car.colors?.[0]?.name || '',
+            color:
+              getCarYearVariant(car, year)?.defaultColor ||
+              car.colors?.[0]?.name ||
+              '',
             year: year || car.defaultYear || '',
           })
         }
@@ -403,7 +440,9 @@ export default function App() {
                 Đang hiển thị <strong>{filteredCars.length}</strong> dòng xe
                 {selectedBranchId !== 'all' && activeBranch
                   ? ` có sẵn tại ${activeBranch.name}`
-                  : ''}
+                  : selectedCity !== 'Tất cả tỉnh/thành'
+                    ? ` có sẵn tại ${selectedCity}`
+                    : ''}
               </p>
             </div>
 
@@ -461,21 +500,41 @@ export default function App() {
               </div>
             </div>
 
-            <div className="branch-filter-bar" aria-label="Lọc theo chi nhánh đại lý">
-              <span className="branch-filter-label">
-                Lọc xe có sẵn theo đại lý:
-              </span>
-              <div className="branch-filter-pills">
-                {DEALER_BRANCHES.map((branch) => (
-                  <button
-                    key={branch.id}
-                    type="button"
-                    className={`branch-pill ${selectedBranchId === branch.id ? 'is-active' : ''}`}
-                    onClick={() => setSelectedBranchId(branch.id)}
-                  >
-                    {branch.name}
-                  </button>
-                ))}
+            <div className="branch-filter-bar" aria-label="Lọc theo khu vực và chi nhánh đại lý">
+              <div className="branch-filter-row">
+                <span className="branch-filter-label">Khu vực / Tỉnh thành:</span>
+                <div className="branch-filter-pills" role="group" aria-label="Chọn khu vực">
+                  {DEALER_CITIES.map((city) => (
+                    <button
+                      key={city}
+                      type="button"
+                      className={`branch-pill branch-pill--city ${selectedCity === city ? 'is-active' : ''}`}
+                      onClick={() => handleSelectCity(city)}
+                    >
+                      {city}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="branch-filter-row">
+                <span className="branch-filter-label">
+                  Showroom ({visibleBranches.length - 1} chi nhánh):
+                </span>
+                <div className="branch-filter-pills" role="group" aria-label="Chọn showroom">
+                  {visibleBranches.map((branch) => (
+                    <button
+                      key={branch.id}
+                      type="button"
+                      className={`branch-pill ${selectedBranchId === branch.id ? 'is-active' : ''}`}
+                      onClick={() => setSelectedBranchId(branch.id)}
+                    >
+                      {branch.id === 'all' && selectedCity !== 'Tất cả tỉnh/thành'
+                        ? `Tất cả tại ${selectedCity}`
+                        : branch.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -486,6 +545,7 @@ export default function App() {
                     key={car.id}
                     car={car}
                     activeBranchId={selectedBranchId}
+                    activeCity={selectedCity}
                     isCompared={compareIds.includes(car.id)}
                     onToggleCompare={handleToggleCompare}
                     onSelect={(selected, color, year) =>
@@ -500,7 +560,7 @@ export default function App() {
                   Hiện chưa có xe sẵn thuộc bộ lọc đã chọn
                 </p>
                 <p className="catalog-empty-desc">
-                  Bạn có thể chuyển sang &ldquo;Tất cả chi nhánh TP.HCM&rdquo; để xem tồn kho toàn thành phố hoặc khôi phục tồn kho mặc định.
+                  Bạn có thể chuyển sang &ldquo;Tất cả tỉnh/thành&rdquo; hoặc khôi phục tồn kho mặc định để xem xe có sẵn trên toàn quốc.
                 </p>
                 <button
                   type="button"
@@ -508,10 +568,11 @@ export default function App() {
                   onClick={() => {
                     setSearchQuery('');
                     setSelectedCategory('Tất cả');
+                    setSelectedCity('Tất cả tỉnh/thành');
                     setSelectedBranchId('all');
                   }}
                 >
-                  Xem tất cả xe TP.HCM
+                  Xem tất cả xe toàn quốc
                 </button>
               </div>
             )}
@@ -523,12 +584,10 @@ export default function App() {
         <div className="container">
           <div className="footer-grid-v2">
             <div className="footer-brand-col">
-              <span className="ford-oval-badge ford-oval-badge--sm">
-                <span>Ford</span>
-              </span>
+              <FordLogo className="ford-logo--footer" label="Ford Việt Nam" />
               <p className="footer-brand-note">
                 Ford Việt Nam — Hệ thống trưng bày, so sánh thông số và tra cứu tồn kho
-                thời gian thực tại 8 showroom Ford chính hãng TP. Hồ Chí Minh.
+                thời gian thực tại 14 showroom Ford chính hãng trên toàn quốc.
               </p>
               <div className="footer-hotline-box">
                 <span>Hotline Hỗ trợ Khách hàng 24/7</span>
@@ -591,7 +650,7 @@ export default function App() {
                 className="footer-link-btn"
                 onClick={() => setUtilityModalMode('dealers')}
               >
-                Tìm 8 Showroom TP.HCM &amp; Chỉ đường Maps
+                Tìm 14 Showroom toàn quốc &amp; Chỉ đường Maps
               </button>
               <button
                 type="button"
@@ -603,10 +662,10 @@ export default function App() {
             </div>
 
             <div className="footer-links-col">
-              <h4>Hệ thống 8 Showroom TP.HCM</h4>
-              <p>Bến Thành Ford • City Ford Bình Triệu</p>
-              <p>Sài Gòn Ford (Cao Thắng, Phổ Quang, Nam Sài Gòn)</p>
-              <p>Western Ford An Lạc • Gia Định Ford • Phú Mỹ Ford</p>
+              <h4>Hệ thống 14 Showroom Toàn Quốc</h4>
+              <p>TP.HCM (8): Bến Thành • City Ford • Sài Gòn Ford • Western • Gia Định • Phú Mỹ</p>
+              <p>Hà Nội (2): Hà Nội Ford • Thăng Long Ford</p>
+              <p>Tỉnh/Thành khác (4): Đà Nẵng • Hải Phòng • Cần Thơ • Bình Dương</p>
             </div>
           </div>
 
@@ -648,6 +707,7 @@ export default function App() {
         car={activeModalCar}
         initialColor={modalCarState.color}
         initialYear={modalCarState.year}
+        initialCity={selectedCity}
         onReserveVehicle={handleReserveVehicle}
         onClose={() => setModalCarState({ carId: null, color: '', year: '' })}
       />
@@ -660,11 +720,16 @@ export default function App() {
         onSelectCar={(car, year) =>
           setModalCarState({
             carId: car.id,
-            color: car.colors?.[0]?.name || '',
+            color:
+              getCarYearVariant(car, year)?.defaultColor ||
+              car.colors?.[0]?.name ||
+              '',
             year: year || car.defaultYear || '',
           })
         }
         onSelectBranchFilter={(branchId) => {
+          const target = DEALER_BRANCHES.find((b) => b.id === branchId);
+          setSelectedCity(target?.city || 'Tất cả tỉnh/thành');
           setSelectedBranchId(branchId);
           scrollToCatalog(false);
         }}
