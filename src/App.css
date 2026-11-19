@@ -1965,9 +1965,28 @@
 }
 
 .branch-address {
-  font-size: 0.78rem;
-  color: var(--text-muted);
+  font-size: 0.875rem;
+  color: #334155;
   margin-top: 2px;
+}
+
+.branch-address-block {
+  margin-top: 3px;
+}
+
+.branch-address-primary {
+  font-size: 0.875rem;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.branch-address-legacy {
+  display: block;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 2px;
+  line-height: 1.4;
 }
 
 .branch-qty {
@@ -2487,8 +2506,8 @@
 
 .dealer-modal-address {
   margin-top: 4px;
-  font-size: 0.84rem;
-  color: var(--text-body);
+  font-size: 0.875rem;
+  color: #334155;
 }
 
 .dealer-modal-hotline {

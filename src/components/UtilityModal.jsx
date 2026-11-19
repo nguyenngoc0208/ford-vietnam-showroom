@@ -3,6 +3,7 @@ import {
   DEALER_BRANCHES,
   DEALER_CITIES,
   FORD_BRANCHES,
+  formatBranchAddress,
   formatVND,
   getCarYearVariant,
   getGoogleMapsUrl,
@@ -179,6 +180,9 @@ export default function UtilityModal({
       ? allBranches
       : allBranches.filter((b) => b.city === selectedDealerCity);
   const cityGroups = DEALER_CITIES.filter((c) => c !== 'Tất cả tỉnh/thành');
+  const selectedBranchObj =
+    allBranches.find((b) => b.id === selectedBranchId) || allBranches[0];
+  const selectedBranchAddr = formatBranchAddress(selectedBranchObj?.address || '');
 
   return (
     <div
@@ -233,6 +237,9 @@ export default function UtilityModal({
                   (sum, c) => sum + getTotalStock(c, branch.id),
                   0,
                 );
+                const { primaryAddress, legacyAddress } = formatBranchAddress(
+                  branch.address,
+                );
                 return (
                   <div key={branch.id} className="dealer-modal-card">
                     <div className="dealer-modal-info">
@@ -249,7 +256,16 @@ export default function UtilityModal({
                             : 'Đang nhập lô mới'}
                         </span>
                       </div>
-                      <p className="dealer-modal-address">{branch.address}</p>
+                      <div className="dealer-modal-address">
+                        <span className="branch-address-primary text-sm text-slate-700">
+                          {primaryAddress}
+                        </span>
+                        {legacyAddress && (
+                          <span className="branch-address-legacy block text-xs text-slate-500 mt-0.5">
+                            {legacyAddress}
+                          </span>
+                        )}
+                      </div>
                       <span className="dealer-modal-hotline">
                         Hotline: {branch.hotline}
                       </span>
@@ -486,12 +502,24 @@ export default function UtilityModal({
                           .filter((branch) => branch.city === city)
                           .map((branch) => (
                             <option key={branch.id} value={branch.id}>
-                              {branch.name} — {branch.address}
+                              {branch.name} — {formatBranchAddress(branch.address).primaryAddress}
                             </option>
                           ))}
                       </optgroup>
                     ))}
                   </select>
+                  {selectedBranchObj && (
+                    <div className="dealer-modal-address">
+                      <span className="branch-address-primary text-sm text-slate-700">
+                        {selectedBranchAddr.primaryAddress}
+                      </span>
+                      {selectedBranchAddr.legacyAddress && (
+                        <span className="branch-address-legacy block text-xs text-slate-500 mt-0.5">
+                          {selectedBranchAddr.legacyAddress}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </label>
 
                 <div className="utility-field-row">

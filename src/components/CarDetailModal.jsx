@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   COLOR_SWATCHES,
   DEALER_CITIES,
+  formatBranchAddress,
   formatVND,
   getBranchStockForTrim,
   getCarYearVariant,
@@ -469,6 +470,9 @@ export default function CarDetailModal({
                   );
                   const hasStock = trimStock > 0;
                   const branchColors = getBranchYearColors(branchItem);
+                  const { primaryAddress, legacyAddress } = formatBranchAddress(
+                    branchItem.address,
+                  );
                   return (
                     <tr key={branchItem.branchId}>
                       <td data-label="Đại lý Ford">
@@ -481,19 +485,26 @@ export default function CarDetailModal({
                               </span>
                             )}
                           </div>
-                          <div className="branch-address-row">
-                            <span className="branch-address">
-                              {branchItem.address}
-                            </span>
-                            <a
-                              href={getGoogleMapsUrl(branchItem)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="map-direction-link"
-                              onClick={(event) => event.stopPropagation()}
-                            >
-                              Chỉ đường ↗
-                            </a>
+                          <div className="branch-address-block">
+                            <div className="branch-address-row">
+                              <span className="branch-address branch-address-primary text-sm text-slate-700">
+                                {primaryAddress}
+                              </span>
+                              <a
+                                href={getGoogleMapsUrl(branchItem)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="map-direction-link"
+                                onClick={(event) => event.stopPropagation()}
+                              >
+                                Chỉ đường ↗
+                              </a>
+                            </div>
+                            {legacyAddress && (
+                              <span className="branch-address-legacy block text-xs text-slate-500 mt-0.5">
+                                {legacyAddress}
+                              </span>
+                            )}
                           </div>
                         </div>
                       </td>

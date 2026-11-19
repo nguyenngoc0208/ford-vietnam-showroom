@@ -2940,15 +2940,25 @@ export const fordCars = RAW_FORD_CARS.map((car) => ({
     ),
 }));
 
-export function getGoogleMapsUrl(branch) {
-  const info = branch?.branchId || branch?.id ? BRANCH_BY_ID[branch.branchId || branch.id] : null;
-  const preferredQuery = branch?.mapsQuery || info?.mapsQuery;
-  if (preferredQuery) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(preferredQuery)}`;
+export function formatBranchAddress(address = '') {
+  const raw = String(address || '').trim();
+  const splitToken = ' (Địa chỉ cũ:';
+  const idx = raw.indexOf(splitToken);
+  if (idx === -1) {
+    return { primaryAddress: raw, legacyAddress: '' };
   }
+  return {
+    primaryAddress: raw.slice(0, idx).trim(),
+    legacyAddress: raw.slice(idx + 1).trim(),
+  };
+}
+
+export function getGoogleMapsUrl(branch) {
   const label = branch?.name || branch?.branch || '';
-  const cleanAddress = (branch?.address || '').replace(/\s*\(Địa chỉ cũ:.*?\)/g, '').trim();
-  const query = encodeURIComponent([label, cleanAddress].filter(Boolean).join(', '));
+  const { primaryAddress } = formatBranchAddress(branch?.address || '');
+  const query = encodeURIComponent(
+    [label, primaryAddress].filter(Boolean).join(', '),
+  );
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
