@@ -21,7 +21,7 @@ import {
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_nationwide_stock_v15',
+  stock: 'ford_vn_nationwide_stock_v16',
   reservations: 'ford_vn_reservations_v3',
   testDrives: 'ford_vn_test_drives_v3',
 };
