@@ -42,200 +42,200 @@ export const FORD_BRANCHES = [
     id: 'ben-thanh',
     name: 'Bến Thành Ford',
     city: 'TP. Hồ Chí Minh',
-    address: '39 Chế Lan Viên, P. Tây Thạnh, TP.HCM (Địa chỉ cũ: P. Tây Thạnh, Q. Tân Phú, TP.HCM)',
-    mapsQuery: 'Bến Thành Ford, 39 Chế Lan Viên, P. Tây Thạnh, Q. Tân Phú, TP.HCM',
+    address:
+      '39 Chế Lan Viên, Phường Tây Thạnh, TP. Hồ Chí Minh (Địa chỉ cũ: 39 Chế Lan Viên, Phường Tây Thạnh, Quận Tân Phú, TP. Hồ Chí Minh)',
     hotline: '028 3815 8888',
   },
   {
     id: 'city-binh-trieu',
     name: 'City Ford Bình Triệu',
     city: 'TP. Hồ Chí Minh',
-    address: '218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP.HCM (Địa chỉ cũ: P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM)',
-    mapsQuery: 'City Ford Bình Triệu, 218 Quốc Lộ 13, P. Hiệp Bình Chánh, TP. Thủ Đức, TP.HCM',
+    address:
+      '218 Quốc Lộ 13, Phường Hiệp Bình, TP. Hồ Chí Minh (Địa chỉ cũ: 218 Quốc Lộ 13, Phường Hiệp Bình Chánh, TP. Thủ Đức, TP. Hồ Chí Minh)',
     hotline: '028 3726 9999',
   },
   {
     id: 'saigon-cao-thang',
     name: 'Sài Gòn Ford Cao Thắng',
     city: 'TP. Hồ Chí Minh',
-    address: '61A Cao Thắng, Phường 3, TP.HCM (Địa chỉ cũ: Phường 3, Quận 3, TP.HCM)',
-    mapsQuery: 'Sài Gòn Ford Cao Thắng, 61A Cao Thắng, Phường 3, Quận 3, TP.HCM',
+    address:
+      '61A Cao Thắng, Phường Bàn Cờ, TP. Hồ Chí Minh (Địa chỉ cũ: 61A Cao Thắng, Phường 3, Quận 3, TP. Hồ Chí Minh)',
     hotline: '028 3830 8888',
   },
   {
     id: 'saigon-pho-quang',
     name: 'Sài Gòn Ford Phổ Quang',
     city: 'TP. Hồ Chí Minh',
-    address: '104 Phổ Quang, Phường 2, TP.HCM (Địa chỉ cũ: Phường 2, Q. Tân Bình, TP.HCM)',
-    mapsQuery: 'Sài Gòn Ford Phổ Quang, 104 Phổ Quang, Phường 2, Q. Tân Bình, TP.HCM',
+    address:
+      '104 Phổ Quang, Phường Tân Sơn Hòa, TP. Hồ Chí Minh (Địa chỉ cũ: 104 Phổ Quang, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh)',
     hotline: '028 3844 8888',
   },
   {
     id: 'saigon-nam-sg',
     name: 'Sài Gòn Ford Nam Sài Gòn',
     city: 'TP. Hồ Chí Minh',
-    address: '161F Dạ Nam / Nguyễn Văn Linh, TP.HCM (Địa chỉ cũ: Huyện Bình Chánh, TP.HCM)',
-    mapsQuery: 'Sài Gòn Ford Nam Sài Gòn, 161F Dạ Nam, Phường 3, Quận 8, TP.HCM',
+    address:
+      '161F Dạ Nam, Phường Chánh Hưng, TP. Hồ Chí Minh (Địa chỉ cũ: 161F Dạ Nam, Phường 3, Quận 8, TP. Hồ Chí Minh)',
     hotline: '028 3851 8888',
   },
   {
     id: 'gia-dinh',
     name: 'Gia Định Ford',
     city: 'TP. Hồ Chí Minh',
-    address: '900 Quốc Lộ 1A, P. Thạnh Xuân, TP.HCM (Địa chỉ cũ: P. Thạnh Xuân, Quận 12, TP.HCM)',
-    mapsQuery: 'Gia Định Ford, 900 Quốc Lộ 1A, P. Thạnh Xuân, Quận 12, TP.HCM',
+    address:
+      '900 Quốc Lộ 1A, Phường Thạnh Xuân, TP. Hồ Chí Minh (Địa chỉ cũ: 900 Quốc Lộ 1A, Phường Thạnh Xuân, Quận 12, TP. Hồ Chí Minh)',
     hotline: '028 3716 8888',
   },
   {
     id: 'western-an-lac',
     name: 'Western Ford An Lạc',
     city: 'TP. Hồ Chí Minh',
-    address: '530 Kinh Dương Vương, P. An Lạc, TP.HCM (Địa chỉ cũ: P. An Lạc, Q. Bình Tân, TP.HCM)',
-    mapsQuery: 'Western Ford An Lạc, 530 Kinh Dương Vương, P. An Lạc, Q. Bình Tân, TP.HCM',
+    address:
+      '530 Kinh Dương Vương, Phường An Lạc, TP. Hồ Chí Minh (Địa chỉ cũ: 530 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân, TP. Hồ Chí Minh)',
     hotline: '028 3752 8888',
   },
   {
     id: 'phu-my',
     name: 'Phú Mỹ Ford',
     city: 'TP. Hồ Chí Minh',
-    address: 'Lô B1 Đường C2, KCN Cát Lái 2, TP.HCM (Địa chỉ cũ: P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM)',
-    mapsQuery: 'Phú Mỹ Ford, Lô B1 Đường C2, KCN Cát Lái 2, P. Thạnh Mỹ Lợi, TP. Thủ Đức, TP.HCM',
+    address:
+      'Lô B1 Đường C2, KCN Cát Lái 2, Phường Cát Lái, TP. Hồ Chí Minh (Địa chỉ cũ: Lô B1 Đường C2, KCN Cát Lái 2, Phường Thạnh Mỹ Lợi, TP. Thủ Đức, TP. Hồ Chí Minh)',
     hotline: '028 3742 8888',
   },
   {
     id: 'binh-duong-ford',
     name: 'Bình Dương Ford',
     city: 'TP. Hồ Chí Minh',
-    address: 'Lô C13 Đường Hùng Vương, P. Hòa Phú, TP.HCM (Địa chỉ cũ: TP. Thủ Dầu Một, Tỉnh Bình Dương)',
-    mapsQuery: 'Bình Dương Ford, Lô C13 Đường Hùng Vương, P. Hòa Phú, TP. Thủ Dầu Một, Bình Dương',
+    address:
+      'Lô C13 Đường Hùng Vương, Phường Bình Dương, TP. Hồ Chí Minh (Địa chỉ cũ: Lô C13 Đường Hùng Vương, Phường Hòa Phú, TP. Thủ Dầu Một, Tỉnh Bình Dương)',
     hotline: '0274 3818 888',
   },
   {
     id: 'vung-tau-ford',
     name: 'Vũng Tàu Ford',
     city: 'TP. Hồ Chí Minh',
-    address: '50 Đường 30/4, Phường 9, TP.HCM (Địa chỉ cũ: TP. Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu)',
-    mapsQuery: 'Vũng Tàu Ford, 50 Đường 30/4, Phường 9, TP. Vũng Tàu, Bà Rịa - Vũng Tàu',
+    address:
+      '50 Đường 30/4, Phường Tam Thắng, TP. Hồ Chí Minh (Địa chỉ cũ: 50 Đường 30/4, Phường 9, TP. Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu)',
     hotline: '0254 3577 888',
   },
   {
     id: 'ha-noi-ford',
     name: 'Hà Nội Ford',
     city: 'Hà Nội',
-    address: '311–313 Trường Chinh, P. Khương Mai, Hà Nội (Địa chỉ cũ: Q. Thanh Xuân, Hà Nội)',
-    mapsQuery: 'Hà Nội Ford, 311-313 Trường Chinh, P. Khương Mai, Q. Thanh Xuân, Hà Nội',
+    address:
+      '311–313 Trường Chinh, Phường Phương Liệt, Hà Nội (Địa chỉ cũ: 311–313 Trường Chinh, Phường Khương Mai, Quận Thanh Xuân, Hà Nội)',
     hotline: '024 3565 8888',
   },
   {
     id: 'thang-long-ford',
     name: 'Thăng Long Ford',
     city: 'Hà Nội',
-    address: '105 Láng Hạ, P. Láng Hạ, Hà Nội (Địa chỉ cũ: Q. Đống Đa, Hà Nội)',
-    mapsQuery: 'Thăng Long Ford, 105 Láng Hạ, P. Láng Hạ, Q. Đống Đa, Hà Nội',
+    address:
+      '105 Láng Hạ, Phường Đống Đa, Hà Nội (Địa chỉ cũ: 105 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, Hà Nội)',
     hotline: '024 3562 9999',
   },
   {
     id: 'thanh-xuan-ford',
     name: 'Thanh Xuân Ford',
     city: 'Hà Nội',
-    address: '88 Nguyễn Xiển, P. Hạ Đình, Hà Nội (Địa chỉ cũ: Q. Thanh Xuân, Hà Nội)',
-    mapsQuery: 'Thanh Xuân Ford, 88 Nguyễn Xiển, P. Hạ Đình, Q. Thanh Xuân, Hà Nội',
+    address:
+      '88 Nguyễn Xiển, Phường Thanh Liệt, Hà Nội (Địa chỉ cũ: 88 Nguyễn Xiển, Phường Hạ Đình, Quận Thanh Xuân, Hà Nội)',
     hotline: '024 3552 8888',
   },
   {
     id: 'long-bien-ford',
     name: 'Long Biên Ford',
     city: 'Hà Nội',
-    address: 'Số 3 Nguyễn Văn Linh, P. Gia Thụy, Hà Nội (Địa chỉ cũ: Q. Long Biên, Hà Nội)',
-    mapsQuery: 'Long Biên Ford, Số 3 Nguyễn Văn Linh, P. Gia Thụy, Q. Long Biên, Hà Nội',
+    address:
+      'Số 3 Nguyễn Văn Linh, Phường Việt Hưng, Hà Nội (Địa chỉ cũ: Số 3 Nguyễn Văn Linh, Phường Gia Thụy, Quận Long Biên, Hà Nội)',
     hotline: '024 3875 8888',
   },
   {
     id: 'thu-do-ford',
     name: 'Thủ Đô Ford',
     city: 'Hà Nội',
-    address: 'Km8 Giải Phóng, P. Hoàng Liệt, Hà Nội (Địa chỉ cũ: Q. Hoàng Mai, Hà Nội)',
-    mapsQuery: 'Thủ Đô Ford, Km8 Giải Phóng, P. Hoàng Liệt, Q. Hoàng Mai, Hà Nội',
+    address:
+      'Km8 Giải Phóng, Phường Hoàng Liệt, Hà Nội (Địa chỉ cũ: Km8 Giải Phóng, Phường Hoàng Liệt, Quận Hoàng Mai, Hà Nội)',
     hotline: '024 3681 8888',
   },
   {
     id: 'ha-thanh-ford',
     name: 'Hà Thành Ford',
     city: 'Hà Nội',
-    address: 'Cụm CN Lai Xá, Xã Kim Chung, Hà Nội (Địa chỉ cũ: Huyện Hoài Đức, Hà Nội)',
-    mapsQuery: 'Hà Thành Ford, Cụm CN Lai Xá, Xã Kim Chung, Huyện Hoài Đức, Hà Nội',
+    address:
+      'Cụm CN Lai Xá, Xã Hoài Đức, Hà Nội (Địa chỉ cũ: Cụm CN Lai Xá, Xã Kim Chung, Huyện Hoài Đức, Hà Nội)',
     hotline: '024 3386 8888',
   },
   {
     id: 'an-do-ford',
     name: 'An Đô Ford',
     city: 'Hà Nội',
-    address: '168 Phạm Văn Đồng, P. Xuân Đỉnh, Hà Nội (Địa chỉ cũ: Q. Bắc Từ Liêm, Hà Nội)',
-    mapsQuery: 'An Đô Ford, 168 Phạm Văn Đồng, P. Xuân Đỉnh, Q. Bắc Từ Liêm, Hà Nội',
+    address:
+      '168 Phạm Văn Đồng, Phường Đông Ngạc, Hà Nội (Địa chỉ cũ: 168 Phạm Văn Đồng, Phường Xuân Đỉnh, Quận Bắc Từ Liêm, Hà Nội)',
     hotline: '024 3750 8888',
   },
   {
     id: 'hai-phong-ford',
     name: 'Hải Phòng Ford',
     city: 'Hải Phòng',
-    address: 'Số 4 Bạch Đằng, P. Hạ Lý, Hải Phòng (Địa chỉ cũ: Q. Hồng Bàng, TP. Hải Phòng)',
-    mapsQuery: 'Hải Phòng Ford, Số 4 Bạch Đằng, P. Hạ Lý, Q. Hồng Bàng, Hải Phòng',
+    address:
+      'Số 4 Bạch Đằng, Phường Hồng Bàng, Hải Phòng (Địa chỉ cũ: Số 4 Bạch Đằng, Phường Hạ Lý, Quận Hồng Bàng, TP. Hải Phòng)',
     hotline: '0225 3282 888',
   },
   {
     id: 'hai-duong-ford',
     name: 'Hải Dương Ford',
     city: 'Hải Phòng',
-    address: '118 An Định, P. Bình Hàn, Hải Phòng (Địa chỉ cũ: TP. Hải Dương, Tỉnh Hải Dương)',
-    mapsQuery: 'Hải Dương Ford, 118 An Định, P. Bình Hàn, TP. Hải Dương, Hải Dương',
+    address:
+      '118 An Định, Phường Thành Đông, Hải Phòng (Địa chỉ cũ: 118 An Định, Phường Bình Hàn, TP. Hải Dương, Tỉnh Hải Dương)',
     hotline: '0220 3895 888',
   },
   {
     id: 'da-nang-ford',
     name: 'Đà Nẵng Ford',
     city: 'Đà Nẵng',
-    address: '56 Điện Biên Phủ, P. Chính Gián, Đà Nẵng (Địa chỉ cũ: Q. Thanh Khê, TP. Đà Nẵng)',
-    mapsQuery: 'Đà Nẵng Ford, 56 Điện Biên Phủ, P. Chính Gián, Q. Thanh Khê, Đà Nẵng',
+    address:
+      '56 Điện Biên Phủ, Phường Thanh Khê, Đà Nẵng (Địa chỉ cũ: 56 Điện Biên Phủ, Phường Chính Gián, Quận Thanh Khê, TP. Đà Nẵng)',
     hotline: '0236 3646 888',
   },
   {
     id: 'dana-ford',
     name: 'Dana Ford',
     city: 'Đà Nẵng',
-    address: '286 Phạm Hùng, Xã Hòa Phước, Đà Nẵng (Địa chỉ cũ: Huyện Hòa Vang, TP. Đà Nẵng)',
-    mapsQuery: 'Dana Ford, 286 Phạm Hùng, Xã Hòa Phước, Huyện Hòa Vang, Đà Nẵng',
+    address:
+      '286 Phạm Hùng, Phường Hòa Xuân, Đà Nẵng (Địa chỉ cũ: 286 Phạm Hùng, Xã Hòa Phước, Huyện Hòa Vang, TP. Đà Nẵng)',
     hotline: '0236 3616 888',
   },
   {
     id: 'quang-nam-ford',
     name: 'Quảng Nam Ford',
     city: 'Đà Nẵng',
-    address: 'Quốc Lộ 1A, P. Tân Thạnh, Đà Nẵng (Địa chỉ cũ: TP. Tam Kỳ, Tỉnh Quảng Nam)',
-    mapsQuery: 'Quảng Nam Ford, Quốc Lộ 1A, P. Tân Thạnh, TP. Tam Kỳ, Quảng Nam',
+    address:
+      'Quốc Lộ 1A, Phường Bàn Thạch, Đà Nẵng (Địa chỉ cũ: Quốc Lộ 1A, Phường Tân Thạnh, TP. Tam Kỳ, Tỉnh Quảng Nam)',
     hotline: '0235 3828 888',
   },
   {
     id: 'can-tho-ford',
     name: 'Cần Thơ Ford',
     city: 'Cần Thơ',
-    address: 'Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Cần Thơ (Địa chỉ cũ: Q. Cái Răng, TP. Cần Thơ)',
-    mapsQuery: 'Cần Thơ Ford, Lô 11C Võ Nguyên Giáp, P. Phú Thứ, Q. Cái Răng, Cần Thơ',
+    address:
+      'Lô 11C Võ Nguyên Giáp, Phường Hưng Phú, Cần Thơ (Địa chỉ cũ: Lô 11C Võ Nguyên Giáp, Phường Phú Thứ, Quận Cái Răng, TP. Cần Thơ)',
     hotline: '0292 3737 888',
   },
   {
     id: 'soc-trang-ford',
     name: 'Sóc Trăng Ford',
     city: 'Cần Thơ',
-    address: '1139 Võ Văn Kiệt, Phường 10, Cần Thơ (Địa chỉ cũ: TP. Sóc Trăng, Tỉnh Sóc Trăng)',
-    mapsQuery: 'Sóc Trăng Ford, 1139 Võ Văn Kiệt, Phường 10, TP. Sóc Trăng, Sóc Trăng',
+    address:
+      '1139 Võ Văn Kiệt, Phường Mỹ Xuyên, Cần Thơ (Địa chỉ cũ: 1139 Võ Văn Kiệt, Phường 10, TP. Sóc Trăng, Tỉnh Sóc Trăng)',
     hotline: '0299 3628 888',
   },
   {
     id: 'hue-ford',
     name: 'Huế Ford',
     city: 'TP. Huế',
-    address: 'Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, P. An Đông, Quận Thuận Hóa, TP. Huế (Địa chỉ cũ: TP. Huế, Tỉnh Thừa Thiên Huế)',
-    mapsQuery: 'Huế Ford, Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, P. An Đông, TP. Huế',
+    address:
+      'Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, Phường An Cựu, TP. Huế (Địa chỉ cũ: Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, Phường An Đông, TP. Huế, Tỉnh Thừa Thiên Huế)',
     hotline: '0234 3818 888',
   },
 ];
@@ -267,7 +267,6 @@ function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = nu
     branch: info.name,
     city: info.city,
     address: info.address,
-    mapsQuery: info.mapsQuery,
     stock,
     stockByTrim,
     colors: stock > 0 ? colors : [],
