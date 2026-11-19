@@ -273,16 +273,18 @@ export default function CarDetailModal({
                   const hasStock = branchItem.stock > 0;
                   return (
                     <tr key={branchItem.branchId}>
-                      <td>
-                        <div className="branch-name">{branchItem.branch}</div>
-                        <div className="branch-address">{branchItem.address}</div>
+                      <td data-label="Đại lý Ford">
+                        <div className="branch-cell-main">
+                          <div className="branch-name">{branchItem.branch}</div>
+                          <div className="branch-address">{branchItem.address}</div>
+                        </div>
                       </td>
-                      <td>
+                      <td data-label="Số lượng kho">
                         <strong className="branch-qty">
                           {branchItem.stock} chiếc
                         </strong>
                       </td>
-                      <td>
+                      <td data-label="Màu sắc sẵn có">
                         {hasStock && branchItem.colors.length > 0 ? (
                           <div className="color-list">
                             {branchItem.colors.map((colorName) => (
@@ -302,14 +304,14 @@ export default function CarDetailModal({
                           <span className="no-colors">Tạm hết xe tại kho</span>
                         )}
                       </td>
-                      <td>
+                      <td data-label="Trạng thái">
                         <span
                           className={`branch-status ${hasStock ? 'is-in' : 'is-out'}`}
                         >
                           {hasStock ? 'Sẵn xe giao ngay' : 'Hết xe tại kho'}
                         </span>
                       </td>
-                      <td>
+                      <td data-label="Thao tác" className="branch-action-cell">
                         {hasStock ? (
                           <button
                             type="button"

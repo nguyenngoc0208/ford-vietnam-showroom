@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   MEGA_CATEGORIES,
   formatVND,
@@ -21,8 +21,24 @@ export default function Navbar({
   const [activeMegaCategory, setActiveMegaCategory] = useState('Xe SUV');
   const [selectedYears, setSelectedYears] = useState({});
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileProductsExpanded, setMobileProductsExpanded] = useState(true);
+  const [mobileExpandedGroup, setMobileExpandedGroup] = useState('Xe SUV');
 
   const solidHeader = isScrolled || megaMenuOpen || mobileMenuOpen;
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   const activeCategoryConfig =
     MEGA_CATEGORIES.find((cat) => cat.key === activeMegaCategory) ||
@@ -41,10 +57,10 @@ export default function Navbar({
     onSelectCar(car, getActiveYear(car));
   };
 
-  const handleSelectCategoryBanner = () => {
+  const handleSelectCategoryBanner = (categoryKey = activeCategoryConfig.key) => {
     setMegaMenuOpen(false);
     setMobileMenuOpen(false);
-    onSelectCategoryAndScroll(activeCategoryConfig.key);
+    onSelectCategoryAndScroll(categoryKey);
   };
 
   return (
@@ -52,7 +68,7 @@ export default function Navbar({
       className={`site-header-wrap ${solidHeader ? 'is-solid' : 'is-transparent'}`}
       onMouseLeave={() => setMegaMenuOpen(false)}
     >
-      {/* Top Utility Bar */}
+      {/* Top Utility Bar (Desktop & Tablet) */}
       <div className="top-utility-bar">
         <div className="utility-inner">
           <span className="utility-tagline">
@@ -164,7 +180,7 @@ export default function Navbar({
 
             <button
               type="button"
-              className="nav-icon-btn"
+              className="nav-icon-btn nav-icon-btn--dealer"
               onClick={() => onNavigateCatalog()}
               aria-label="Định vị đại lý gần nhất"
               title="Định vị đại lý gần nhất"
@@ -213,7 +229,7 @@ export default function Navbar({
               type="button"
               className="nav-mobile-toggle"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              aria-label="Mở menu điều hướng"
+              aria-label={mobileMenuOpen ? 'Đóng menu' : 'Mở menu'}
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? '✕' : '☰'}
@@ -221,7 +237,7 @@ export default function Navbar({
           </div>
         </div>
 
-        {/* Mega Menu 2 Cột chuẩn Ford Việt Nam */}
+        {/* Mega Menu 2 Cột (Desktop) */}
         {megaMenuOpen && (
           <div className="mega-menu" role="region" aria-label="Danh mục xe Ford">
             <div className="mega-menu-layout">
@@ -267,7 +283,7 @@ export default function Navbar({
                     <button
                       type="button"
                       className="pill-btn pill-btn--white mega-banner-cta"
-                      onClick={handleSelectCategoryBanner}
+                      onClick={() => handleSelectCategoryBanner()}
                     >
                       Chọn xe &amp; Báo giá
                     </button>
@@ -327,33 +343,145 @@ export default function Navbar({
             </div>
           </div>
         )}
+      </header>
 
-        {/* Mobile Drawer Menu */}
-        {mobileMenuOpen && (
-          <div className="mobile-nav-drawer">
+      {/* Mobile Sliding Drawer Menu */}
+      <div
+        className={`mobile-drawer-backdrop ${mobileMenuOpen ? 'is-open' : ''}`}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            setMobileMenuOpen(false);
+          }
+        }}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <aside
+          className={`mobile-drawer-panel ${mobileMenuOpen ? 'is-open' : ''}`}
+          aria-label="Menu điều hướng di động"
+        >
+          <div className="mobile-drawer-header">
+            <span className="ford-oval-badge ford-oval-badge--sm">
+              <span>Ford</span>
+            </span>
             <button
               type="button"
-              className="mobile-nav-link"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigateCatalog();
-              }}
+              className="mobile-drawer-close"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Đóng menu di động"
             >
-              Sản Phẩm &amp; Tồn Kho
+              ✕
             </button>
+          </div>
+
+          <div className="mobile-drawer-body">
+            {/* Accordion Sản Phẩm */}
+            <div className="mobile-accordion">
+              <button
+                type="button"
+                className="mobile-accordion-trigger"
+                aria-expanded={mobileProductsExpanded}
+                onClick={() => setMobileProductsExpanded((prev) => !prev)}
+              >
+                <span>Sản Phẩm</span>
+                <span className="mobile-acc-chevron">
+                  {mobileProductsExpanded ? '−' : '+'}
+                </span>
+              </button>
+
+              {mobileProductsExpanded && (
+                <div className="mobile-accordion-content">
+                  {MEGA_CATEGORIES.map((category) => {
+                    const isGroupOpen = mobileExpandedGroup === category.key;
+                    const groupCars = cars.filter(
+                      (c) => c.category === category.key,
+                    );
+                    return (
+                      <div key={category.key} className="mobile-cat-group">
+                        <button
+                          type="button"
+                          className={`mobile-cat-trigger ${isGroupOpen ? 'is-open' : ''}`}
+                          onClick={() =>
+                            setMobileExpandedGroup(
+                              isGroupOpen ? '' : category.key,
+                            )
+                          }
+                        >
+                          <span>{category.label}</span>
+                          <span>{isGroupOpen ? '▾' : '›'}</span>
+                        </button>
+
+                        {isGroupOpen && (
+                          <div className="mobile-cat-cars">
+                            {groupCars.map((car) => (
+                              <button
+                                key={car.id}
+                                type="button"
+                                className="mobile-car-row"
+                                onClick={() => handleSelectFromMenu(car)}
+                              >
+                                <img
+                                  src={car.image}
+                                  alt={car.name}
+                                  onError={(event) =>
+                                    handleCarImageError(
+                                      event,
+                                      car.name,
+                                      car.category,
+                                    )
+                                  }
+                                />
+                                <div>
+                                  <strong>{car.name}</strong>
+                                  <span>
+                                    Từ{' '}
+                                    {formatVND(
+                                      getCarPriceForYear(car, car.defaultYear),
+                                    )}
+                                  </span>
+                                </div>
+                              </button>
+                            ))}
+                            <button
+                              type="button"
+                              className="mobile-cat-all-link"
+                              onClick={() =>
+                                handleSelectCategoryBanner(category.key)
+                              }
+                            >
+                              Xem tất cả {category.label} →
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             <button
               type="button"
-              className="mobile-nav-link"
+              className="mobile-drawer-link"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenUtilityModal('calculator');
               }}
             >
-              Bảng Giá &amp; Dự Toán Lăn Bánh
+              Mua Xe &amp; Dự Toán Lăn Bánh
             </button>
             <button
               type="button"
-              className="mobile-nav-link"
+              className="mobile-drawer-link"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenUtilityModal('calculator');
+              }}
+            >
+              Bảng Giá Xe
+            </button>
+            <button
+              type="button"
+              className="mobile-drawer-link"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenUtilityModal('test-drive');
@@ -363,17 +491,24 @@ export default function Navbar({
             </button>
             <button
               type="button"
-              className="mobile-nav-link"
+              className="mobile-drawer-link"
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenAccountModal();
+                onNavigateCatalog();
               }}
             >
-              Đơn Giữ Xe ({reservationCount})
+              Tìm Đại Lý &amp; Tồn Kho
             </button>
+            <a
+              href="#ford-support"
+              className="mobile-drawer-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Dịch Vụ &amp; Hỗ Trợ
+            </a>
           </div>
-        )}
-      </header>
+        </aside>
+      </div>
     </div>
   );
 }

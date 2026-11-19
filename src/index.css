@@ -30,16 +30,20 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-white);
   color: var(--text-body);
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 #root {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 h1,
