@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import {
   COLOR_SWATCHES,
   formatVND,
+  getBranchStockForTrim,
   getColorOption,
+  getGoogleMapsUrl,
   getTotalStock,
   handleCarImageError,
 } from '../data/fordCars';
@@ -33,7 +35,6 @@ export default function CarDetailModal({
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [holdSubmitted, setHoldSubmitted] = useState(null);
-  const [isSwapping, setIsSwapping] = useState(false);
 
   useEffect(() => {
     car?.colors?.forEach((colorObj) => {
@@ -77,11 +78,22 @@ export default function CarDetailModal({
       ? car.yearPrices[selectedYear] - car.price
       : 0;
   const effectivePrice = activeTrim.price + yearDelta;
+  const activeImageSrc = activeColorObj.image || car.image;
 
-  const totalStock = getTotalStock(car);
+  const trimTotalStock = getTotalStock(car, 'all', activeTrim.name);
   const activeHoldBranch = car.inventory.find(
     (b) => b.branchId === holdBranchId,
   );
+  const activeHoldBranchStock = getBranchStockForTrim(
+    activeHoldBranch,
+    activeTrim.name,
+  );
+
+  const handleSelectTrim = (index) => {
+    setSelectedTrimIndex(index);
+    setHoldSubmitted(null);
+    setHoldBranchId(null);
+  };
 
   const handleOpenHoldForm = (branchItem) => {
     setHoldSubmitted(null);
@@ -143,9 +155,10 @@ export default function CarDetailModal({
           <div className="modal-overview-media">
             <div className="modal-image-wrapper">
               <img
-                src={activeColorObj.image || car.image}
+                key={activeImageSrc}
+                src={activeImageSrc}
                 alt={`${car.name} - ${activeTrim.name} - ${activeColorObj.name}`}
-                className={isSwapping ? 'is-swapping' : ''}
+                className="car-fade-img"
                 onError={(event) =>
                   handleCarImageError(event, car.name, car.category)
                 }
@@ -160,12 +173,12 @@ export default function CarDetailModal({
             <div className="modal-badges">
               <span className="vehicle-card-segment">{car.category}</span>
               <span
-                className={`vehicle-stock-badge ${totalStock > 0 ? 'is-in' : 'is-out'}`}
+                className={`vehicle-stock-badge ${trimTotalStock > 0 ? 'is-in' : 'is-out'}`}
               >
                 <span className="stock-dot" aria-hidden="true" />
-                {totalStock > 0
-                  ? `TP.HCM còn ${totalStock} xe sẵn sàng giao`
-                  : 'Tạm hết xe sẵn tại kho'}
+                {trimTotalStock > 0
+                  ? `Bản ${activeTrim.name}: Còn ${trimTotalStock} xe tại TP.HCM`
+                  : `Bản ${activeTrim.name}: Tạm hết xe sẵn`}
               </span>
             </div>
 
@@ -198,14 +211,16 @@ export default function CarDetailModal({
 
             {car.trims && car.trims.length > 0 && (
               <div className="modal-option-block">
-                <span className="modal-option-label">Chọn phiên bản:</span>
+                <span className="modal-option-label">
+                  Chọn phiên bản ({car.trims.length} phiên bản):
+                </span>
                 <div className="trim-pills" role="group" aria-label="Chọn phiên bản">
                   {car.trims.map((trim, index) => (
                     <button
                       key={trim.name}
                       type="button"
                       className={`trim-pill ${selectedTrimIndex === index ? 'is-active' : ''}`}
-                      onClick={() => setSelectedTrimIndex(index)}
+                      onClick={() => handleSelectTrim(index)}
                     >
                       {trim.name}
                     </button>
@@ -226,19 +241,12 @@ export default function CarDetailModal({
                       key={colorObj.name}
                       type="button"
                       className={`modal-swatch-btn ${isActive ? 'is-active' : ''}`}
-                      onClick={() => {
-                        if (colorObj.name === activeColorObj.name) return;
-                        setIsSwapping(true);
-                        setSelectedColor(colorObj.name);
-                        window.setTimeout(() => setIsSwapping(false), 180);
-                      }}
-                    >
-                      <span
-                        className="color-dot"
-                        style={{ backgroundColor: colorObj.hex }}
-                      />
-                      {colorObj.name}
-                    </button>
+                      style={{ backgroundColor: colorObj.hex }}
+                      title={colorObj.name}
+                      aria-label={`Chọn màu ${colorObj.name}`}
+                      aria-pressed={isActive}
+                      onClick={() => setSelectedColor(colorObj.name)}
+                    />
                   );
                 })}
               </div>
@@ -246,9 +254,11 @@ export default function CarDetailModal({
           </div>
         </div>
 
-        {/* Highlight Specs */}
+        {/* Highlight Specs (Updates dynamically per selected trim) */}
         <section className="modal-section modal-specs-box">
-          <h3 className="modal-section-title">Thông số kỹ thuật nổi bật</h3>
+          <h3 className="modal-section-title">
+            Thông số kỹ thuật — {activeTrim.name}
+          </h3>
           <div className="specs-grid">
             {SPEC_FIELDS.map(({ key, label }) => (
               <div key={key} className="spec-item">
@@ -266,10 +276,10 @@ export default function CarDetailModal({
           <div className="inventory-heading-row">
             <div>
               <h3 className="modal-section-title">
-                Tra cứu Tồn kho Hệ thống Showroom Ford TP.HCM
+                Tồn kho phiên bản {activeTrim.name} tại 8 Showroom TP.HCM
               </h3>
               <p className="inventory-subnote">
-                Nhấn &ldquo;Đặt giữ xe&rdquo; tại showroom còn hàng để trừ tồn kho thời gian thực và nhận mã giữ chỗ.
+                Số lượng thay đổi theo phiên bản bạn chọn. Bấm &ldquo;Chỉ đường&rdquo; để mở Google Maps hoặc &ldquo;Đặt giữ xe&rdquo; để giữ suất giao ngay.
               </p>
             </div>
           </div>
@@ -287,18 +297,35 @@ export default function CarDetailModal({
               </thead>
               <tbody>
                 {car.inventory.map((branchItem) => {
-                  const hasStock = branchItem.stock > 0;
+                  const trimStock = getBranchStockForTrim(
+                    branchItem,
+                    activeTrim.name,
+                  );
+                  const hasStock = trimStock > 0;
                   return (
                     <tr key={branchItem.branchId}>
                       <td data-label="Đại lý Ford">
                         <div className="branch-cell-main">
                           <div className="branch-name">{branchItem.branch}</div>
-                          <div className="branch-address">{branchItem.address}</div>
+                          <div className="branch-address-row">
+                            <span className="branch-address">
+                              {branchItem.address}
+                            </span>
+                            <a
+                              href={getGoogleMapsUrl(branchItem)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="map-direction-link"
+                              onClick={(event) => event.stopPropagation()}
+                            >
+                              Chỉ đường ↗
+                            </a>
+                          </div>
                         </div>
                       </td>
                       <td data-label="Số lượng kho">
                         <strong className="branch-qty">
-                          {branchItem.stock} chiếc
+                          {trimStock} chiếc
                         </strong>
                       </td>
                       <td data-label="Màu sắc sẵn có">
@@ -318,7 +345,7 @@ export default function CarDetailModal({
                             ))}
                           </div>
                         ) : (
-                          <span className="no-colors">Tạm hết xe tại kho</span>
+                          <span className="no-colors">Tạm hết bản này</span>
                         )}
                       </td>
                       <td data-label="Trạng thái">
@@ -395,7 +422,7 @@ export default function CarDetailModal({
                   </div>
                 </div>
                 <p className="hold-receipt-note">
-                  Tồn kho tại {holdSubmitted.branchName} đã được cập nhật giảm 1 chiếc và lưu vào Tài khoản của bạn.
+                  Tồn kho bản {holdSubmitted.trimName} tại {holdSubmitted.branchName} đã được cập nhật giảm 1 chiếc và lưu vào Tài khoản của bạn.
                 </p>
               </div>
             ) : (
@@ -406,7 +433,7 @@ export default function CarDetailModal({
                     <p>
                       {car.name}
                       {selectedYear ? ` (${selectedYear})` : ''} — {activeTrim.name} • Tồn kho còn:{' '}
-                      <strong>{activeHoldBranch.stock} chiếc</strong>
+                      <strong>{activeHoldBranchStock} chiếc</strong>
                     </p>
                   </div>
                   <button

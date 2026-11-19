@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { DEALER_BRANCHES, formatVND } from '../data/fordCars';
+import {
+  DEALER_BRANCHES,
+  formatVND,
+  getGoogleMapsUrl,
+  getTotalStock,
+} from '../data/fordCars';
 
 const REGION_CONFIG = {
   hcm: {
@@ -72,6 +77,7 @@ export default function UtilityModal({
   mode,
   onClose,
   onSelectCar,
+  onSelectBranchFilter,
   onSubmitTestDrive,
 }) {
   const [selectedCarId, setSelectedCarId] = useState(cars[0]?.id || 'everest');
@@ -102,6 +108,7 @@ export default function UtilityModal({
   if (!mode) return null;
 
   const isCalculator = mode === 'calculator';
+  const isDealers = mode === 'dealers';
   const activeCar = cars.find((c) => c.id === selectedCarId) || cars[0];
   const trims = activeCar.trims || [{ name: activeCar.name, price: activeCar.price }];
   const activeTrim = trims[selectedTrimIndex] || trims[0];
@@ -149,6 +156,8 @@ export default function UtilityModal({
     );
   };
 
+  const hcmBranches = DEALER_BRANCHES.filter((b) => b.id !== 'all');
+
   return (
     <div
       className="modal-overlay"
@@ -169,7 +178,67 @@ export default function UtilityModal({
           ×
         </button>
 
-        {isCalculator ? (
+        {isDealers ? (
+          <div>
+            <p className="catalog-eyebrow">HỆ THỐNG ĐẠI LÝ ỦY QUYỀN</p>
+            <h2 id="utility-modal-title" className="modal-title">
+              Tìm Đại Lý Showroom Ford TP.HCM
+            </h2>
+            <p className="modal-description">
+              Tra cứu địa chỉ 8 showroom Ford chính hãng tại TP. Hồ Chí Minh, mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
+            </p>
+
+            <div className="dealers-modal-list">
+              {hcmBranches.map((branch) => {
+                const branchTotalCars = cars.reduce(
+                  (sum, c) => sum + getTotalStock(c, branch.id),
+                  0,
+                );
+                return (
+                  <div key={branch.id} className="dealer-modal-card">
+                    <div className="dealer-modal-info">
+                      <div className="dealer-modal-top">
+                        <strong>{branch.name}</strong>
+                        <span
+                          className={`branch-status ${branchTotalCars > 0 ? 'is-in' : 'is-out'}`}
+                        >
+                          {branchTotalCars > 0
+                            ? `${branchTotalCars} xe sẵn kho`
+                            : 'Đang nhập lô mới'}
+                        </span>
+                      </div>
+                      <p className="dealer-modal-address">{branch.address}</p>
+                      <span className="dealer-modal-hotline">
+                        Hotline: {branch.hotline}
+                      </span>
+                    </div>
+
+                    <div className="dealer-modal-actions">
+                      <a
+                        href={getGoogleMapsUrl(branch)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="pill-btn pill-btn--outline-navy btn-table-hold"
+                      >
+                        Chỉ đường ↗
+                      </a>
+                      <button
+                        type="button"
+                        className="pill-btn pill-btn--navy btn-table-hold"
+                        onClick={() => {
+                          onClose();
+                          onSelectBranchFilter?.(branch.id);
+                        }}
+                      >
+                        Xem xe tại kho
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : isCalculator ? (
           <div>
             <p className="catalog-eyebrow">BẢNG GIÁ &amp; DỰ TOÁN LĂN BÁNH</p>
             <h2 id="utility-modal-title" className="modal-title">
@@ -299,7 +368,7 @@ export default function UtilityModal({
               Đăng Ký Lái Thử Xe Ford
             </h2>
             <p className="modal-description">
-              Chọn mẫu xe, chi nhánh đại lý Ford và ngày hẹn phù hợp để trải nghiệm thực tế.
+              Chọn mẫu xe, showroom Ford TP.HCM và ngày hẹn phù hợp để trải nghiệm thực tế.
             </p>
 
             {testDriveReceipt ? (
@@ -361,12 +430,12 @@ export default function UtilityModal({
                 </div>
 
                 <label className="utility-field">
-                  <span>Chọn chi nhánh đại lý Ford</span>
+                  <span>Chọn showroom Ford TP.HCM</span>
                   <select
                     value={selectedBranchId}
                     onChange={(event) => setSelectedBranchId(event.target.value)}
                   >
-                    {DEALER_BRANCHES.filter((b) => b.id !== 'all').map((branch) => (
+                    {hcmBranches.map((branch) => (
                       <option key={branch.id} value={branch.id}>
                         {branch.name} — {branch.address}
                       </option>

@@ -10,7 +10,6 @@ export default function Navbar({
   cars,
   isScrolled,
   reservationCount = 0,
-  onNavigateCatalog,
   onSelectCategoryAndScroll,
   onOpenSearch,
   onSelectCar,
@@ -78,7 +77,7 @@ export default function Navbar({
             <button
               type="button"
               className="utility-link"
-              onClick={() => onNavigateCatalog()}
+              onClick={() => onOpenUtilityModal('dealers')}
             >
               Tìm Đại Lý
             </button>
@@ -181,9 +180,9 @@ export default function Navbar({
             <button
               type="button"
               className="nav-icon-btn nav-icon-btn--dealer"
-              onClick={() => onNavigateCatalog()}
-              aria-label="Định vị đại lý gần nhất"
-              title="Định vị đại lý gần nhất"
+              onClick={() => onOpenUtilityModal('dealers')}
+              aria-label="Tìm đại lý Ford TP.HCM"
+              title="Tìm đại lý Ford"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -494,10 +493,10 @@ export default function Navbar({
               className="mobile-drawer-link"
               onClick={() => {
                 setMobileMenuOpen(false);
-                onNavigateCatalog();
+                onOpenUtilityModal('dealers');
               }}
             >
-              Tìm Đại Lý &amp; Tồn Kho
+              Tìm Đại Lý &amp; Chỉ Đường Maps
             </button>
             <a
               href="#ford-support"

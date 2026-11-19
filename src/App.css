@@ -1258,6 +1258,47 @@
   overflow: hidden;
 }
 
+@keyframes carImageFade {
+  from {
+    opacity: 0.28;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.car-fade-img {
+  animation: carImageFade 0.28s ease;
+}
+
+.compare-toggle-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--ford-navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.16s ease;
+}
+
+.compare-toggle-btn:hover {
+  border-color: var(--ford-blue);
+  color: var(--ford-blue);
+}
+
+.compare-toggle-btn.is-selected {
+  background-color: var(--ford-blue);
+  border-color: var(--ford-blue);
+  color: #ffffff;
+}
+
 .vehicle-card-media img {
   position: relative;
   z-index: 1;
@@ -1267,11 +1308,7 @@
   margin: auto;
   display: block;
   mix-blend-mode: multiply;
-  transition: opacity 0.25s ease, transform 0.32s ease;
-}
-
-.vehicle-card-media img.is-swapping {
-  opacity: 0.55;
+  transition: transform 0.32s ease;
 }
 
 .vehicle-card:hover .vehicle-card-media img {
@@ -1413,43 +1450,62 @@
   color: var(--ford-blue);
 }
 
-/* Color Swatches on Card */
+/* Color Swatches on Card (Ford.com.vn 28x28 rounded-square style) */
 .vehicle-swatches {
   margin-top: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .swatches-label {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
+}
+
+.swatches-label strong {
+  color: var(--ford-navy);
 }
 
 .swatches-list {
   display: flex;
   align-items: center;
-  gap: 7px;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 6px;
 }
 
 .swatch-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 9999px;
-  border: 1px solid rgba(15, 23, 42, 0.25);
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
   padding: 0;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .swatch-btn:hover {
-  transform: scale(1.12);
+  transform: translateY(-2px);
+  border-color: var(--ford-navy);
 }
 
 .swatch-btn.is-selected {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--ford-navy);
+  border-color: var(--ford-navy);
+}
+
+.swatch-btn.is-selected::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -7px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--ford-navy);
 }
 
 .vehicle-stock-row {
@@ -1591,12 +1647,7 @@
   max-height: 240px;
   object-fit: contain;
   mix-blend-mode: multiply;
-  transition: opacity 0.25s ease;
   display: block;
-}
-
-.modal-image-wrapper img.is-swapping {
-  opacity: 0.55;
 }
 
 .modal-promo-banner {
@@ -1683,27 +1734,39 @@
 .modal-color-swatches {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
+  padding-bottom: 6px;
 }
 
 .modal-swatch-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  border-radius: 9999px;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
   border: 1px solid #cbd5e1;
-  background: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-body);
+  padding: 0;
   cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.modal-swatch-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--ford-navy);
 }
 
 .modal-swatch-btn.is-active {
-  border-color: var(--ford-blue);
-  background: #eef5ff;
-  color: var(--ford-navy);
+  border-color: var(--ford-navy);
+}
+
+.modal-swatch-btn.is-active::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -7px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--ford-navy);
 }
 
 .modal-section {
@@ -2260,18 +2323,424 @@
   margin-top: 18px;
 }
 
-/* Footer */
+.branch-address-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.map-direction-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 9px;
+  border-radius: 9999px;
+  background-color: #eef5ff;
+  border: 1px solid #bfd7fa;
+  color: var(--ford-blue);
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.map-direction-link:hover {
+  background-color: var(--ford-blue);
+  color: #ffffff;
+}
+
+/* Dealers Modal List */
+.dealers-modal-list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dealer-modal-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background-color: var(--bg-gray-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dealer-modal-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dealer-modal-top strong {
+  color: var(--ford-navy);
+  font-size: 0.96rem;
+}
+
+.dealer-modal-address {
+  margin-top: 4px;
+  font-size: 0.84rem;
+  color: var(--text-body);
+}
+
+.dealer-modal-hotline {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.dealer-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Compare Floating Bar & Modal */
+.ford-page.has-compare-bar .ford-footer {
+  padding-bottom: 104px;
+}
+
+.compare-bar-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 650;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.compare-bar {
+  max-width: 1120px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 12px 18px;
+  box-shadow: 0 14px 36px rgba(0, 9, 91, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: auto;
+}
+
+.compare-bar-items {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.compare-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-gray-soft);
+  border: 1px solid #d5dde7;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ford-navy);
+}
+
+.compare-chip img {
+  width: 44px;
+  height: 28px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.compare-chip-remove {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: none;
+  background-color: #e2e8f0;
+  color: var(--ford-navy);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.compare-slot-hint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.compare-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.compare-clear-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.compare-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.compare-modal-content {
+  max-width: 1040px;
+}
+
+.compare-table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  border-right: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.compare-table th:last-child,
+.compare-table td:last-child {
+  border-right: none;
+}
+
+.compare-row-label {
+  width: 165px;
+  font-weight: 700;
+  color: var(--ford-navy);
+  background-color: var(--bg-gray-soft);
+}
+
+.compare-car-col {
+  min-width: 210px;
+  background-color: #ffffff;
+}
+
+.compare-car-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.compare-car-img {
+  width: 170px;
+  height: 98px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compare-car-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.compare-car-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ford-navy);
+}
+
+.compare-price {
+  color: var(--ford-blue);
+  font-size: 0.98rem;
+}
+
+.compare-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.compare-swatch-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Footer v2 */
 .ford-footer {
   background-color: var(--ford-navy);
   color: rgba(255, 255, 255, 0.86);
-  padding: 44px 0;
+  padding: 52px 0 28px;
   font-size: 0.88rem;
 }
 
-.footer-grid {
+.footer-grid-v2 {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.35fr 1fr 1fr 1.1fr;
   gap: 28px;
+}
+
+.footer-hotline-box {
+  margin-top: 16px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.footer-hotline-box span {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.footer-hotline-box strong {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-link-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.86rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.footer-link-btn:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-bottom-bar {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Toast Notification */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-banner {
+  position: fixed;
+  top: 86px;
+  right: 20px;
+  z-index: 1200;
+  max-width: 380px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-left: 5px solid var(--ford-navy);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 14px 32px rgba(0, 9, 91, 0.2);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: toastSlideIn 0.22s ease;
+}
+
+.toast-banner--success {
+  border-left-color: #16a34a;
+}
+
+.toast-banner--info {
+  border-left-color: var(--ford-blue);
+}
+
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: #ecfdf5;
+  color: #15803d;
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-banner--info .toast-icon {
+  background-color: #eef5ff;
+  color: var(--ford-blue);
+}
+
+.toast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.toast-body strong {
+  font-size: 0.88rem;
+  color: var(--ford-navy);
+}
+
+.toast-body span {
+  font-size: 0.8rem;
+  color: var(--text-body);
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .footer-brand-note {
@@ -2349,12 +2818,46 @@
     grid-template-columns: 1fr;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
+  .footer-grid-v2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 767px) {
+  .footer-grid-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .dealer-modal-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dealer-modal-actions {
+    width: 100%;
+  }
+
+  .dealer-modal-actions .btn-table-hold {
+    flex: 1;
+  }
+
+  .compare-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .compare-bar-actions {
+    justify-content: space-between;
+  }
+
+  .toast-banner {
+    top: 70px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+  }
   .top-utility-bar {
     display: none;
   }

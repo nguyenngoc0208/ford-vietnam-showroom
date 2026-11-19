@@ -6,18 +6,21 @@ import CarCard from './components/CarCard';
 import CarDetailModal from './components/CarDetailModal';
 import UtilityModal from './components/UtilityModal';
 import AccountModal from './components/AccountModal';
+import CompareBar from './components/CompareBar';
+import CompareModal from './components/CompareModal';
 import {
   CATEGORY_TABS,
   DEALER_BRANCHES,
   fordCars,
+  getBranchStockForTrim,
   getTotalStock,
 } from './data/fordCars';
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_hcm_stock_v2',
-  reservations: 'ford_vn_reservations_v2',
-  testDrives: 'ford_vn_test_drives_v2',
+  stock: 'ford_vn_hcm_stock_v3',
+  reservations: 'ford_vn_reservations_v3',
+  testDrives: 'ford_vn_test_drives_v3',
 };
 
 function readJsonStorage(key, fallback) {
@@ -29,6 +32,13 @@ function readJsonStorage(key, fallback) {
   }
 }
 
+function sumTrimStocks(stockByTrim) {
+  return Object.values(stockByTrim || {}).reduce(
+    (sum, qty) => sum + (typeof qty === 'number' ? Math.max(0, qty) : 0),
+    0,
+  );
+}
+
 function buildInitialCars() {
   const savedStockMap = readJsonStorage(STORAGE_KEYS.stock, null);
   if (!savedStockMap || typeof savedStockMap !== 'object') {
@@ -37,10 +47,19 @@ function buildInitialCars() {
   return fordCars.map((car) => ({
     ...car,
     inventory: car.inventory.map((branchItem) => {
-      const savedStock = savedStockMap?.[car.id]?.[branchItem.branchId];
-      return typeof savedStock === 'number'
-        ? { ...branchItem, stock: Math.max(0, savedStock) }
-        : branchItem;
+      const savedBranch = savedStockMap?.[car.id]?.[branchItem.branchId];
+      if (savedBranch && typeof savedBranch === 'object') {
+        const mergedByTrim = {
+          ...branchItem.stockByTrim,
+          ...savedBranch,
+        };
+        return {
+          ...branchItem,
+          stockByTrim: mergedByTrim,
+          stock: sumTrimStocks(mergedByTrim),
+        };
+      }
+      return branchItem;
     }),
   }));
 }
@@ -50,7 +69,7 @@ function serializeStockMap(carsList) {
   for (const car of carsList) {
     map[car.id] = {};
     for (const branchItem of car.inventory) {
-      map[car.id][branchItem.branchId] = branchItem.stock;
+      map[car.id][branchItem.branchId] = branchItem.stockByTrim || {};
     }
   }
   return map;
@@ -77,8 +96,13 @@ export default function App() {
   const [utilityModalMode, setUtilityModalMode] = useState(null);
   const [accountOpen, setAccountOpen] = useState(false);
 
+  const [compareIds, setCompareIds] = useState([]);
+  const [compareOpen, setCompareOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+
   const catalogRef = useRef(null);
   const searchInputRef = useRef(null);
+  const toastTimerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -86,8 +110,23 @@ export default function App() {
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (toastTimerRef.current) {
+        window.clearTimeout(toastTimerRef.current);
+      }
+    };
   }, []);
+
+  const showToast = (title, message, type = 'success') => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+    setToast({ id: Date.now(), title, message, type });
+    toastTimerRef.current = window.setTimeout(() => {
+      setToast(null);
+    }, 4200);
+  };
 
   const persistStock = (nextCars) => {
     try {
@@ -124,6 +163,14 @@ export default function App() {
     });
   }, [cars, searchQuery, selectedCategory, selectedBranchId]);
 
+  const compareCars = useMemo(
+    () =>
+      compareIds
+        .map((id) => cars.find((c) => c.id === id))
+        .filter(Boolean),
+    [compareIds, cars],
+  );
+
   const scrollToCatalog = (focusSearch = false) => {
     catalogRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (focusSearch) {
@@ -142,6 +189,23 @@ export default function App() {
     });
   };
 
+  const handleToggleCompare = (car) => {
+    setCompareIds((prev) => {
+      if (prev.includes(car.id)) {
+        return prev.filter((id) => id !== car.id);
+      }
+      if (prev.length >= 3) {
+        showToast(
+          'Tối đa 3 xe so sánh',
+          'Vui lòng bỏ bớt 1 xe trước khi thêm mẫu xe mới.',
+          'info',
+        );
+        return prev;
+      }
+      return [...prev, car.id];
+    });
+  };
+
   const handleReserveVehicle = ({
     car,
     branchItem,
@@ -155,17 +219,25 @@ export default function App() {
     const targetBranch = car.inventory.find(
       (b) => b.branchId === branchItem.branchId,
     );
-    if (!targetBranch || targetBranch.stock <= 0) return null;
+    const currentTrimStock = getBranchStockForTrim(targetBranch, trimName);
+    if (!targetBranch || currentTrimStock <= 0) return null;
 
     const nextCars = cars.map((item) => {
       if (item.id !== car.id) return item;
       return {
         ...item,
-        inventory: item.inventory.map((b) =>
-          b.branchId === branchItem.branchId
-            ? { ...b, stock: Math.max(0, b.stock - 1) }
-            : b,
-        ),
+        inventory: item.inventory.map((b) => {
+          if (b.branchId !== branchItem.branchId) return b;
+          const nextByTrim = {
+            ...(b.stockByTrim || {}),
+            [trimName]: Math.max(0, currentTrimStock - 1),
+          };
+          return {
+            ...b,
+            stockByTrim: nextByTrim,
+            stock: sumTrimStocks(nextByTrim),
+          };
+        }),
       };
     });
 
@@ -192,6 +264,12 @@ export default function App() {
     persistStock(nextCars);
     persistList(STORAGE_KEYS.reservations, nextReservations);
 
+    showToast(
+      `Đặt giữ xe thành công (${newReservation.code})`,
+      `${car.name} — ${trimName} tại ${branchItem.branch}`,
+      'success',
+    );
+
     return newReservation;
   };
 
@@ -203,11 +281,19 @@ export default function App() {
       if (item.id !== target.carId) return item;
       return {
         ...item,
-        inventory: item.inventory.map((b) =>
-          b.branchId === target.branchId
-            ? { ...b, stock: b.stock + 1 }
-            : b,
-        ),
+        inventory: item.inventory.map((b) => {
+          if (b.branchId !== target.branchId) return b;
+          const prevQty = getBranchStockForTrim(b, target.trimName);
+          const nextByTrim = {
+            ...(b.stockByTrim || {}),
+            [target.trimName]: prevQty + 1,
+          };
+          return {
+            ...b,
+            stockByTrim: nextByTrim,
+            stock: sumTrimStocks(nextByTrim),
+          };
+        }),
       };
     });
 
@@ -216,6 +302,12 @@ export default function App() {
     setReservations(nextReservations);
     persistStock(nextCars);
     persistList(STORAGE_KEYS.reservations, nextReservations);
+
+    showToast(
+      'Đã hủy đơn giữ xe',
+      `Đã hoàn +1 xe về kho ${target.branchName}.`,
+      'info',
+    );
   };
 
   const handleResetInventory = () => {
@@ -229,6 +321,11 @@ export default function App() {
     setCars(fordCars);
     setReservations([]);
     setTestDrives([]);
+    showToast(
+      'Đã khôi phục tồn kho',
+      'Số lượng xe tại 8 showroom TP.HCM đã trở về mặc định.',
+      'info',
+    );
   };
 
   const handleSubmitTestDrive = (booking) => {
@@ -240,6 +337,13 @@ export default function App() {
     const nextTestDrives = [newBooking, ...testDrives];
     setTestDrives(nextTestDrives);
     persistList(STORAGE_KEYS.testDrives, nextTestDrives);
+
+    showToast(
+      'Đăng ký lái thử thành công!',
+      `Hẹn ${booking.carName} ngày ${booking.date} tại ${booking.branchName}.`,
+      'success',
+    );
+
     return newBooking;
   };
 
@@ -249,12 +353,11 @@ export default function App() {
   const activeBranch = DEALER_BRANCHES.find((b) => b.id === selectedBranchId);
 
   return (
-    <div className="ford-page">
+    <div className={`ford-page ${compareCars.length > 0 ? 'has-compare-bar' : ''}`}>
       <Navbar
         cars={cars}
         isScrolled={isScrolled}
         reservationCount={reservations.length}
-        onNavigateCatalog={() => scrollToCatalog(false)}
         onSelectCategoryAndScroll={(category) => {
           setSelectedCategory(category);
           scrollToCatalog(false);
@@ -281,12 +384,7 @@ export default function App() {
           onScrollToInventory={() => scrollToCatalog(false)}
           onOpenPromo={() => setUtilityModalMode('calculator')}
           onOpenTestDrive={() => setUtilityModalMode('test-drive')}
-          onFocusDealers={() => {
-            if (selectedBranchId === 'all') {
-              setSelectedBranchId('ben-thanh');
-            }
-            scrollToCatalog(false);
-          }}
+          onFocusDealers={() => setUtilityModalMode('dealers')}
         />
 
         <section
@@ -388,6 +486,8 @@ export default function App() {
                     key={car.id}
                     car={car}
                     activeBranchId={selectedBranchId}
+                    isCompared={compareIds.includes(car.id)}
+                    onToggleCompare={handleToggleCompare}
                     onSelect={(selected, color, year) =>
                       setModalCarState({ carId: selected.id, color, year })
                     }
@@ -400,7 +500,7 @@ export default function App() {
                   Hiện chưa có xe sẵn thuộc bộ lọc đã chọn
                 </p>
                 <p className="catalog-empty-desc">
-                  Bạn có thể chuyển sang &ldquo;Tất cả chi nhánh&rdquo; để xem tồn kho toàn quốc hoặc khôi phục tồn kho mặc định.
+                  Bạn có thể chuyển sang &ldquo;Tất cả chi nhánh TP.HCM&rdquo; để xem tồn kho toàn thành phố hoặc khôi phục tồn kho mặc định.
                 </p>
                 <button
                   type="button"
@@ -411,7 +511,7 @@ export default function App() {
                     setSelectedBranchId('all');
                   }}
                 >
-                  Xem tất cả xe toàn quốc
+                  Xem tất cả xe TP.HCM
                 </button>
               </div>
             )}
@@ -420,28 +520,124 @@ export default function App() {
       </main>
 
       <footer id="ford-support" className="ford-footer">
-        <div className="container footer-grid">
-          <div>
-            <span className="ford-oval-badge ford-oval-badge--sm">
-              <span>Ford</span>
-            </span>
-            <p className="footer-brand-note">
-              Ford Việt Nam — Trải nghiệm đặt xe, tra cứu tồn kho đại lý và dịch vụ hậu mãi
-              chính hãng chuẩn toàn cầu Ready Set Ford.
-            </p>
+        <div className="container">
+          <div className="footer-grid-v2">
+            <div className="footer-brand-col">
+              <span className="ford-oval-badge ford-oval-badge--sm">
+                <span>Ford</span>
+              </span>
+              <p className="footer-brand-note">
+                Ford Việt Nam — Hệ thống trưng bày, so sánh thông số và tra cứu tồn kho
+                thời gian thực tại 8 showroom Ford chính hãng TP. Hồ Chí Minh.
+              </p>
+              <div className="footer-hotline-box">
+                <span>Hotline Hỗ trợ Khách hàng 24/7</span>
+                <strong>1800 588 888</strong>
+              </div>
+            </div>
+
+            <div className="footer-links-col">
+              <h4>Sản Phẩm Ford</h4>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => {
+                  setSelectedCategory('Xe SUV');
+                  scrollToCatalog(false);
+                }}
+              >
+                Dòng xe SUV (Everest, Territory)
+              </button>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => {
+                  setSelectedCategory('Xe Thương mại');
+                  scrollToCatalog(false);
+                }}
+              >
+                Bán tải &amp; Thương mại (Ranger, Raptor, Transit)
+              </button>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => {
+                  setSelectedCategory('Xe Điện');
+                  scrollToCatalog(false);
+                }}
+              >
+                Xe thuần điện (Mustang Mach-E)
+              </button>
+            </div>
+
+            <div className="footer-links-col">
+              <h4>Mua Xe &amp; Tiện Ích</h4>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => setUtilityModalMode('calculator')}
+              >
+                Bảng giá &amp; Dự toán chi phí lăn bánh
+              </button>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => setUtilityModalMode('test-drive')}
+              >
+                Đăng ký lái thử xe tại Showroom
+              </button>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => setUtilityModalMode('dealers')}
+              >
+                Tìm 8 Showroom TP.HCM &amp; Chỉ đường Maps
+              </button>
+              <button
+                type="button"
+                className="footer-link-btn"
+                onClick={() => setAccountOpen(true)}
+              >
+                Quản lý đơn đặt giữ xe ({reservations.length})
+              </button>
+            </div>
+
+            <div className="footer-links-col">
+              <h4>Hệ thống 8 Showroom TP.HCM</h4>
+              <p>Bến Thành Ford • City Ford Bình Triệu</p>
+              <p>Sài Gòn Ford (Cao Thắng, Phổ Quang, Nam Sài Gòn)</p>
+              <p>Western Ford An Lạc • Gia Định Ford • Phú Mỹ Ford</p>
+            </div>
           </div>
-          <div className="footer-links-col">
-            <h4>Hệ thống Showroom Ford TP.HCM</h4>
-            <p>Bến Thành Ford • City Ford Bình Triệu • Gia Định Ford • Phú Mỹ Ford</p>
-            <p>Sài Gòn Ford (Cao Thắng, Phổ Quang, Nam Sài Gòn) • Western Ford An Lạc</p>
-          </div>
-          <div className="footer-links-col">
-            <h4>Hỗ trợ Khách hàng</h4>
-            <p>Tổng đài CSKH: 1800 588 888 (Miễn phí)</p>
-            <p>Giá niêm yết đã bao gồm VAT • Dữ liệu tồn kho cập nhật thời gian thực</p>
+
+          <div className="footer-bottom-bar">
+            <span>© 2026 Ford Việt Nam. All rights reserved.</span>
+            <span>Giá niêm yết đã bao gồm VAT • Dữ liệu tồn kho cập nhật thời gian thực</span>
           </div>
         </div>
       </footer>
+
+      <CompareBar
+        selectedCars={compareCars}
+        onRemoveCar={(carId) =>
+          setCompareIds((prev) => prev.filter((id) => id !== carId))
+        }
+        onClearAll={() => setCompareIds([])}
+        onOpenCompare={() => setCompareOpen(true)}
+      />
+
+      <CompareModal
+        isOpen={compareOpen}
+        cars={compareCars}
+        onSelectCar={(car) =>
+          setModalCarState({
+            carId: car.id,
+            color: car.colors?.[0]?.name || '',
+            year: car.defaultYear || '',
+          })
+        }
+        onClose={() => setCompareOpen(false)}
+      />
 
       <CarDetailModal
         key={
@@ -468,6 +664,10 @@ export default function App() {
             year: year || car.defaultYear || '',
           })
         }
+        onSelectBranchFilter={(branchId) => {
+          setSelectedBranchId(branchId);
+          scrollToCatalog(false);
+        }}
         onSubmitTestDrive={handleSubmitTestDrive}
       />
 
@@ -479,6 +679,31 @@ export default function App() {
         onResetInventory={handleResetInventory}
         onClose={() => setAccountOpen(false)}
       />
+
+      {toast && (
+        <div
+          key={toast.id}
+          className={`toast-banner toast-banner--${toast.type}`}
+          role="status"
+          aria-live="polite"
+        >
+          <span className="toast-icon" aria-hidden="true">
+            {toast.type === 'success' ? '✓' : 'i'}
+          </span>
+          <div className="toast-body">
+            <strong>{toast.title}</strong>
+            <span>{toast.message}</span>
+          </div>
+          <button
+            type="button"
+            className="toast-close"
+            onClick={() => setToast(null)}
+            aria-label="Đóng thông báo"
+          >
+            ×
+          </button>
+        </div>
+      )}
     </div>
   );
 }

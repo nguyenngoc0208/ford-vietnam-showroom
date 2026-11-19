@@ -8,14 +8,18 @@ import {
   handleCarImageError,
 } from '../data/fordCars';
 
-export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
+export default function CarCard({
+  car,
+  activeBranchId = 'all',
+  isCompared = false,
+  onToggleCompare,
+  onSelect,
+}) {
   const [selectedColor, setSelectedColor] = useState(
     car.colors?.[0]?.name || '',
   );
   const [selectedYear, setSelectedYear] = useState(car.defaultYear || '');
-  const [isSwapping, setIsSwapping] = useState(false);
 
-  // Preload all color images for this model to avoid white flash on switch
   useEffect(() => {
     car.colors?.forEach((colorObj) => {
       if (colorObj.image) {
@@ -29,6 +33,7 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
   const displayedPrice = getCarPriceForYear(car, selectedYear);
   const stockCount = getTotalStock(car, activeBranchId);
   const isAvailable = stockCount > 0;
+  const activeImageSrc = activeColorObj.image || car.image;
 
   const activeBranchName =
     activeBranchId !== 'all'
@@ -40,13 +45,6 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
       ? `Còn ${stockCount} xe tại ${activeBranchName}`
       : `Còn ${stockCount} xe sẵn sàng giao`
     : 'Hết xe sẵn — Đặt hàng trước';
-
-  const handleSelectColor = (colorName) => {
-    if (colorName === activeColorObj.name) return;
-    setIsSwapping(true);
-    setSelectedColor(colorName);
-    window.setTimeout(() => setIsSwapping(false), 180);
-  };
 
   return (
     <article
@@ -63,15 +61,30 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
     >
       <div className="vehicle-card-media">
         <span className="vehicle-card-segment">{car.category}</span>
+
+        <button
+          type="button"
+          className={`compare-toggle-btn ${isCompared ? 'is-selected' : ''}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            onToggleCompare?.(car);
+          }}
+          aria-pressed={isCompared}
+        >
+          {isCompared ? '✓ Đã chọn' : '+ So sánh'}
+        </button>
+
         <img
-          src={activeColorObj.image || car.image}
+          key={activeImageSrc}
+          src={activeImageSrc}
           alt={`${car.name} - ${activeColorObj.name}`}
-          className={isSwapping ? 'is-swapping' : ''}
+          className="car-fade-img"
           loading="lazy"
           onError={(event) =>
             handleCarImageError(event, car.name, car.category)
           }
         />
+
         {activeColorObj.name && (
           <span className="vehicle-color-tag">
             <span
@@ -138,7 +151,7 @@ export default function CarCard({ car, activeBranchId = 'all', onSelect }) {
                     title={colorObj.name}
                     aria-label={`Chọn màu ${colorObj.name}`}
                     aria-pressed={isSelected}
-                    onClick={() => handleSelectColor(colorObj.name)}
+                    onClick={() => setSelectedColor(colorObj.name)}
                   />
                 );
               })}
