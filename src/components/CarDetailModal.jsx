@@ -5,6 +5,7 @@ import {
   formatBranchAddress,
   formatVND,
   getBranchStockForTrim,
+  getBranchTypeLabel,
   getCarYearVariant,
   getColorOption,
   getGoogleMapsUrl,
@@ -562,11 +563,12 @@ export default function CarDetailModal({
                   </tr>
                 )}
                 {filteredInventory.map((branchItem) => {
-                  const trimStock = getBranchStockForTrim(
-                    branchItem,
-                    activeStockKey,
-                  );
-                  const hasStock = trimStock > 0;
+                  const isServiceOnly = branchItem.type === '2S';
+                  const branchType = branchItem.type || '3S';
+                  const trimStock = isServiceOnly
+                    ? 0
+                    : getBranchStockForTrim(branchItem, activeStockKey);
+                  const hasStock = !isServiceOnly && trimStock > 0;
                   const branchColors = getBranchYearColors(branchItem);
                   const { primaryAddress, legacyAddress } = formatBranchAddress(
                     branchItem.address,
@@ -577,6 +579,11 @@ export default function CarDetailModal({
                         <div className="branch-cell-main">
                           <div className="branch-name-row">
                             <span className="branch-name">{branchItem.branch}</span>
+                            <span
+                              className={`branch-type-badge is-${branchType.toLowerCase()}`}
+                            >
+                              {getBranchTypeLabel(branchType)}
+                            </span>
                             {branchItem.city && (
                               <span className="branch-city-badge">
                                 {branchItem.city}
@@ -608,7 +615,7 @@ export default function CarDetailModal({
                       </td>
                       <td data-label="Số lượng kho">
                         <strong className="branch-qty">
-                          {trimStock} chiếc
+                          {isServiceOnly ? '0 chiếc' : `${trimStock} chiếc`}
                         </strong>
                       </td>
                       <td data-label="Màu sắc sẵn có">
@@ -628,14 +635,28 @@ export default function CarDetailModal({
                             ))}
                           </div>
                         ) : (
-                          <span className="no-colors">Tạm hết bản này</span>
+                          <span className="no-colors">
+                            {isServiceOnly
+                              ? 'Bảo dưỡng & Phụ tùng'
+                              : 'Tạm hết bản này'}
+                          </span>
                         )}
                       </td>
                       <td data-label="Trạng thái">
                         <span
-                          className={`branch-status ${hasStock ? 'is-in' : 'is-out'}`}
+                          className={`branch-status ${
+                            isServiceOnly
+                              ? 'is-service'
+                              : hasStock
+                                ? 'is-in'
+                                : 'is-out'
+                          }`}
                         >
-                          {hasStock ? 'Sẵn xe giao ngay' : 'Hết xe tại kho'}
+                          {isServiceOnly
+                            ? 'Trung tâm dịch vụ 2S'
+                            : hasStock
+                              ? 'Sẵn xe giao ngay'
+                              : 'Hết xe tại kho'}
                         </span>
                       </td>
                       <td data-label="Thao tác" className="branch-action-cell">
@@ -648,7 +669,11 @@ export default function CarDetailModal({
                             Đặt giữ xe
                           </button>
                         ) : (
-                          <span className="no-colors">Không khả dụng</span>
+                          <span className="no-colors">
+                            {isServiceOnly
+                              ? 'Không bán xe mới'
+                              : 'Không khả dụng'}
+                          </span>
                         )}
                       </td>
                     </tr>

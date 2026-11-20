@@ -2205,6 +2205,39 @@
   color: var(--out-stock-text);
 }
 
+.branch-status.is-service {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.branch-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.branch-type-badge.is-3s {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.branch-type-badge.is-1s {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.branch-type-badge.is-2s {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
 .btn-table-hold {
   padding: 7px 14px;
   font-size: 0.78rem;

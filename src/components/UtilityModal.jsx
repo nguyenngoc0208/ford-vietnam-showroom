@@ -5,6 +5,7 @@ import {
   FORD_BRANCHES,
   formatBranchAddress,
   formatVND,
+  getBranchTypeLabel,
   getCarYearVariant,
   getGoogleMapsUrl,
   getTotalStock,
@@ -287,10 +288,14 @@ export default function UtilityModal({
                 </div>
               )}
               {filteredDealers.map((branch) => {
-                const branchTotalCars = cars.reduce(
-                  (sum, c) => sum + getTotalStock(c, branch.id),
-                  0,
-                );
+                const isServiceOnly = branch.type === '2S';
+                const branchTotalCars = isServiceOnly
+                  ? 0
+                  : cars.reduce(
+                      (sum, c) => sum + getTotalStock(c, branch.id),
+                      0,
+                    );
+                const branchType = branch.type || '3S';
                 const { primaryAddress, legacyAddress } = formatBranchAddress(
                   branch.address,
                 );
@@ -299,15 +304,28 @@ export default function UtilityModal({
                     <div className="dealer-modal-info">
                       <div className="dealer-modal-top">
                         <strong>{branch.name}</strong>
+                        <span
+                          className={`branch-type-badge is-${branchType.toLowerCase()}`}
+                        >
+                          {getBranchTypeLabel(branchType)}
+                        </span>
                         {branch.city && (
                           <span className="branch-city-badge">{branch.city}</span>
                         )}
                         <span
-                          className={`branch-status ${branchTotalCars > 0 ? 'is-in' : 'is-out'}`}
+                          className={`branch-status ${
+                            isServiceOnly
+                              ? 'is-service'
+                              : branchTotalCars > 0
+                                ? 'is-in'
+                                : 'is-out'
+                          }`}
                         >
-                          {branchTotalCars > 0
-                            ? `${branchTotalCars} xe sẵn kho`
-                            : 'Đang nhập lô mới'}
+                          {isServiceOnly
+                            ? 'Trung tâm dịch vụ 2S'
+                            : branchTotalCars > 0
+                              ? `${branchTotalCars} xe sẵn kho`
+                              : 'Đang nhập lô mới'}
                         </span>
                       </div>
                       <div className="dealer-modal-address">
@@ -334,16 +352,18 @@ export default function UtilityModal({
                       >
                         Chỉ đường ↗
                       </a>
-                      <button
-                        type="button"
-                        className="pill-btn pill-btn--navy btn-table-hold"
-                        onClick={() => {
-                          onClose();
-                          onSelectBranchFilter?.(branch.id);
-                        }}
-                      >
-                        Xem xe tại kho
-                      </button>
+                      {!isServiceOnly && (
+                        <button
+                          type="button"
+                          className="pill-btn pill-btn--navy btn-table-hold"
+                          onClick={() => {
+                            onClose();
+                            onSelectBranchFilter?.(branch.id);
+                          }}
+                        >
+                          Xem xe tại kho
+                        </button>
+                      )}
                     </div>
                   </div>
                 );

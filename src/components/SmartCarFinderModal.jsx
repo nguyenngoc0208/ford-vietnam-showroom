@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import {
   COLOR_SWATCHES,
   DEALER_CITIES,
+  FORD_BRANCHES,
   formatBranchAddress,
   formatVND,
   getBranchStockForTrim,
@@ -136,7 +137,11 @@ function extractAllConfigurations(cars, selectedCity) {
             .filter((branch) => {
               const cityMatch =
                 selectedCity === 'Tất cả tỉnh/thành' || branch.city === selectedCity;
-              return cityMatch && getBranchStockForTrim(branch, stockKey) > 0;
+              return (
+                branch.type !== '2S' &&
+                cityMatch &&
+                getBranchStockForTrim(branch, stockKey) > 0
+              );
             })
             .map((branch) => {
               const rawYearColors =
@@ -624,7 +629,7 @@ export default function SmartCarFinderModal({
                   {DEALER_CITIES.map((cityName) => {
                     const displayCity =
                       cityName === 'Tất cả tỉnh/thành'
-                        ? 'Toàn quốc (25 showroom)'
+                        ? `Toàn quốc (${FORD_BRANCHES.length} showroom)`
                         : cityName;
                     return (
                       <button

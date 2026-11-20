@@ -23,7 +23,7 @@ import {
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_nationwide_stock_v19',
+  stock: 'ford_vn_nationwide_stock_v20',
   reservations: 'ford_vn_reservations_v1',
   testDrives: 'ford_vn_test_drives_v3',
 };
@@ -52,6 +52,7 @@ function buildInitialCars() {
   return fordCars.map((car) => ({
     ...car,
     inventory: car.inventory.map((branchItem) => {
+      if (branchItem.type === '2S') return branchItem;
       const savedBranch = savedStockMap?.[car.id]?.[branchItem.branchId];
       if (savedBranch && typeof savedBranch === 'object') {
         const mergedByTrim = {
