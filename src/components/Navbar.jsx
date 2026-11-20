@@ -209,28 +209,13 @@ export default function Navbar({
 
             <button
               type="button"
-              className="nav-icon-btn nav-icon-btn--account"
+              className="nav-reservations-btn"
               onClick={onOpenAccountModal}
-              aria-label="Tài khoản & Đơn giữ xe đã đặt"
-              title="Tài khoản & Đơn giữ xe"
+              aria-label={`Xe đã giữ (${reservationCount})`}
+              title="Danh sách xe đã đặt giữ chỗ"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.9"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="8" r="3.5" />
-                <path d="M5 19.5a7 7 0 0 1 14 0" />
-              </svg>
-              {reservationCount > 0 && (
-                <span className="account-badge" aria-hidden="true">
-                  {reservationCount}
-                </span>
-              )}
+              <span>Xe đã giữ</span>
+              <span className="nav-reservations-count">({reservationCount})</span>
             </button>
 
             <button
@@ -514,6 +499,16 @@ export default function Navbar({
               }}
             >
               Tìm Đại Lý &amp; Chỉ Đường Maps
+            </button>
+            <button
+              type="button"
+              className="mobile-drawer-link"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenAccountModal?.();
+              }}
+            >
+              Xe đã giữ ({reservationCount})
             </button>
             <a
               href="#ford-support"

@@ -8,6 +8,7 @@ import {
   getCarYearVariant,
   getGoogleMapsUrl,
   getTotalStock,
+  matchesBranchSearch,
 } from '../data/fordCars';
 
 const REGION_CONFIG = {
@@ -93,6 +94,7 @@ export default function UtilityModal({
 
   const [selectedBranchId, setSelectedBranchId] = useState(DEALER_BRANCHES[1].id);
   const [selectedDealerCity, setSelectedDealerCity] = useState('Tất cả tỉnh/thành');
+  const [dealerSearch, setDealerSearch] = useState('');
   const [appointmentDate, setAppointmentDate] = useState(getDefaultDateString);
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
@@ -177,10 +179,12 @@ export default function UtilityModal({
   };
 
   const allBranches = DEALER_BRANCHES.filter((b) => b.id !== 'all');
-  const filteredDealers =
-    selectedDealerCity === 'Tất cả tỉnh/thành'
-      ? allBranches
-      : allBranches.filter((b) => b.city === selectedDealerCity);
+  const filteredDealers = allBranches.filter((branch) => {
+    const matchesCity =
+      selectedDealerCity === 'Tất cả tỉnh/thành' ||
+      branch.city === selectedDealerCity;
+    return matchesCity && matchesBranchSearch(branch, dealerSearch);
+  });
   const cityGroups = DEALER_CITIES.filter((c) => c !== 'Tất cả tỉnh/thành');
   const selectedBranchObj =
     allBranches.find((b) => b.id === selectedBranchId) || allBranches[0];
@@ -255,7 +259,33 @@ export default function UtilityModal({
               ))}
             </div>
 
+            <div className="branch-search-box">
+              <input
+                type="search"
+                className="branch-search-input"
+                placeholder="Tìm theo tên đại lý, phường mới hoặc quận/tỉnh cũ (VD: Thủ Đức, Tân Bình, Bình Dương...)"
+                value={dealerSearch}
+                onChange={(event) => setDealerSearch(event.target.value)}
+                aria-label="Tìm đại lý theo tên, phường mới hoặc quận/tỉnh cũ"
+              />
+              {dealerSearch && (
+                <button
+                  type="button"
+                  className="quick-search-clear"
+                  onClick={() => setDealerSearch('')}
+                  aria-label="Xóa từ khóa tìm đại lý"
+                >
+                  ×
+                </button>
+              )}
+            </div>
+
             <div className="dealers-modal-list">
+              {filteredDealers.length === 0 && (
+                <div className="branch-search-empty">
+                  Không tìm thấy showroom nào khớp với &ldquo;{dealerSearch}&rdquo;. Vui lòng thử tên quận/tỉnh khác hoặc xóa bộ lọc.
+                </div>
+              )}
               {filteredDealers.map((branch) => {
                 const branchTotalCars = cars.reduce(
                   (sum, c) => sum + getTotalStock(c, branch.id),

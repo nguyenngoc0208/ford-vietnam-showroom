@@ -23,8 +23,8 @@ import {
 import './App.css';
 
 const STORAGE_KEYS = {
-  stock: 'ford_vn_nationwide_stock_v18',
-  reservations: 'ford_vn_reservations_v3',
+  stock: 'ford_vn_nationwide_stock_v19',
+  reservations: 'ford_vn_reservations_v1',
   testDrives: 'ford_vn_test_drives_v3',
 };
 
@@ -102,6 +102,68 @@ function createInitialFinderState(city = 'Tất cả tỉnh/thành') {
   };
 }
 
+function buildUrlForHistoryState(snapshot) {
+  const params = new URLSearchParams();
+  if (snapshot?.fordView === 'car' && snapshot.carId) {
+    params.set('car', snapshot.carId);
+    if (snapshot.year) {
+      params.set('year', snapshot.year);
+    }
+  } else if (snapshot?.fordView === 'finder') {
+    params.set('modal', 'finder');
+  } else if (snapshot?.fordView === 'utility' && snapshot.mode) {
+    params.set('modal', snapshot.mode);
+  } else if (snapshot?.fordView === 'compare') {
+    params.set('modal', 'compare');
+  } else if (snapshot?.fordView === 'account') {
+    params.set('modal', 'reservations');
+  }
+  const qs = params.toString();
+  return `${window.location.pathname}${qs ? `?${qs}` : ''}`;
+}
+
+function parseDeepLinkFromUrl(carsList) {
+  const params = new URLSearchParams(window.location.search);
+  const carId = params.get('car');
+  if (carId) {
+    const car = carsList.find((item) => item.id === carId);
+    if (car) {
+      const requestedYear = params.get('year') || '';
+      const validYear = car.availableYears?.includes(requestedYear)
+        ? requestedYear
+        : car.defaultYear || '';
+      const defaultColor =
+        getCarYearVariant(car, validYear)?.defaultColor ||
+        car.colors?.[0]?.name ||
+        '';
+      return {
+        fordView: 'car',
+        carId: car.id,
+        color: defaultColor,
+        year: validYear,
+        trimIndex: 0,
+        engineIndex: 0,
+        city: null,
+      };
+    }
+  }
+
+  const modal = params.get('modal');
+  if (modal === 'finder') {
+    return {
+      fordView: 'finder',
+      finderState: createInitialFinderState('Tất cả tỉnh/thành'),
+    };
+  }
+  if (modal === 'dealers' || modal === 'calculator' || modal === 'test-drive') {
+    return { fordView: 'utility', mode: modal };
+  }
+  if (modal === 'reservations' || modal === 'account') {
+    return { fordView: 'account' };
+  }
+  return null;
+}
+
 export default function App() {
   const [cars, setCars] = useState(buildInitialCars);
   const [reservations, setReservations] = useState(() =>
@@ -111,18 +173,39 @@ export default function App() {
     readJsonStorage(STORAGE_KEYS.testDrives, []),
   );
 
+  const [initialDeepLink] = useState(() => parseDeepLinkFromUrl(fordCars));
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
   const [selectedCity, setSelectedCity] = useState('Tất cả tỉnh/thành');
   const [selectedBranchId, setSelectedBranchId] = useState('all');
-  const [modalCarState, setModalCarState] = useState(EMPTY_MODAL_CAR_STATE);
-  const [finderOpen, setFinderOpen] = useState(false);
-  const [finderState, setFinderState] = useState(() =>
-    createInitialFinderState('Tất cả tỉnh/thành'),
+  const [modalCarState, setModalCarState] = useState(() =>
+    initialDeepLink?.fordView === 'car'
+      ? {
+          carId: initialDeepLink.carId,
+          color: initialDeepLink.color,
+          year: initialDeepLink.year,
+          trimIndex: 0,
+          engineIndex: 0,
+          city: null,
+        }
+      : EMPTY_MODAL_CAR_STATE,
   );
-  const [utilityModalMode, setUtilityModalMode] = useState(null);
-  const [accountOpen, setAccountOpen] = useState(false);
+  const [finderOpen, setFinderOpen] = useState(
+    () => initialDeepLink?.fordView === 'finder',
+  );
+  const [finderState, setFinderState] = useState(() =>
+    initialDeepLink?.fordView === 'finder'
+      ? initialDeepLink.finderState
+      : createInitialFinderState('Tất cả tỉnh/thành'),
+  );
+  const [utilityModalMode, setUtilityModalMode] = useState(() =>
+    initialDeepLink?.fordView === 'utility' ? initialDeepLink.mode : null,
+  );
+  const [accountOpen, setAccountOpen] = useState(
+    () => initialDeepLink?.fordView === 'account',
+  );
 
   const [compareIds, setCompareIds] = useState([]);
   const [compareOpen, setCompareOpen] = useState(false);
@@ -142,13 +225,22 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Normalize initial base entry so popping modal depth never exits the app
-    const currentState = window.history.state || {};
-    if (currentState.fordView || currentState.fordDepth) {
+    if (initialDeepLink) {
+      const restored = { ...initialDeepLink, fordDepth: 0 };
       window.history.replaceState(
-        { ...currentState, fordView: null, fordDepth: 0 },
+        restored,
         '',
+        buildUrlForHistoryState(restored),
       );
+    } else {
+      const currentState = window.history.state || {};
+      if (currentState.fordView || currentState.fordDepth) {
+        window.history.replaceState(
+          { ...currentState, fordView: null, fordDepth: 0 },
+          '',
+          buildUrlForHistoryState(null),
+        );
+      }
     }
 
     const handlePopState = (event) => {
@@ -193,11 +285,12 @@ export default function App() {
         window.clearTimeout(toastTimerRef.current);
       }
     };
-  }, []);
+  }, [initialDeepLink]);
 
   const pushHistoryView = (snapshot) => {
     const nextDepth = (window.history.state?.fordDepth || 0) + 1;
-    window.history.pushState({ ...snapshot, fordDepth: nextDepth }, '');
+    const stateObj = { ...snapshot, fordDepth: nextDepth };
+    window.history.pushState(stateObj, '', buildUrlForHistoryState(stateObj));
     setHistoryDepth(nextDepth);
   };
 
@@ -207,6 +300,12 @@ export default function App() {
     if (depth > 0) {
       setHistoryDepth(0);
       window.history.go(-depth);
+    } else if (window.location.search) {
+      window.history.replaceState(
+        { fordView: null, fordDepth: 0 },
+        '',
+        buildUrlForHistoryState(null),
+      );
     }
   };
 
@@ -438,6 +537,7 @@ export default function App() {
       price,
       branchId: branchItem.branchId,
       branchName: branchItem.branch,
+      branchAddress: branchItem.address || '',
       color,
       customerName,
       customerPhone,
@@ -852,7 +952,7 @@ export default function App() {
         cars={compareCars}
         canGoBack={historyDepth > 1}
         onHistoryBack={handleHistoryBack}
-        onSelectCar={(car) => openCarModal({ car })}
+        onSelectCar={(car, year) => openCarModal({ car, year })}
         onClose={dismissAllModals}
       />
 

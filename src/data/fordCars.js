@@ -351,26 +351,31 @@ const RAW_FORD_CARS = [
       {
         name: 'Trắng',
         hex: '#FFFFFF',
+        priceDelta: 8000000,
         image: '/images/cars/everest-white.png',
       },
       {
         name: 'Bạc',
         hex: '#CBD5E1',
+        priceDelta: 0,
         image: '/images/cars/everest-silver.png',
       },
       {
         name: 'Xám',
         hex: '#64748B',
+        priceDelta: 0,
         image: '/images/cars/everest-grey.png',
       },
       {
         name: 'Đen',
         hex: '#141414',
+        priceDelta: 0,
         image: '/images/cars/everest-black.png',
       },
       {
         name: 'Xanh Thạch Anh',
         hex: '#52645D',
+        priceDelta: 8000000,
         image: '/images/cars/everest-quartz-green.png',
       },
     ],
@@ -390,8 +395,8 @@ const RAW_FORD_CARS = [
         name: 'Platinum',
         price: 1335000000,
         engine: 'Dầu 2.0L Turbo 10AT 4x2',
-        power: '170 PS',
-        torque: '405 Nm',
+        power: null,
+        torque: null,
         transmission: 'Tự động 10 cấp điện tử (10AT)',
         drivetrain: 'Cầu sau (4x2)',
         seats: '7 chỗ ngồi',
@@ -402,18 +407,18 @@ const RAW_FORD_CARS = [
             stockKey: 'Platinum 4x2',
             price: 1335000000,
             engine: 'Dầu 2.0L Turbo 10AT 4x2',
-            power: '170 PS',
-            torque: '405 Nm',
+            power: null,
+            torque: null,
             transmission: 'Tự động 10 cấp điện tử (10AT)',
             drivetrain: 'Cầu sau (4x2)',
           },
           {
             label: 'Dầu 2.0L Turbo 10AT 4x4',
             stockKey: 'Platinum 4x4',
-            price: 1335000000,
+            price: 1440000000,
             engine: 'Dầu 2.0L Turbo 10AT 4x4',
-            power: '170 PS',
-            torque: '405 Nm',
+            power: null,
+            torque: null,
             transmission: 'Tự động 10 cấp điện tử (10AT)',
             drivetrain: 'Hai cầu toàn thời gian (4x4)',
           },
@@ -423,8 +428,8 @@ const RAW_FORD_CARS = [
         name: 'Sport',
         price: 1209000000,
         engine: 'Dầu 2.0L Turbo 10AT 4x2',
-        power: '170 PS',
-        torque: '405 Nm',
+        power: null,
+        torque: null,
         transmission: 'Tự động 10 cấp điện tử (10AT)',
         drivetrain: 'Cầu sau (4x2)',
         seats: '7 chỗ ngồi',
@@ -434,8 +439,8 @@ const RAW_FORD_CARS = [
         name: 'Active',
         price: 1129000000,
         engine: 'Dầu 2.0L Turbo 10AT 4x2',
-        power: '170 PS',
-        torque: '405 Nm',
+        power: null,
+        torque: null,
         transmission: 'Tự động 10 cấp điện tử (10AT)',
         drivetrain: 'Cầu sau (4x2)',
         seats: '7 chỗ ngồi',
@@ -444,8 +449,8 @@ const RAW_FORD_CARS = [
     ],
     specs: {
       engine: 'Xăng 2.3L EcoBoost / Dầu 2.0L Turbo',
-      power: '170 - 300 PS',
-      torque: '405 - 446 Nm',
+      power: '300 PS (bản Platinum+ 2.3L)',
+      torque: '446 Nm (bản Platinum+ 2.3L)',
       transmission: 'Tự động 10 cấp (10AT)',
       drivetrain: '4x2 / 4x4 toàn thời gian',
       seats: '7 chỗ ngồi',
@@ -781,6 +786,7 @@ const RAW_FORD_CARS = [
         transmission: 'Tự động 7 cấp',
         drivetrain: 'Dẫn động một cầu 4x2 • Chế độ lái tùy chọn',
         seats: '5 chỗ ngồi',
+        fuel_consumption_l_100km: null,
       },
       {
         name: 'Territory Titanium X 1.5L AT',
@@ -791,6 +797,8 @@ const RAW_FORD_CARS = [
         transmission: 'Tự động 7 cấp',
         drivetrain: 'Dẫn động một cầu 4x2',
         seats: '5 chỗ ngồi',
+        fuel_consumption_l_100km: null,
+        speakers: null,
       },
       {
         name: 'Territory Titanium 1.5L AT',
@@ -801,6 +809,7 @@ const RAW_FORD_CARS = [
         transmission: 'Tự động 7 cấp',
         drivetrain: 'Dẫn động một cầu 4x2 • Chế độ lái tùy chọn',
         seats: '5 chỗ ngồi',
+        fuel_consumption_l_100km: null,
       },
       {
         name: 'Territory Trend 1.5L AT',
@@ -811,6 +820,8 @@ const RAW_FORD_CARS = [
         transmission: 'Tự động 7 cấp',
         drivetrain: 'Dẫn động một cầu 4x2',
         seats: '5 chỗ ngồi',
+        fuel_consumption_l_100km: null,
+        screen: null,
       },
     ],
     specs: {
@@ -820,6 +831,7 @@ const RAW_FORD_CARS = [
       transmission: 'Tự động 7 cấp',
       drivetrain: 'Dẫn động một cầu 4x2',
       seats: '5 chỗ ngồi',
+      fuel_consumption_l_100km: null,
     },
     inventory: [
       createBranchStock(
@@ -1127,6 +1139,7 @@ const RAW_FORD_CARS = [
         transmission: 'Số sàn 6 cấp',
         drivetrain: 'Dẫn động cầu sau (RWD)',
         seats: '18 chỗ ngồi',
+        dimensions: '6703 × 2164 × 2775 mm',
       },
       {
         name: 'Transit Premium 16 chỗ',
@@ -1137,6 +1150,7 @@ const RAW_FORD_CARS = [
         transmission: 'Số sàn 6 cấp',
         drivetrain: 'Dẫn động cầu sau (RWD)',
         seats: '16 chỗ ngồi',
+        dimensions: '5998 × 2068 × 2775 mm',
       },
       {
         name: 'Transit Trend 16 chỗ',
@@ -1147,6 +1161,7 @@ const RAW_FORD_CARS = [
         transmission: 'Số sàn 6 cấp',
         drivetrain: 'Dẫn động cầu sau (RWD)',
         seats: '16 chỗ ngồi',
+        dimensions: '5998 × 2068 × 2775 mm',
       },
     ],
     specs: {
@@ -1156,6 +1171,7 @@ const RAW_FORD_CARS = [
       transmission: 'Số sàn 6 cấp',
       drivetrain: 'Dẫn động cầu sau (RWD)',
       seats: '16 - 18 chỗ ngồi',
+      dimensions: '5998–6703 × 2068–2164 × 2775 mm',
     },
     inventory: [
       createBranchStock(
@@ -1389,12 +1405,12 @@ const RAW_FORD_CARS = [
     id: 'ranger',
     name: 'Ford Ranger Mới',
     category: 'Xe Thương mại',
-    price: 726000000,
+    price: 707000000,
     defaultYear: '2026',
     availableYears: ['2025', '2026'],
     yearPrices: {
       '2025': 669000000,
-      '2026': 726000000,
+      '2026': 707000000,
     },
     promo: 'Hỗ trợ 50% lệ phí trước bạ và tặng nắp thùng cuộn chính hãng.',
     image: '/images/cars/ranger-orange.png',
@@ -1461,19 +1477,19 @@ const RAW_FORD_CARS = [
     trims: [
       {
         name: 'Ranger Wildtrak',
-        price: 973000000,
+        price: 949000000,
         engine: 'Diesel 2.0L Single-Turbo',
         power: '170 PS',
         torque: '405 Nm',
         transmission: 'Tự động 10 cấp (10AT)',
         drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
         seats: '5 chỗ ngồi',
-        availableColors: ['Đen', 'Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam'],
+        availableColors: ['Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam', 'Đen'],
         engineOptions: [
           {
             label: 'Dầu 2.0L 10AT 4x4',
             stockKey: 'Ranger Wildtrak 2.0L 4X4 AT',
-            price: 973000000,
+            price: 949000000,
             engine: 'Diesel 2.0L Single-Turbo',
             power: '170 PS',
             torque: '405 Nm',
@@ -1494,19 +1510,28 @@ const RAW_FORD_CARS = [
       },
       {
         name: 'Ranger XLS',
-        price: 726000000,
+        price: 707000000,
         engine: 'Diesel 2.0L Single-Turbo',
         power: '170 PS',
         torque: '405 Nm',
         transmission: 'Tự động 10 cấp (10AT)',
         drivetrain: 'Cầu sau (4x2)',
         seats: '5 chỗ ngồi',
-        availableColors: ['Đen', 'Trắng Tuyết', 'Ghi Ánh Thép', 'Bạc', 'Đỏ'],
+        availableColors: [
+          'Đỏ',
+          'Xám',
+          'Trắng',
+          'Bạc Ánh Kim',
+          'Trắng Tuyết',
+          'Ghi Ánh Thép',
+          'Bạc',
+          'Đen',
+        ],
         engineOptions: [
           {
             label: 'Dầu 2.0L 10AT 4x2',
             stockKey: 'Ranger XLS 2.0L 4x2 AT',
-            price: 726000000,
+            price: 707000000,
             engine: 'Diesel 2.0L Single-Turbo',
             power: '170 PS',
             torque: '405 Nm',
@@ -1516,7 +1541,7 @@ const RAW_FORD_CARS = [
           {
             label: 'Dầu 2.0L 10AT 4x4',
             stockKey: 'Ranger XLS 2.0L 4x4 AT',
-            price: 795000000,
+            price: 776000000,
             engine: 'Diesel 2.0L Single-Turbo',
             power: '170 PS',
             torque: '405 Nm',
@@ -1537,7 +1562,7 @@ const RAW_FORD_CARS = [
     yearVariants: {
       '2026': {
         name: 'Ford Ranger Mới',
-        price: 726000000,
+        price: 707000000,
         defaultColor: 'Cam',
         image: '/images/cars/ranger-orange.png',
         shortDesc:
@@ -1647,19 +1672,19 @@ const RAW_FORD_CARS = [
         trims: [
           {
             name: 'Ranger Wildtrak',
-            price: 973000000,
+            price: 949000000,
             engine: 'Diesel 2.0L Single-Turbo',
             power: '170 PS',
             torque: '405 Nm',
             transmission: 'Tự động 10 cấp (10AT)',
             drivetrain: 'Hai cầu chủ động (4x4) • Ford Co-Pilot360',
             seats: '5 chỗ ngồi',
-            availableColors: ['Đen', 'Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam'],
+            availableColors: ['Trắng', 'Xám', 'Bạc Ánh Kim', 'Cam', 'Đen'],
             engineOptions: [
               {
                 label: 'Dầu 2.0L 10AT 4x4',
                 stockKey: 'Ranger Wildtrak 2.0L 4X4 AT',
-                price: 973000000,
+                price: 949000000,
                 engine: 'Diesel 2.0L Single-Turbo',
                 power: '170 PS',
                 torque: '405 Nm',
@@ -1680,19 +1705,28 @@ const RAW_FORD_CARS = [
           },
           {
             name: 'Ranger XLS',
-            price: 726000000,
+            price: 707000000,
             engine: 'Diesel 2.0L Single-Turbo',
             power: '170 PS',
             torque: '405 Nm',
             transmission: 'Tự động 10 cấp (10AT)',
             drivetrain: 'Cầu sau (4x2)',
             seats: '5 chỗ ngồi',
-            availableColors: ['Đen', 'Trắng Tuyết', 'Ghi Ánh Thép', 'Bạc', 'Đỏ'],
+            availableColors: [
+              'Đỏ',
+              'Xám',
+              'Trắng',
+              'Bạc Ánh Kim',
+              'Trắng Tuyết',
+              'Ghi Ánh Thép',
+              'Bạc',
+              'Đen',
+            ],
             engineOptions: [
               {
                 label: 'Dầu 2.0L 10AT 4x2',
                 stockKey: 'Ranger XLS 2.0L 4x2 AT',
-                price: 726000000,
+                price: 707000000,
                 engine: 'Diesel 2.0L Single-Turbo',
                 power: '170 PS',
                 torque: '405 Nm',
@@ -1702,7 +1736,7 @@ const RAW_FORD_CARS = [
               {
                 label: 'Dầu 2.0L 10AT 4x4',
                 stockKey: 'Ranger XLS 2.0L 4x4 AT',
-                price: 795000000,
+                price: 776000000,
                 engine: 'Diesel 2.0L Single-Turbo',
                 power: '170 PS',
                 torque: '405 Nm',
@@ -2365,34 +2399,34 @@ const RAW_FORD_CARS = [
       'Ford Ranger Raptor mang DNA đua địa hình Baja với động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5", khung gầm gia cường và 7 chế độ lái chuyên dụng.',
     colors: [
       {
-        name: 'Đen',
-        hex: '#141414',
-        priceDelta: 0,
-        image: '/images/cars/raptor-black.png',
-      },
-      {
         name: 'Trắng',
         hex: '#FFFFFF',
         priceDelta: 0,
         image: '/images/cars/raptor-white.png',
       },
       {
-        name: 'Xanh Dương',
-        hex: '#1D4ED8',
-        priceDelta: 0,
-        image: '/images/cars/raptor-blue.png',
-      },
-      {
-        name: 'Ghi Ánh Thép',
+        name: 'Xám',
         hex: '#6B7280',
         priceDelta: 8000000,
         image: '/images/cars/raptor-grey.png',
       },
       {
-        name: 'Đỏ Cam',
+        name: 'Cam',
         hex: '#EA580C',
         priceDelta: 8000000,
         image: '/images/cars/raptor-orange.png',
+      },
+      {
+        name: 'Đen',
+        hex: '#141414',
+        priceDelta: 0,
+        image: '/images/cars/raptor-black.png',
+      },
+      {
+        name: 'Xanh Dương',
+        hex: '#1D4ED8',
+        priceDelta: 0,
+        image: '/images/cars/raptor-blue.png',
       },
     ],
     trims: [
@@ -2419,7 +2453,7 @@ const RAW_FORD_CARS = [
       '2026': {
         name: 'Ford Ranger Raptor Mới',
         price: 1448000000,
-        defaultColor: 'Ghi Ánh Thép',
+        defaultColor: 'Xám',
         image: '/images/cars/raptor-grey.png',
         shortDesc:
           'Siêu bán tải 2026 trang bị động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5" và 7 chế độ lái.',
@@ -2427,34 +2461,34 @@ const RAW_FORD_CARS = [
           'Ford Ranger Raptor mang DNA đua địa hình Baja với động cơ Xăng 3.0L V6 Twin-Turbo EcoBoost, giảm xóc FOX 2.5", khung gầm gia cường và 7 chế độ lái chuyên dụng.',
         colors: [
           {
-            name: 'Đen',
-            hex: '#141414',
-            priceDelta: 0,
-            image: '/images/cars/raptor-black.png',
-          },
-          {
             name: 'Trắng',
             hex: '#FFFFFF',
             priceDelta: 0,
             image: '/images/cars/raptor-white.png',
           },
           {
-            name: 'Xanh Dương',
-            hex: '#1D4ED8',
-            priceDelta: 0,
-            image: '/images/cars/raptor-blue.png',
-          },
-          {
-            name: 'Ghi Ánh Thép',
+            name: 'Xám',
             hex: '#6B7280',
             priceDelta: 8000000,
             image: '/images/cars/raptor-grey.png',
           },
           {
-            name: 'Đỏ Cam',
+            name: 'Cam',
             hex: '#EA580C',
             priceDelta: 8000000,
             image: '/images/cars/raptor-orange.png',
+          },
+          {
+            name: 'Đen',
+            hex: '#141414',
+            priceDelta: 0,
+            image: '/images/cars/raptor-black.png',
+          },
+          {
+            name: 'Xanh Dương',
+            hex: '#1D4ED8',
+            priceDelta: 0,
+            image: '/images/cars/raptor-blue.png',
           },
         ],
         specs: {
@@ -2545,18 +2579,18 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'ben-thanh',
         { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        ['Xám', 'Cam', 'Đen'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2026': ['Xám', 'Cam', 'Đen'],
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
       createBranchStock(
         'city-binh-trieu',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Đen', 'Đỏ Cam'],
+        ['Đen', 'Cam'],
         {
-          '2026': ['Đen', 'Đỏ Cam'],
+          '2026': ['Đen', 'Cam'],
           '2025': ['Đen', 'Cam Code'],
         },
       ),
@@ -2572,9 +2606,9 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'saigon-pho-quang',
         { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Trắng'],
+        ['Xám', 'Cam', 'Trắng'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Trắng'],
+          '2026': ['Xám', 'Cam', 'Trắng'],
           '2025': ['Xám Conquer', 'Cam Code', 'Trắng'],
         },
       ),
@@ -2590,54 +2624,54 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'western-an-lac',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Xanh Dương'],
+        ['Xám', 'Xanh Dương'],
         {
-          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2026': ['Xám', 'Xanh Dương'],
           '2025': ['Xám Conquer', 'Xanh Dương'],
         },
       ),
       createBranchStock(
         'gia-dinh',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Đỏ Cam'],
+        ['Cam'],
         {
-          '2026': ['Đỏ Cam'],
+          '2026': ['Cam'],
           '2025': ['Cam Code'],
         },
       ),
       createBranchStock(
         'phu-my',
         { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        ['Xám', 'Cam', 'Đen'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2026': ['Xám', 'Cam', 'Đen'],
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
       createBranchStock(
         'ha-noi-ford',
         { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        ['Xám', 'Cam', 'Đen'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2026': ['Xám', 'Cam', 'Đen'],
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
       createBranchStock(
         'thang-long-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Xanh Dương'],
+        ['Xám', 'Xanh Dương'],
         {
-          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2026': ['Xám', 'Xanh Dương'],
           '2025': ['Xám Conquer', 'Xanh Dương'],
         },
       ),
       createBranchStock(
         'da-nang-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Đỏ Cam', 'Ghi Ánh Thép'],
+        ['Cam', 'Xám'],
         {
-          '2026': ['Đỏ Cam', 'Ghi Ánh Thép'],
+          '2026': ['Cam', 'Xám'],
           '2025': ['Cam Code', 'Xám Conquer'],
         },
       ),
@@ -2662,27 +2696,27 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'binh-duong-ford',
         { 'Raptor 3.0L V6 4X4 AT': 2, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        ['Xám', 'Cam', 'Đen'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2026': ['Xám', 'Cam', 'Đen'],
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
       createBranchStock(
         'vung-tau-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Trắng'],
+        ['Xám', 'Trắng'],
         {
-          '2026': ['Ghi Ánh Thép', 'Trắng'],
+          '2026': ['Xám', 'Trắng'],
           '2025': ['Xám Conquer', 'Trắng'],
         },
       ),
       createBranchStock(
         'thanh-xuan-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
-        ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+        ['Xám', 'Cam', 'Đen'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam', 'Đen'],
+          '2026': ['Xám', 'Cam', 'Đen'],
           '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
         },
       ),
@@ -2707,18 +2741,18 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'ha-thanh-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Đỏ Cam'],
+        ['Xám', 'Cam'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam'],
+          '2026': ['Xám', 'Cam'],
           '2025': ['Xám Conquer', 'Cam Code'],
         },
       ),
       createBranchStock(
         'an-do-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Đỏ Cam', 'Trắng'],
+        ['Cam', 'Trắng'],
         {
-          '2026': ['Đỏ Cam', 'Trắng'],
+          '2026': ['Cam', 'Trắng'],
           '2025': ['Cam Code', 'Trắng'],
         },
       ),
@@ -2734,9 +2768,9 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'dana-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Đỏ Cam'],
+        ['Xám', 'Cam'],
         {
-          '2026': ['Ghi Ánh Thép', 'Đỏ Cam'],
+          '2026': ['Xám', 'Cam'],
           '2025': ['Xám Conquer', 'Cam Code'],
         },
       ),
@@ -2761,9 +2795,9 @@ const RAW_FORD_CARS = [
       createBranchStock(
         'hue-ford',
         { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Ghi Ánh Thép', 'Xanh Dương'],
+        ['Xám', 'Xanh Dương'],
         {
-          '2026': ['Ghi Ánh Thép', 'Xanh Dương'],
+          '2026': ['Xám', 'Xanh Dương'],
           '2025': ['Xám Conquer', 'Xanh Dương'],
         },
       ),
@@ -2809,20 +2843,28 @@ const RAW_FORD_CARS = [
         engine: 'Động cơ điện kép (Dual Motor AWD)',
         power: '395 PS',
         torque: '627 Nm',
-        range: '~550 km (chuẩn WLTP)',
+        range: null,
+        motor_power_kw: null,
+        battery_capacity_kwh: null,
+        range_km: null,
+        charging_time: null,
         transmission: 'Truyền động điện 1 cấp',
         drivetrain: 'Hai cầu toàn thời gian (AWD)',
-        seats: '5 chỗ ngồi',
+        seats: null,
       },
     ],
     specs: {
       engine: 'Động cơ điện kép (Dual Motor AWD)',
       power: '395 PS',
       torque: '627 Nm',
-      range: '~550 km (chuẩn WLTP)',
+      range: null,
+      motor_power_kw: null,
+      battery_capacity_kwh: null,
+      range_km: null,
+      charging_time: null,
       transmission: 'Truyền động điện 1 cấp',
       drivetrain: 'Hai cầu toàn thời gian (AWD)',
-      seats: '5 chỗ ngồi',
+      seats: null,
     },
     inventory: [
       createBranchStock(
@@ -2950,6 +2992,29 @@ export function formatBranchAddress(address = '') {
     primaryAddress: raw.slice(0, idx).trim(),
     legacyAddress: raw.slice(idx + 1).trim(),
   };
+}
+
+function normalizeVietnameseSearch(value = '') {
+  return String(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .toLowerCase()
+    .trim();
+}
+
+export function matchesBranchSearch(branch, rawQuery = '') {
+  const query = normalizeVietnameseSearch(rawQuery);
+  if (!query) return true;
+  const branchName = branch?.name || branch?.branch || '';
+  const { primaryAddress, legacyAddress } = formatBranchAddress(
+    branch?.address || '',
+  );
+  const haystack = normalizeVietnameseSearch(
+    `${branchName} ${primaryAddress} ${legacyAddress} ${branch?.city || ''}`,
+  );
+  return haystack.includes(query);
 }
 
 export function getGoogleMapsUrl(branch) {

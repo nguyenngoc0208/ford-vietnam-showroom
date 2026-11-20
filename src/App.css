@@ -332,6 +332,51 @@
   font-weight: 800;
 }
 
+.nav-reservations-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 13px;
+  border-radius: 9999px;
+  font-size: 0.81rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-reservations-count {
+  font-weight: 800;
+}
+
+.site-header-wrap.is-transparent .nav-reservations-btn {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.site-header-wrap.is-transparent .nav-reservations-btn:hover {
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+.site-header-wrap.is-solid .nav-reservations-btn {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: var(--ford-navy);
+}
+
+.site-header-wrap.is-solid .nav-reservations-btn:hover {
+  background-color: #e2e8f0;
+  border-color: var(--ford-navy);
+}
+
+@media (max-width: 420px) {
+  .nav-reservations-btn {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+  }
+}
+
 .nav-icon-btn--account {
   position: relative;
 }
@@ -2858,6 +2903,99 @@
   height: 18px;
   border-radius: 4px;
   border: 1px solid #cbd5e1;
+}
+
+.compare-year-tabs {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.compare-year-btn {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: var(--ford-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.compare-year-btn.is-active {
+  background-color: var(--ford-navy);
+  border-color: var(--ford-navy);
+  color: #ffffff;
+}
+
+.compare-metric-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.compare-metric-cell.is-best {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background-color: #ecfdf5;
+  border: 1px solid #86efac;
+}
+
+.compare-best-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: #15803d;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.branch-search-box {
+  position: relative;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.branch-search-input {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 0.86rem;
+  color: var(--ford-navy);
+  outline: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.branch-search-input:focus {
+  border-color: var(--ford-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 104, 215, 0.12);
+}
+
+.branch-search-empty,
+.branch-search-empty-cell {
+  padding: 20px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background-color: var(--bg-gray-soft);
+}
+
+.account-branch-address {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  margin: 2px 0;
 }
 
 /* Footer v2 */

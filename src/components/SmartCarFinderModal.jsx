@@ -108,14 +108,25 @@ function extractAllConfigurations(cars, selectedCity) {
         engineList.forEach((engineOpt, engineIndex) => {
           const price = engineOpt ? engineOpt.price : trim.price;
           const stockKey = engineOpt?.stockKey || trim.name;
-          const engine = engineOpt?.engine || trim.engine || variant.specs.engine;
-          const power = engineOpt?.power || trim.power || variant.specs.power;
-          const torque = engineOpt?.torque || trim.torque || variant.specs.torque;
-          const range = engineOpt?.range || trim.range || variant.specs.range;
-          const transmission =
-            engineOpt?.transmission || trim.transmission || variant.specs.transmission;
-          const drivetrain =
-            engineOpt?.drivetrain || trim.drivetrain || variant.specs.drivetrain;
+          const resolveSpec = (key) => {
+            if (
+              engineOpt &&
+              Object.prototype.hasOwnProperty.call(engineOpt, key)
+            ) {
+              return engineOpt[key];
+            }
+            if (trim && Object.prototype.hasOwnProperty.call(trim, key)) {
+              return trim[key];
+            }
+            return variant.specs?.[key];
+          };
+          const engine = resolveSpec('engine');
+          const power = resolveSpec('power');
+          const torque = resolveSpec('torque');
+          const range = resolveSpec('range');
+          const transmission = resolveSpec('transmission');
+          const drivetrain = resolveSpec('drivetrain');
+          const seats = resolveSpec('seats');
 
           const trimAllowedColors = trim.availableColors?.length
             ? trim.availableColors
@@ -167,7 +178,7 @@ function extractAllConfigurations(cars, selectedCity) {
             range,
             transmission,
             drivetrain,
-            seats: trim.seats || variant.specs.seats,
+            seats: seats ?? 'Đang cập nhật',
             image: variant.image || car.image,
             defaultColor:
               (trim.availableColors && trim.availableColors[0]) ||
@@ -300,9 +311,18 @@ function buildReasons(cfg, answers) {
   }
 
   const powerLine = [cfg.engine, cfg.power, cfg.torque, cfg.range]
-    .filter(Boolean)
+    .filter(
+      (item) =>
+        item !== null &&
+        item !== undefined &&
+        item !== '' &&
+        !(typeof item === 'number' && Number.isNaN(item)),
+    )
     .join(' • ');
-  reasons.push(`Vận hành mạnh mẽ: ${powerLine}`);
+  const isLimitedSpecs = cfg.power === null || cfg.torque === null || cfg.range === null;
+  reasons.push(
+    `Vận hành: ${powerLine}${isLimitedSpecs ? ' (Một số thông số đang cập nhật)' : ''}`,
+  );
 
   if (cfg.totalCityStock > 0) {
     const areaLabel =

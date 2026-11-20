@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
-import { COLOR_SWATCHES, formatVND } from '../data/fordCars';
+import {
+  COLOR_SWATCHES,
+  formatBranchAddress,
+  formatVND,
+} from '../data/fordCars';
 
 export default function AccountModal({
   isOpen,
@@ -40,7 +44,7 @@ export default function AccountModal({
           <div>
             <p className="catalog-eyebrow">QUẢN LÝ ĐẶT XE TRỰC TUYẾN</p>
             <h2 id="account-modal-title" className="account-panel-title">
-              Tài khoản &amp; Đơn giữ xe
+              Xe đã giữ ({reservations.length})
             </h2>
           </div>
           <button
@@ -56,54 +60,71 @@ export default function AccountModal({
         <div className="account-panel-body">
           <div className="account-section">
             <div className="account-section-header">
-              <h3>Đơn đặt giữ xe ({reservations.length})</h3>
+              <h3>Danh sách xe đã giữ ({reservations.length})</h3>
             </div>
 
             {reservations.length > 0 ? (
               <div className="account-list">
-                {reservations.map((item) => (
-                  <div key={item.id} className="account-item-card">
-                    <div className="account-item-top">
-                      <span className="receipt-badge">{item.code}</span>
-                      <button
-                        type="button"
-                        className="account-cancel-btn"
-                        onClick={() => onCancelReservation(item.id)}
-                      >
-                        Hủy giữ xe (+1 kho)
-                      </button>
-                    </div>
-                    <strong className="account-car-title">
-                      {item.carName}
-                      {item.year ? ` (${item.year})` : ''} — {item.trimName}
-                    </strong>
-                    <div className="account-item-meta">
-                      <span>
-                        Chi nhánh: <strong>{item.branchName}</strong>
-                      </span>
-                      <span className="account-color-inline">
-                        Màu:
-                        <span
-                          className="color-dot"
-                          style={{
-                            backgroundColor:
-                              COLOR_SWATCHES[item.color] || '#94a3b8',
-                          }}
-                        />
-                        <strong>{item.color}</strong>
-                      </span>
-                      {item.price && (
+                {reservations.map((item) => {
+                  const branchAddr = item.branchAddress
+                    ? formatBranchAddress(item.branchAddress)
+                    : null;
+                  return (
+                    <div key={item.id} className="account-item-card">
+                      <div className="account-item-top">
+                        <span className="receipt-badge">{item.code}</span>
+                        <button
+                          type="button"
+                          className="account-cancel-btn"
+                          onClick={() => onCancelReservation(item.id)}
+                        >
+                          Hủy giữ chỗ
+                        </button>
+                      </div>
+                      <strong className="account-car-title">
+                        {item.carName}
+                        {item.year ? ` (${item.year})` : ''} — {item.trimName}
+                      </strong>
+                      <div className="account-item-meta">
                         <span>
-                          Giá niêm yết: <strong>{formatVND(item.price)}</strong>
+                          Showroom: <strong>{item.branchName}</strong>
                         </span>
-                      )}
-                      <span>
-                        Khách hàng: <strong>{item.customerName}</strong> —{' '}
-                        {item.customerPhone}
-                      </span>
+                        {branchAddr && (
+                          <div className="account-branch-address">
+                            <span className="branch-address-primary">
+                              {branchAddr.primaryAddress}
+                            </span>
+                            {branchAddr.legacyAddress && (
+                              <span className="branch-address-legacy">
+                                {branchAddr.legacyAddress}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        <span className="account-color-inline">
+                          Màu:
+                          <span
+                            className="color-dot"
+                            style={{
+                              backgroundColor:
+                                COLOR_SWATCHES[item.color] || '#94a3b8',
+                            }}
+                          />
+                          <strong>{item.color}</strong>
+                        </span>
+                        {item.price && (
+                          <span>
+                            Giá niêm yết: <strong>{formatVND(item.price)}</strong>
+                          </span>
+                        )}
+                        <span>
+                          Khách hàng: <strong>{item.customerName}</strong> —{' '}
+                          {item.customerPhone}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="account-empty">

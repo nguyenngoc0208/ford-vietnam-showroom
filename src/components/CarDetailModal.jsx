@@ -10,16 +10,57 @@ import {
   getGoogleMapsUrl,
   getTotalStock,
   handleCarImageError,
+  matchesBranchSearch,
 } from '../data/fordCars';
 
 const SPEC_FIELDS = [
   { key: 'engine', label: 'Động cơ' },
   { key: 'power', label: 'Công suất cực đại' },
   { key: 'torque', label: 'Mô-men xoắn cực đại' },
-  { key: 'range', label: 'Tầm hoạt động', optional: true },
+  { key: 'range', label: 'Tầm hoạt động', onlyIfDefined: true },
+  { key: 'motor_power_kw', label: 'Công suất mô-tơ (kW)', onlyIfDefined: true },
+  { key: 'battery_capacity_kwh', label: 'Dung lượng pin (kWh)', onlyIfDefined: true },
+  { key: 'charging_time', label: 'Thời gian sạc', onlyIfDefined: true },
   { key: 'transmission', label: 'Hộp số' },
   { key: 'drivetrain', label: 'Hệ dẫn động' },
+  { key: 'seats', label: 'Số chỗ ngồi' },
+  { key: 'dimensions', label: 'Kích thước (DxRxC)', onlyIfDefined: true },
+  {
+    key: 'fuel_consumption_l_100km',
+    label: 'Tiêu thụ nhiên liệu',
+    onlyIfDefined: true,
+  },
+  { key: 'screen', label: 'Màn hình giải trí', onlyIfDefined: true },
+  { key: 'speakers', label: 'Hệ thống âm thanh', onlyIfDefined: true },
 ];
+
+function resolveSpecValue(key, primarySource, fallbackSource) {
+  if (
+    primarySource &&
+    Object.prototype.hasOwnProperty.call(primarySource, key)
+  ) {
+    return primarySource[key];
+  }
+  if (
+    fallbackSource &&
+    Object.prototype.hasOwnProperty.call(fallbackSource, key)
+  ) {
+    return fallbackSource[key];
+  }
+  return undefined;
+}
+
+function formatSpecDisplay(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === '' ||
+    (typeof value === 'number' && Number.isNaN(value))
+  ) {
+    return 'Đang cập nhật';
+  }
+  return value;
+}
 
 export default function CarDetailModal({
   car,
@@ -42,6 +83,7 @@ export default function CarDetailModal({
     initialColor || car?.colors?.[0]?.name || '',
   );
   const [selectedCity, setSelectedCity] = useState(initialCity);
+  const [branchSearch, setBranchSearch] = useState('');
   const [holdBranchId, setHoldBranchId] = useState(null);
   const [holdColor, setHoldColor] = useState('');
   const [customerName, setCustomerName] = useState('');
@@ -124,10 +166,11 @@ export default function CarDetailModal({
   const activeImageSrc = activeColorObj.image || yearVariant?.image || car.image;
 
   const trimTotalStock = getTotalStock(car, 'all', activeStockKey);
-  const filteredInventory =
-    selectedCity === 'Tất cả tỉnh/thành'
-      ? car.inventory
-      : car.inventory.filter((item) => item.city === selectedCity);
+  const filteredInventory = car.inventory.filter((item) => {
+    const cityMatch =
+      selectedCity === 'Tất cả tỉnh/thành' || item.city === selectedCity;
+    return cityMatch && matchesBranchSearch(item, branchSearch);
+  });
   const activeHoldBranch = car.inventory.find(
     (b) => b.branchId === holdBranchId,
   );
@@ -427,15 +470,19 @@ export default function CarDetailModal({
             Thông số kỹ thuật — {trimDisplayName}
           </h3>
           <div className="specs-grid">
-            {SPEC_FIELDS.map(({ key, label, optional }) => {
-              const value = activeSpecsSource[key] || yearVariant.specs[key];
-              if (optional && !value) {
+            {SPEC_FIELDS.map(({ key, label, onlyIfDefined }) => {
+              const value = resolveSpecValue(
+                key,
+                activeSpecsSource,
+                yearVariant.specs,
+              );
+              if (onlyIfDefined && value === undefined) {
                 return null;
               }
               return (
                 <div key={key} className="spec-item">
                   <span className="spec-label">{label}</span>
-                  <span className="spec-value">{value || '—'}</span>
+                  <span className="spec-value">{formatSpecDisplay(value)}</span>
                 </div>
               );
             })}
@@ -474,6 +521,27 @@ export default function CarDetailModal({
             ))}
           </div>
 
+          <div className="branch-search-box">
+            <input
+              type="search"
+              className="branch-search-input"
+              placeholder="Tìm theo tên đại lý, phường mới hoặc quận/tỉnh cũ (VD: Thủ Đức, Tân Bình, Bình Dương...)"
+              value={branchSearch}
+              onChange={(event) => setBranchSearch(event.target.value)}
+              aria-label="Tìm showroom theo tên, phường mới hoặc quận/tỉnh cũ"
+            />
+            {branchSearch && (
+              <button
+                type="button"
+                className="quick-search-clear"
+                onClick={() => setBranchSearch('')}
+                aria-label="Xóa từ khóa tìm showroom"
+              >
+                ×
+              </button>
+            )}
+          </div>
+
           <div className="inventory-table-wrap">
             <table className="inventory-table">
               <thead>
@@ -486,6 +554,13 @@ export default function CarDetailModal({
                 </tr>
               </thead>
               <tbody>
+                {filteredInventory.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="branch-search-empty-cell">
+                      Không tìm thấy showroom nào khớp với &ldquo;{branchSearch}&rdquo;.
+                    </td>
+                  </tr>
+                )}
                 {filteredInventory.map((branchItem) => {
                   const trimStock = getBranchStockForTrim(
                     branchItem,
