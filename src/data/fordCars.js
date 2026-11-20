@@ -47,6 +47,45 @@ export function getBranchTypeLabel(type = '3S') {
   return BRANCH_TYPE_LABELS[type] || '3S';
 }
 
+export function getBranchStats(branches = FORD_BRANCHES) {
+  const byCity = {};
+  let count3S = 0;
+  let count1S = 0;
+  let count2S = 0;
+
+  for (const branch of branches) {
+    const type = branch.branch_type || branch.type || '3S';
+    if (type === '1S') count1S += 1;
+    else if (type === '2S') count2S += 1;
+    else count3S += 1;
+
+    if (branch.city) {
+      byCity[branch.city] = (byCity[branch.city] || 0) + 1;
+    }
+  }
+
+  const hcmCount = byCity['TP. Hồ Chí Minh'] || 0;
+  const hanoiCount = byCity['Hà Nội'] || 0;
+  const otherCitiesTotal = Math.max(0, branches.length - hcmCount - hanoiCount);
+
+  const countBrandInCity = (city, prefix) =>
+    branches.filter((b) => b.city === city && b.name.startsWith(prefix)).length;
+
+  return {
+    total: branches.length,
+    count3S,
+    count1S,
+    count2S,
+    byCity,
+    otherCitiesTotal,
+    brandCounts: {
+      saiGonFord: countBrandInCity('TP. Hồ Chí Minh', 'Sài Gòn Ford'),
+      cityFord: countBrandInCity('TP. Hồ Chí Minh', 'City Ford'),
+      thangLongFord: countBrandInCity('Hà Nội', 'Thăng Long Ford'),
+    },
+  };
+}
+
 const RAW_FORD_BRANCHES = [
   // A. TP. Hồ Chí Minh (14 địa điểm)
   {

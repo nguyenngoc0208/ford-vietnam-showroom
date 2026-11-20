@@ -5,12 +5,15 @@ import {
   FORD_BRANCHES,
   formatBranchAddress,
   formatVND,
+  getBranchStats,
   getBranchTypeLabel,
   getCarYearVariant,
   getGoogleMapsUrl,
   getTotalStock,
   matchesBranchSearch,
 } from '../data/fordCars';
+
+const BRANCH_STATS = getBranchStats(FORD_BRANCHES);
 
 const REGION_CONFIG = {
   hcm: {
@@ -237,10 +240,10 @@ export default function UtilityModal({
           <div>
             <p className="catalog-eyebrow">HỆ THỐNG ĐẠI LÝ ỦY QUYỀN TOÀN QUỐC</p>
             <h2 id="utility-modal-title" className="modal-title">
-              Tìm Đại Lý Showroom Ford ({filteredDealers.length} Chi Nhánh)
+              Tìm Đại Lý &amp; Điểm Dịch Vụ Ford ({filteredDealers.length} Địa Điểm)
             </h2>
             <p className="modal-description">
-              Tra cứu địa chỉ {FORD_BRANCHES.length} showroom Ford chính hãng tại 6 thành phố trực thuộc Trung ương (TP. Hồ Chí Minh, Hà Nội, Hải Phòng, Đà Nẵng, Cần Thơ và TP. Huế); mở Google Maps chỉ đường hoặc lọc xe có sẵn tại chi nhánh.
+              Tra cứu {BRANCH_STATS.total} địa điểm ủy quyền chính hãng (gồm {BRANCH_STATS.count3S} đại lý 3S, {BRANCH_STATS.count1S} điểm trưng bày 1S và {BRANCH_STATS.count2S} trung tâm dịch vụ 2S) tại 6 thành phố trực thuộc Trung ương; mở Google Maps chỉ đường hoặc lọc xe sẵn kho.
             </p>
 
             <div

@@ -227,8 +227,10 @@ function getBudgetScore(price, budgetId) {
 }
 
 function getPurposeScore(cfg, purposeId) {
-  const is4x4OrAwd = /4x4|awd/i.test(cfg.drivetrain);
-  const isDiesel = /diesel|dầu/i.test(cfg.engine);
+  const drivetrainText = String(cfg.drivetrain || '');
+  const engineText = String(cfg.engine || '');
+  const is4x4OrAwd = /4x4|awd/i.test(drivetrainText);
+  const isDiesel = /diesel|dầu/i.test(engineText);
 
   switch (purposeId) {
     case 'city-family':
@@ -273,7 +275,9 @@ function getPurposeScore(cfg, purposeId) {
 }
 
 function getPreferenceScore(cfg, preferenceId) {
-  const isHighDisplacement = /3\.0|2\.3L EcoBoost/i.test(cfg.engine);
+  const engineText = String(cfg.engine || '');
+  const drivetrainText = String(cfg.drivetrain || '');
+  const isHighDisplacement = /3\.0|2\.3L EcoBoost/i.test(engineText);
   switch (preferenceId) {
     case 'latest-2026':
       if (cfg.year === '2026') return 22;
@@ -286,7 +290,7 @@ function getPreferenceScore(cfg, preferenceId) {
     case 'fuel-efficient':
       if (cfg.carId === 'mach-e') return 20;
       if (cfg.carId === 'territory') return 15;
-      if (/4x2|RWD/i.test(cfg.drivetrain) && /Diesel|Turbo Diesel/i.test(cfg.engine)) {
+      if (/4x2|RWD/i.test(drivetrainText) && /Diesel|Turbo Diesel/i.test(engineText)) {
         return 19;
       }
       if (isHighDisplacement) return -8;

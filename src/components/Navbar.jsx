@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FordLogo from './FordLogo';
 import {
+  FORD_BRANCHES,
   MEGA_CATEGORIES,
   formatVND,
   getCarYearVariant,
@@ -81,7 +82,7 @@ export default function Navbar({
               className="utility-link"
               onClick={() => onOpenUtilityModal('dealers')}
             >
-              Tìm Đại Lý
+              Tìm Đại Lý ({FORD_BRANCHES.length})
             </button>
             <button
               type="button"
@@ -498,7 +499,7 @@ export default function Navbar({
                 onOpenUtilityModal('dealers');
               }}
             >
-              Tìm Đại Lý &amp; Chỉ Đường Maps
+              Tìm {FORD_BRANCHES.length} Địa Điểm &amp; Chỉ Đường Maps
             </button>
             <button
               type="button"

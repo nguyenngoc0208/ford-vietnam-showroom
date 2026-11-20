@@ -180,11 +180,15 @@ export default function CompareModal({
   const minPrice = prices.length ? Math.min(...prices) : null;
   const maxPrice = prices.length ? Math.max(...prices) : null;
 
-  const powers = columns.map((c) => c.powerNum).filter((v) => typeof v === 'number');
+  const powers = columns
+    .map((c) => c.powerNum)
+    .filter((v) => typeof v === 'number' && !Number.isNaN(v));
   const maxPower = powers.length ? Math.max(...powers) : null;
   const minPower = powers.length ? Math.min(...powers) : null;
 
-  const torques = columns.map((c) => c.torqueNum).filter((v) => typeof v === 'number');
+  const torques = columns
+    .map((c) => c.torqueNum)
+    .filter((v) => typeof v === 'number' && !Number.isNaN(v));
   const maxTorque = torques.length ? Math.max(...torques) : null;
   const minTorque = torques.length ? Math.min(...torques) : null;
 

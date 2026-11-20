@@ -16,10 +16,13 @@ import {
   DEALER_CITIES,
   FORD_BRANCHES,
   fordCars,
+  getBranchStats,
   getBranchStockForTrim,
   getCarYearVariant,
   getTotalStock,
 } from './data/fordCars';
+
+const BRANCH_STATS = getBranchStats(FORD_BRANCHES);
 import './App.css';
 
 const STORAGE_KEYS = {
@@ -925,16 +928,36 @@ export default function App() {
             </div>
 
             <div className="footer-links-col">
-              <h4>Hệ thống {FORD_BRANCHES.length} Showroom Toàn Quốc</h4>
-              <p>TP. Hồ Chí Minh (10): Bến Thành • City Ford • Sài Gòn Ford • Western • Gia Định • Phú Mỹ • Bình Dương • Vũng Tàu</p>
-              <p>Hà Nội (7): Hà Nội Ford • Thăng Long • Thanh Xuân • Long Biên • Thủ Đô • Hà Thành • An Đô</p>
-              <p>TP. trực thuộc TW khác (8): Hải Phòng (2) • Đà Nẵng (3) • Cần Thơ (2) • TP. Huế (1)</p>
+              <h4>
+                Hệ thống {BRANCH_STATS.total} Địa điểm Toàn Quốc{' '}
+                <span style={{ fontWeight: 500, fontSize: '0.85em', opacity: 0.9 }}>
+                  ({BRANCH_STATS.count3S} đại lý 3S, {BRANCH_STATS.count1S} điểm 1S &amp; {BRANCH_STATS.count2S} xưởng 2S)
+                </span>
+              </h4>
+              <p>
+                TP. Hồ Chí Minh ({BRANCH_STATS.byCity['TP. Hồ Chí Minh'] || 0}): Sài Gòn Ford ({BRANCH_STATS.brandCounts.saiGonFord} CN) • Bến Thành • Tân Thuận • Western • Gia Định • Suối Tiên • City Ford ({BRANCH_STATS.brandCounts.cityFord} CN) • Phú Mỹ • Bình Dương • Dĩ An
+              </p>
+              <p>
+                Hà Nội ({BRANCH_STATS.byCity['Hà Nội'] || 0}): Hà Nội Ford • Thăng Long ({BRANCH_STATS.brandCounts.thangLongFord} CN) • Thanh Xuân • Long Biên • Hà Thành • Mỹ Đình • Thủ Đô • An Đô • TXF Hà Đông • HTF Mỹ Đình
+              </p>
+              <p>
+                TP. trực thuộc TW khác ({BRANCH_STATS.otherCitiesTotal}): Hải Phòng ({BRANCH_STATS.byCity['Hải Phòng'] || 0}) • Đà Nẵng ({BRANCH_STATS.byCity['Đà Nẵng'] || 0}) • Cần Thơ ({BRANCH_STATS.byCity['Cần Thơ'] || 0}) • TP. Huế ({BRANCH_STATS.byCity['TP. Huế'] || 0})
+              </p>
             </div>
           </div>
 
           <div className="footer-bottom-bar">
             <span>© 2026 Ford Việt Nam. All rights reserved.</span>
-            <span>Giá niêm yết đã bao gồm VAT • Dữ liệu tồn kho cập nhật thời gian thực</span>
+            <div className="footer-bottom-actions">
+              <span>Giá niêm yết đã bao gồm VAT • Dữ liệu tồn kho cập nhật thời gian thực</span>
+              <button
+                type="button"
+                className="footer-reset-btn"
+                onClick={handleResetInventory}
+              >
+                ↺ Khôi phục dữ liệu mặc định
+              </button>
+            </div>
           </div>
         </div>
       </footer>

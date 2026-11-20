@@ -2717,10 +2717,16 @@
   gap: 16px;
 }
 
+.dealer-modal-info {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
 .dealer-modal-top {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
   flex-wrap: wrap;
 }
 
@@ -2730,9 +2736,11 @@
 }
 
 .dealer-modal-address {
-  margin-top: 4px;
+  margin-top: 6px;
   font-size: 0.875rem;
   color: #334155;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .dealer-modal-hotline {
@@ -3100,6 +3108,34 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+.footer-bottom-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.footer-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
 /* Toast Notification */
 @keyframes toastSlideIn {
   from {
@@ -3271,14 +3307,29 @@
   .dealer-modal-card {
     flex-direction: column;
     align-items: flex-start;
+    padding: 14px;
+    gap: 12px;
   }
 
   .dealer-modal-actions {
     width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .dealer-modal-actions .btn-table-hold {
-    flex: 1;
+    flex: 1 1 135px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .branch-address-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
   .compare-bar {
