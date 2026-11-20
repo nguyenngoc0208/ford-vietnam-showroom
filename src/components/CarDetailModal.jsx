@@ -563,8 +563,9 @@ export default function CarDetailModal({
                   </tr>
                 )}
                 {filteredInventory.map((branchItem) => {
-                  const isServiceOnly = branchItem.type === '2S';
-                  const branchType = branchItem.type || '3S';
+                  const branchType =
+                    branchItem.branch_type || branchItem.type || '3S';
+                  const isServiceOnly = branchType === '2S';
                   const trimStock = isServiceOnly
                     ? 0
                     : getBranchStockForTrim(branchItem, activeStockKey);
@@ -653,7 +654,7 @@ export default function CarDetailModal({
                           }`}
                         >
                           {isServiceOnly
-                            ? 'Trung tâm dịch vụ 2S'
+                            ? '2S • Dịch vụ'
                             : hasStock
                               ? 'Sẵn xe giao ngay'
                               : 'Hết xe tại kho'}

@@ -138,7 +138,7 @@ function extractAllConfigurations(cars, selectedCity) {
               const cityMatch =
                 selectedCity === 'Tất cả tỉnh/thành' || branch.city === selectedCity;
               return (
-                branch.type !== '2S' &&
+                (branch.branch_type || branch.type) !== '2S' &&
                 cityMatch &&
                 getBranchStockForTrim(branch, stockKey) > 0
               );

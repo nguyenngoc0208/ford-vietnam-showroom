@@ -40,276 +40,312 @@ export const DEALER_CITIES = [
 export const BRANCH_TYPE_LABELS = {
   '3S': '3S',
   '1S': '1S • Trưng bày',
-  '2S': '2S • Xưởng dịch vụ',
+  '2S': '2S • Dịch vụ',
 };
 
 export function getBranchTypeLabel(type = '3S') {
   return BRANCH_TYPE_LABELS[type] || '3S';
 }
 
-export const FORD_BRANCHES = [
+const RAW_FORD_BRANCHES = [
+  // A. TP. Hồ Chí Minh (14 địa điểm)
   {
     id: 'saigon-cao-thang',
     name: 'Sài Gòn Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '61A Cao Thắng, Phường Bàn Cờ, TP. Hồ Chí Minh (Địa chỉ cũ: 61A Cao Thắng, Phường 3, Quận 3, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '61A Cao Thắng, Phường Bàn Cờ, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '61A Cao Thắng, Quận 3, TP. Hồ Chí Minh',
     hotline: '0968 703 703',
   },
   {
     id: 'saigon-pho-quang',
     name: 'Sài Gòn Ford – Phổ Quang',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '104 Phổ Quang, Phường Tân Sơn Hòa, TP. Hồ Chí Minh (Địa chỉ cũ: 104 Phổ Quang, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '104 Phổ Quang, Phường Tân Sơn Hòa, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '104 Phổ Quang, Quận Tân Bình, TP. Hồ Chí Minh',
     hotline: '0933 885 885',
   },
   {
     id: 'saigon-nam-sg',
     name: 'Sài Gòn Ford – Nam Sài Gòn',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '161F Dạ Nam, Phường Chánh Hưng, TP. Hồ Chí Minh (Địa chỉ cũ: 161F Dạ Nam, Phường 3, Quận 8, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '161F Dạ Nam, Phường Chánh Hưng, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '161F Dạ Nam, Quận 8, TP. Hồ Chí Minh',
     hotline: '0925 158 158',
   },
   {
     id: 'ben-thanh',
     name: 'Bến Thành Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '39 Chế Lan Viên, Phường Tây Thạnh, TP. Hồ Chí Minh (Địa chỉ cũ: 39 Chế Lan Viên, Phường Tây Thạnh, Quận Tân Phú, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '39 Chế Lan Viên, Phường Tây Thạnh, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '39 Chế Lan Viên, Quận Tân Phú, TP. Hồ Chí Minh',
     hotline: '0908 061 061',
   },
   {
     id: 'tan-thuan-ford',
     name: 'Tân Thuận Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      'Lô DVTM-8 và DVTM-11, Đường số 7, KCX Tân Thuận, Phường Tân Thuận, TP. Hồ Chí Minh (Địa chỉ cũ: Lô DVTM-8 và DVTM-11, Đường số 7, KCX Tân Thuận, Phường Tân Thuận Đông, Quận 7, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: 'KCX Tân Thuận, Phường Tân Thuận, TP. Hồ Chí Minh',
+    administrative_area_before_merger: 'KCX Tân Thuận, Quận 7, TP. Hồ Chí Minh',
     hotline: '0917 764 636',
   },
   {
     id: 'western-an-lac',
     name: 'Western Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '530 Kinh Dương Vương, Phường An Lạc, TP. Hồ Chí Minh (Địa chỉ cũ: 530 Kinh Dương Vương, Phường An Lạc, Quận Bình Tân, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '530 Kinh Dương Vương, Phường An Lạc, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '530 Kinh Dương Vương, Quận Bình Tân, TP. Hồ Chí Minh',
     hotline: '0918 479 696',
   },
   {
     id: 'gia-dinh',
     name: 'Gia Định Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '900 Quốc lộ 1A, Phường Thới An, TP. Hồ Chí Minh (Địa chỉ cũ: 900 Quốc lộ 1A, Phường Thới An, Quận 12, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '900 Quốc lộ 1A, Phường Thới An, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '900 Quốc lộ 1A, Quận 12, TP. Hồ Chí Minh',
     hotline: '0933 681 123',
   },
   {
     id: 'suoi-tien-ford',
     name: 'Suối Tiên Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '35 Hoàng Hữu Nam, Phường Tăng Nhơn Phú, TP. Hồ Chí Minh (Địa chỉ cũ: 35 Hoàng Hữu Nam, Phường Tân Phú, TP. Thủ Đức, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '35 Hoàng Hữu Nam, Phường Tăng Nhơn Phú, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '35 Hoàng Hữu Nam, TP. Thủ Đức, TP. Hồ Chí Minh',
     hotline: '0939 173 535',
   },
   {
     id: 'city-binh-trieu',
     name: 'City Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '218 Quốc lộ 13, Phường Hiệp Bình, TP. Hồ Chí Minh (Địa chỉ cũ: 218 Quốc lộ 13, Phường Hiệp Bình Chánh, TP. Thủ Đức, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: '218 Quốc lộ 13, Phường Hiệp Bình, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '218 Quốc lộ 13, TP. Thủ Đức, TP. Hồ Chí Minh',
     hotline: '0937 400 700',
   },
   {
     id: 'phu-my',
     name: 'Phú Mỹ Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      'Lô B1, Đường D3, KCN Cát Lái 2, Phường Cát Lái, TP. Hồ Chí Minh (Địa chỉ cũ: Lô B1, Đường D3, KCN Cát Lái 2, Phường Thạnh Mỹ Lợi, TP. Thủ Đức, TP. Hồ Chí Minh)',
+    administrative_area_after_merger: 'KCN Cát Lái 2, Phường Cát Lái, TP. Hồ Chí Minh',
+    administrative_area_before_merger: 'KCN Cát Lái 2, TP. Thủ Đức, TP. Hồ Chí Minh',
     hotline: '0945 007 872',
   },
   {
     id: 'binh-duong-ford',
     name: 'Bình Dương Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      'Lô C13, Đường Hùng Vương, Khu Liên Hợp, Phường Bình Dương, TP. Hồ Chí Minh (Địa chỉ cũ: Lô C13, Đường Hùng Vương, Khu Liên Hợp, Phường Hòa Phú, TP. Thủ Dầu Một, Tỉnh Bình Dương)',
+    administrative_area_after_merger: 'Khu Liên Hợp, Phường Bình Dương, TP. Hồ Chí Minh',
+    administrative_area_before_merger: 'Khu Liên Hợp, TP. Thủ Dầu Một, Tỉnh Bình Dương',
     hotline: '0902 558 448',
   },
   {
     id: 'di-an-ford',
     name: 'Dĩ An Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '28 ĐT 743, Phường Dĩ An, TP. Hồ Chí Minh (Địa chỉ cũ: 28 ĐT 743, Phường Bình An, TP. Dĩ An, Tỉnh Bình Dương)',
+    administrative_area_after_merger: 'Đường ĐT 743, Phường Dĩ An, TP. Hồ Chí Minh',
+    administrative_area_before_merger: 'Đường ĐT 743, TP. Dĩ An, Tỉnh Bình Dương',
     hotline: '0901 261 779',
   },
   {
     id: 'city-ba-ria-2s',
-    name: 'City Ford – 2S Bà Rịa',
-    type: '2S',
+    name: 'City Ford – Bà Rịa',
+    branch_type: '2S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      'Quốc lộ 51, Phường Bà Rịa, TP. Hồ Chí Minh (Địa chỉ cũ: Quốc lộ 51, Phường Phước Trung, TP. Bà Rịa, Tỉnh Bà Rịa - Vũng Tàu)',
+    administrative_area_after_merger: 'Quốc lộ 51, Phường Bà Rịa, TP. Hồ Chí Minh',
+    administrative_area_before_merger: 'Quốc lộ 51, TP. Bà Rịa, Tỉnh Bà Rịa - Vũng Tàu',
     hotline: '0933 265 269',
   },
   {
     id: 'vung-tau-ford',
-    name: 'City Ford – 1S Vũng Tàu',
-    type: '1S',
+    name: 'City Ford – Vũng Tàu',
+    branch_type: '1S',
     city: 'TP. Hồ Chí Minh',
-    address:
-      '40A Đường 30/4, Phường Tam Thắng, TP. Hồ Chí Minh (Địa chỉ cũ: 40A Đường 30/4, Phường 9, TP. Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu)',
+    administrative_area_after_merger: '40A Đường 30/4, Phường Tam Thắng, TP. Hồ Chí Minh',
+    administrative_area_before_merger: '40A Đường 30/4, TP. Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu',
     hotline: '0933 590 077',
   },
+
+  // B. Hà Nội (11 địa điểm: 8 3S + 2 1S + 1 2S)
   {
     id: 'ha-noi-ford',
     name: 'Hà Nội Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      '311–313 Trường Chinh, Phường Phương Liệt, Hà Nội (Địa chỉ cũ: 311–313 Trường Chinh, Phường Khương Mai, Quận Thanh Xuân, Hà Nội)',
+    administrative_area_after_merger: '311–313 Trường Chinh, Phường Phương Liệt, Hà Nội',
+    administrative_area_before_merger: '311–313 Trường Chinh, Phường Khương Mai, Quận Thanh Xuân, Hà Nội',
     hotline: '024 3565 8888',
   },
   {
     id: 'thang-long-ford',
     name: 'Thăng Long Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      '105 Láng Hạ, Phường Đống Đa, Hà Nội (Địa chỉ cũ: 105 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, Hà Nội)',
+    administrative_area_after_merger: '105 Láng Hạ, Phường Đống Đa, Hà Nội',
+    administrative_area_before_merger: '105 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, Hà Nội',
     hotline: '024 3562 9999',
   },
   {
     id: 'thanh-xuan-ford',
     name: 'Thanh Xuân Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      '88 Nguyễn Xiển, Phường Thanh Liệt, Hà Nội (Địa chỉ cũ: 88 Nguyễn Xiển, Phường Hạ Đình, Quận Thanh Xuân, Hà Nội)',
+    administrative_area_after_merger: 'Ngõ 443 Nguyễn Trãi, Phường Khương Đình, Hà Nội',
+    administrative_area_before_merger: 'Ngõ 443 Nguyễn Trãi, Quận Thanh Xuân, Hà Nội',
     hotline: '024 3552 8888',
   },
   {
     id: 'long-bien-ford',
     name: 'Long Biên Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      'Số 3 Nguyễn Văn Linh, Phường Việt Hưng, Hà Nội (Địa chỉ cũ: Số 3 Nguyễn Văn Linh, Phường Gia Thụy, Quận Long Biên, Hà Nội)',
+    administrative_area_after_merger: '03 Nguyễn Văn Linh, Phường Việt Hưng, Hà Nội',
+    administrative_area_before_merger: '03 Nguyễn Văn Linh, Quận Long Biên, Hà Nội',
     hotline: '024 3875 8888',
-  },
-  {
-    id: 'thu-do-ford',
-    name: 'Thủ Đô Ford',
-    type: '3S',
-    city: 'Hà Nội',
-    address:
-      'Km8 Giải Phóng, Phường Hoàng Liệt, Hà Nội (Địa chỉ cũ: Km8 Giải Phóng, Phường Hoàng Liệt, Quận Hoàng Mai, Hà Nội)',
-    hotline: '024 3681 8888',
   },
   {
     id: 'ha-thanh-ford',
     name: 'Hà Thành Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      'Cụm CN Lai Xá, Xã Hoài Đức, Hà Nội (Địa chỉ cũ: Cụm CN Lai Xá, Xã Kim Chung, Huyện Hoài Đức, Hà Nội)',
+    administrative_area_after_merger: 'Cụm công nghiệp Lai Xá, Phường Tây Tựu, Hà Nội',
+    administrative_area_before_merger: 'Cụm công nghiệp Lai Xá, Huyện Hoài Đức, Hà Nội',
     hotline: '024 3386 8888',
+  },
+  {
+    id: 'my-dinh-ford',
+    name: 'Mỹ Đình Ford',
+    branch_type: '3S',
+    city: 'Hà Nội',
+    administrative_area_after_merger: 'Đường Trịnh Văn Bô, Phường Xuân Phương, Hà Nội',
+    administrative_area_before_merger: 'Đường Trịnh Văn Bô, Quận Nam Từ Liêm, Hà Nội',
+    hotline: '024 3768 8888',
+  },
+  {
+    id: 'thu-do-ford',
+    name: 'Thủ Đô Ford',
+    branch_type: '3S',
+    city: 'Hà Nội',
+    administrative_area_after_merger: '05 Ngọc Hồi, Phường Yên Sở, Hà Nội',
+    administrative_area_before_merger: '05 Ngọc Hồi, Huyện Thanh Trì, Hà Nội',
+    hotline: '024 3681 8888',
   },
   {
     id: 'an-do-ford',
     name: 'An Đô Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hà Nội',
-    address:
-      '168 Phạm Văn Đồng, Phường Đông Ngạc, Hà Nội (Địa chỉ cũ: 168 Phạm Văn Đồng, Phường Xuân Đỉnh, Quận Bắc Từ Liêm, Hà Nội)',
+    administrative_area_after_merger: '168 Phạm Văn Đồng, Phường Đông Ngạc, Hà Nội',
+    administrative_area_before_merger: '168 Phạm Văn Đồng, Quận Bắc Từ Liêm, Hà Nội',
     hotline: '024 3750 8888',
   },
   {
+    id: 'txf-ha-dong-1s',
+    name: 'TXF Hà Đông – 1S',
+    branch_type: '1S',
+    city: 'Hà Nội',
+    administrative_area_after_merger: '1105 Do Lộ, Phường Yên Nghĩa, Hà Nội',
+    administrative_area_before_merger: '1105 Do Lộ, Quận Hà Đông, Hà Nội',
+    hotline: '024 3552 6666',
+  },
+  {
+    id: 'htf-my-dinh-1s',
+    name: 'HTF Mỹ Đình – 1S',
+    branch_type: '1S',
+    city: 'Hà Nội',
+    administrative_area_after_merger: '02 Tôn Thất Thuyết, Phường Cầu Giấy, Hà Nội',
+    administrative_area_before_merger: '02 Tôn Thất Thuyết, Quận Cầu Giấy, Hà Nội',
+    hotline: '024 3386 6666',
+  },
+  {
+    id: 'thang-long-tay-mo-2s',
+    name: 'Thăng Long Ford – 2S Tây Mỗ',
+    branch_type: '2S',
+    city: 'Hà Nội',
+    administrative_area_after_merger: 'Phường Tây Mỗ, Hà Nội',
+    administrative_area_before_merger: 'Phường Tây Mỗ, Quận Nam Từ Liêm, Hà Nội',
+    hotline: '024 3562 6666',
+  },
+
+  // C. Đà Nẵng (2 địa điểm)
+  {
+    id: 'da-nang-ford',
+    name: 'Dana Ford – Showroom 1',
+    branch_type: '3S',
+    city: 'Đà Nẵng',
+    administrative_area_after_merger: '56 Điện Biên Phủ, Phường Thanh Khê, Đà Nẵng',
+    administrative_area_before_merger: '56 Điện Biên Phủ, Quận Thanh Khê, Đà Nẵng',
+    hotline: '0236 3646 888',
+  },
+  {
+    id: 'dana-ford',
+    name: 'Dana Ford – Showroom 2',
+    branch_type: '3S',
+    city: 'Đà Nẵng',
+    administrative_area_after_merger: '286 Phạm Hùng, Phường Hòa Xuân, Đà Nẵng',
+    administrative_area_before_merger: '286 Phạm Hùng, Huyện Hòa Vang, Đà Nẵng',
+    hotline: '0236 3616 888',
+  },
+
+  // D. Hải Phòng (2 địa điểm)
+  {
     id: 'hai-phong-ford',
     name: 'Hải Phòng Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hải Phòng',
-    address:
-      'Số 4 Bạch Đằng, Phường Hồng Bàng, Hải Phòng (Địa chỉ cũ: Số 4 Bạch Đằng, Phường Hạ Lý, Quận Hồng Bàng, TP. Hải Phòng)',
+    administrative_area_after_merger: 'Tổ 3, Khu An Trì, Phường Hồng Bàng, TP. Hải Phòng',
+    administrative_area_before_merger: 'Tổ 3, Khu An Trì, TP. Hải Phòng',
     hotline: '0225 3282 888',
   },
   {
     id: 'hai-duong-ford',
     name: 'Hải Dương Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Hải Phòng',
-    address:
-      '118 An Định, Phường Thành Đông, Hải Phòng (Địa chỉ cũ: 118 An Định, Phường Bình Hàn, TP. Hải Dương, Tỉnh Hải Dương)',
+    administrative_area_after_merger: 'Khu 14, Phường Thành Đông, TP. Hải Phòng',
+    administrative_area_before_merger: 'Khu 14, TP. Hải Dương, Tỉnh Hải Dương',
     hotline: '0220 3895 888',
   },
-  {
-    id: 'da-nang-ford',
-    name: 'Đà Nẵng Ford',
-    type: '3S',
-    city: 'Đà Nẵng',
-    address:
-      '56 Điện Biên Phủ, Phường Thanh Khê, Đà Nẵng (Địa chỉ cũ: 56 Điện Biên Phủ, Phường Chính Gián, Quận Thanh Khê, TP. Đà Nẵng)',
-    hotline: '0236 3646 888',
-  },
-  {
-    id: 'dana-ford',
-    name: 'Dana Ford',
-    type: '3S',
-    city: 'Đà Nẵng',
-    address:
-      '286 Phạm Hùng, Phường Hòa Xuân, Đà Nẵng (Địa chỉ cũ: 286 Phạm Hùng, Xã Hòa Phước, Huyện Hòa Vang, TP. Đà Nẵng)',
-    hotline: '0236 3616 888',
-  },
-  {
-    id: 'quang-nam-ford',
-    name: 'Quảng Nam Ford',
-    type: '3S',
-    city: 'Đà Nẵng',
-    address:
-      'Quốc Lộ 1A, Phường Bàn Thạch, Đà Nẵng (Địa chỉ cũ: Quốc Lộ 1A, Phường Tân Thạnh, TP. Tam Kỳ, Tỉnh Quảng Nam)',
-    hotline: '0235 3828 888',
-  },
+
+  // E. Cần Thơ (1 địa điểm)
   {
     id: 'can-tho-ford',
     name: 'Cần Thơ Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'Cần Thơ',
-    address:
-      'Lô 11C Võ Nguyên Giáp, Phường Hưng Phú, Cần Thơ (Địa chỉ cũ: Lô 11C Võ Nguyên Giáp, Phường Phú Thứ, Quận Cái Răng, TP. Cần Thơ)',
+    administrative_area_after_merger: 'Lô 11C Võ Nguyên Giáp, Phường Hưng Phú, TP. Cần Thơ',
+    administrative_area_before_merger: 'Lô 11C Võ Nguyên Giáp, Quận Cái Răng, TP. Cần Thơ',
     hotline: '0292 3737 888',
   },
-  {
-    id: 'soc-trang-ford',
-    name: 'Sóc Trăng Ford',
-    type: '3S',
-    city: 'Cần Thơ',
-    address:
-      '1139 Võ Văn Kiệt, Phường Mỹ Xuyên, Cần Thơ (Địa chỉ cũ: 1139 Võ Văn Kiệt, Phường 10, TP. Sóc Trăng, Tỉnh Sóc Trăng)',
-    hotline: '0299 3628 888',
-  },
+
+  // F. TP. Huế (1 địa điểm)
   {
     id: 'hue-ford',
     name: 'Huế Ford',
-    type: '3S',
+    branch_type: '3S',
     city: 'TP. Huế',
-    address:
-      'Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, Phường An Cựu, TP. Huế (Địa chỉ cũ: Lô F KĐT An Cựu City, Đường Võ Nguyên Giáp, Phường An Đông, TP. Huế, Tỉnh Thừa Thiên Huế)',
+    administrative_area_after_merger: '595 Nguyễn Tất Thành, Khu vực Thủy Dương, TP. Huế',
+    administrative_area_before_merger:
+      '595 Nguyễn Tất Thành, Xã Thủy Dương, Thị xã Hương Thủy, Tỉnh Thừa Thiên Huế',
     hotline: '0234 3818 888',
   },
 ];
+
+export const FORD_BRANCHES = RAW_FORD_BRANCHES.map((branch) => ({
+  ...branch,
+  type: branch.branch_type,
+  address: `${branch.administrative_area_after_merger} (Địa chỉ cũ: ${branch.administrative_area_before_merger})`,
+}));
 
 export const DEALER_BRANCHES = [
   {
@@ -332,7 +368,8 @@ const BRANCH_ORDER = Object.fromEntries(
 
 function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = null) {
   const info = BRANCH_BY_ID[branchId];
-  const isServiceOnly = info.type === '2S';
+  const branchType = info.branch_type || info.type || '3S';
+  const isServiceOnly = branchType === '2S';
   const normalizedStockByTrim = isServiceOnly
     ? Object.fromEntries(Object.keys(stockByTrim).map((key) => [key, 0]))
     : stockByTrim;
@@ -342,8 +379,11 @@ function createBranchStock(branchId, stockByTrim, colors = [], colorsByYear = nu
   const entry = {
     branchId,
     branch: info.name,
-    type: info.type || '3S',
+    branch_type: branchType,
+    type: branchType,
     city: info.city,
+    administrative_area_after_merger: info.administrative_area_after_merger,
+    administrative_area_before_merger: info.administrative_area_before_merger,
     address: info.address,
     stock,
     stockByTrim: normalizedStockByTrim,
@@ -799,6 +839,50 @@ const RAW_FORD_CARS = [
         ['Xanh Thạch Anh', 'Đen', 'Trắng'],
       ),
       createBranchStock(
+        'my-dinh-ford',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 1,
+          Sport: 2,
+          Active: 1,
+        },
+        ['Trắng', 'Xám', 'Đen'],
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Trắng', 'Đen'],
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        {
+          'Platinum+': 1,
+          'Platinum 4x2': 1,
+          'Platinum 4x4': 0,
+          Sport: 1,
+          Active: 1,
+        },
+        ['Xanh Thạch Anh', 'Trắng'],
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        {
+          'Platinum+': 0,
+          'Platinum 4x2': 0,
+          'Platinum 4x4': 0,
+          Sport: 0,
+          Active: 0,
+        },
+        [],
+      ),
+      createBranchStock(
         'hai-duong-ford',
         {
           'Platinum+': 0,
@@ -819,28 +903,6 @@ const RAW_FORD_CARS = [
           Active: 1,
         },
         ['Trắng', 'Bạc', 'Xám'],
-      ),
-      createBranchStock(
-        'quang-nam-ford',
-        {
-          'Platinum+': 0,
-          'Platinum 4x2': 1,
-          'Platinum 4x4': 0,
-          Sport: 1,
-          Active: 1,
-        },
-        ['Đen', 'Trắng'],
-      ),
-      createBranchStock(
-        'soc-trang-ford',
-        {
-          'Platinum+': 0,
-          'Platinum 4x2': 1,
-          'Platinum 4x4': 0,
-          Sport: 1,
-          Active: 1,
-        },
-        ['Trắng', 'Đen'],
       ),
       createBranchStock(
         'hue-ford',
@@ -1197,6 +1259,46 @@ const RAW_FORD_CARS = [
         ['Trắng', 'Đen', 'Đỏ'],
       ),
       createBranchStock(
+        'my-dinh-ford',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 2,
+          'Territory Trend 1.5L AT': 2,
+        },
+        ['Trắng', 'Xanh', 'Đen'],
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Trắng', 'Đỏ'],
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        {
+          'Territory Platinum 1.5L AT': 1,
+          'Territory Titanium X 1.5L AT': 1,
+          'Territory Titanium 1.5L AT': 1,
+          'Territory Trend 1.5L AT': 1,
+        },
+        ['Đen', 'Bạc', 'Trắng'],
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        {
+          'Territory Platinum 1.5L AT': 0,
+          'Territory Titanium X 1.5L AT': 0,
+          'Territory Titanium 1.5L AT': 0,
+          'Territory Trend 1.5L AT': 0,
+        },
+        [],
+      ),
+      createBranchStock(
         'hai-duong-ford',
         {
           'Territory Platinum 1.5L AT': 0,
@@ -1215,26 +1317,6 @@ const RAW_FORD_CARS = [
           'Territory Trend 1.5L AT': 1,
         },
         ['Đỏ', 'Trắng', 'Xanh'],
-      ),
-      createBranchStock(
-        'quang-nam-ford',
-        {
-          'Territory Platinum 1.5L AT': 0,
-          'Territory Titanium X 1.5L AT': 1,
-          'Territory Titanium 1.5L AT': 1,
-          'Territory Trend 1.5L AT': 1,
-        },
-        ['Trắng', 'Đen'],
-      ),
-      createBranchStock(
-        'soc-trang-ford',
-        {
-          'Territory Platinum 1.5L AT': 0,
-          'Territory Titanium X 1.5L AT': 1,
-          'Territory Titanium 1.5L AT': 1,
-          'Territory Trend 1.5L AT': 1,
-        },
-        ['Trắng', 'Bạc'],
       ),
       createBranchStock(
         'hue-ford',
@@ -1553,6 +1635,42 @@ const RAW_FORD_CARS = [
         ['Trắng', 'Bạc', 'Đen'],
       ),
       createBranchStock(
+        'my-dinh-ford',
+        {
+          'Transit Premium+ 18 chỗ': 1,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 2,
+        },
+        ['Trắng', 'Vàng Cát', 'Đen'],
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Bạc'],
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 1,
+          'Transit Trend 16 chỗ': 1,
+        },
+        ['Trắng', 'Nâu'],
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        {
+          'Transit Premium+ 18 chỗ': 0,
+          'Transit Premium 16 chỗ': 0,
+          'Transit Trend 16 chỗ': 0,
+        },
+        [],
+      ),
+      createBranchStock(
         'hai-duong-ford',
         {
           'Transit Premium+ 18 chỗ': 0,
@@ -1569,24 +1687,6 @@ const RAW_FORD_CARS = [
           'Transit Trend 16 chỗ': 1,
         },
         ['Trắng', 'Vàng Cát', 'Nâu'],
-      ),
-      createBranchStock(
-        'quang-nam-ford',
-        {
-          'Transit Premium+ 18 chỗ': 0,
-          'Transit Premium 16 chỗ': 1,
-          'Transit Trend 16 chỗ': 1,
-        },
-        ['Trắng', 'Bạc'],
-      ),
-      createBranchStock(
-        'soc-trang-ford',
-        {
-          'Transit Premium+ 18 chỗ': 0,
-          'Transit Premium 16 chỗ': 1,
-          'Transit Trend 16 chỗ': 1,
-        },
-        ['Trắng', 'Vàng Cát'],
       ),
       createBranchStock(
         'hue-ford',
@@ -2557,6 +2657,86 @@ const RAW_FORD_CARS = [
         },
       ),
       createBranchStock(
+        'my-dinh-ford',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 2,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 1,
+          'Ranger Wildtrak': 2,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Xám', 'Đen'],
+        {
+          '2026': ['Cam', 'Xám', 'Đen'],
+          '2025': ['Vàng Luxe', 'Xám Meteor', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 1,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 0,
+        },
+        ['Trắng', 'Đen'],
+        {
+          '2026': ['Trắng', 'Đen'],
+          '2025': ['Trắng', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 1,
+          'Ranger Wildtrak 2.0L 4X4 AT': 1,
+          'Ranger XLS 2.0L 4x4 AT': 1,
+          'Ranger XLS 2.0L 4x2 AT': 2,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 1,
+          'Ranger Sport': 1,
+          'Ranger XLS+': 1,
+          'Ranger XLS': 1,
+          'Ranger XL': 1,
+        },
+        ['Cam', 'Trắng', 'Bạc Ánh Kim'],
+        {
+          '2026': ['Cam', 'Trắng', 'Bạc Ánh Kim'],
+          '2025': ['Vàng Luxe', 'Trắng', 'Bạc'],
+        },
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        {
+          'Ranger Wildtrak 3.0L 4X4 AT': 0,
+          'Ranger Wildtrak 2.0L 4X4 AT': 0,
+          'Ranger XLS 2.0L 4x4 AT': 0,
+          'Ranger XLS 2.0L 4x2 AT': 0,
+          'Ranger Stormtrak': 0,
+          'Ranger Wildtrak': 0,
+          'Ranger Sport': 0,
+          'Ranger XLS+': 0,
+          'Ranger XLS': 0,
+          'Ranger XL': 0,
+        },
+        [],
+        {
+          '2026': [],
+          '2025': [],
+        },
+      ),
+      createBranchStock(
         'hai-duong-ford',
         {
           'Ranger Wildtrak 3.0L 4X4 AT': 0,
@@ -2594,46 +2774,6 @@ const RAW_FORD_CARS = [
         {
           '2026': ['Cam', 'Trắng', 'Đen'],
           '2025': ['Vàng Luxe', 'Trắng', 'Đen'],
-        },
-      ),
-      createBranchStock(
-        'quang-nam-ford',
-        {
-          'Ranger Wildtrak 3.0L 4X4 AT': 0,
-          'Ranger Wildtrak 2.0L 4X4 AT': 1,
-          'Ranger XLS 2.0L 4x4 AT': 1,
-          'Ranger XLS 2.0L 4x2 AT': 1,
-          'Ranger Stormtrak': 0,
-          'Ranger Wildtrak': 1,
-          'Ranger Sport': 0,
-          'Ranger XLS+': 1,
-          'Ranger XLS': 1,
-          'Ranger XL': 1,
-        },
-        ['Trắng', 'Xám'],
-        {
-          '2026': ['Trắng', 'Xám', 'Bạc'],
-          '2025': ['Trắng', 'Xám Meteor', 'Bạc'],
-        },
-      ),
-      createBranchStock(
-        'soc-trang-ford',
-        {
-          'Ranger Wildtrak 3.0L 4X4 AT': 0,
-          'Ranger Wildtrak 2.0L 4X4 AT': 1,
-          'Ranger XLS 2.0L 4x4 AT': 1,
-          'Ranger XLS 2.0L 4x2 AT': 1,
-          'Ranger Stormtrak': 0,
-          'Ranger Wildtrak': 1,
-          'Ranger Sport': 0,
-          'Ranger XLS+': 1,
-          'Ranger XLS': 1,
-          'Ranger XL': 1,
-        },
-        ['Bạc', 'Trắng', 'Đen'],
-        {
-          '2026': ['Bạc', 'Trắng', 'Đen'],
-          '2025': ['Bạc', 'Trắng', 'Đen'],
         },
       ),
       createBranchStock(
@@ -3071,6 +3211,42 @@ const RAW_FORD_CARS = [
         },
       ),
       createBranchStock(
+        'my-dinh-ford',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 2 },
+        ['Xám', 'Cam', 'Đen'],
+        {
+          '2026': ['Xám', 'Cam', 'Đen'],
+          '2025': ['Xám Conquer', 'Cam Code', 'Đen'],
+        },
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Đen', 'Trắng'],
+        {
+          '2026': ['Đen', 'Trắng'],
+          '2025': ['Đen', 'Trắng'],
+        },
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        { 'Raptor 3.0L V6 4X4 AT': 1, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
+        ['Xám', 'Xanh Dương'],
+        {
+          '2026': ['Xám', 'Xanh Dương'],
+          '2025': ['Xám Conquer', 'Xanh Dương'],
+        },
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 0 },
+        [],
+        {
+          '2026': [],
+          '2025': [],
+        },
+      ),
+      createBranchStock(
         'hai-duong-ford',
         { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
         ['Trắng'],
@@ -3086,24 +3262,6 @@ const RAW_FORD_CARS = [
         {
           '2026': ['Xám', 'Cam'],
           '2025': ['Xám Conquer', 'Cam Code'],
-        },
-      ),
-      createBranchStock(
-        'quang-nam-ford',
-        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 1 },
-        ['Đen'],
-        {
-          '2026': ['Đen'],
-          '2025': ['Đen'],
-        },
-      ),
-      createBranchStock(
-        'soc-trang-ford',
-        { 'Raptor 3.0L V6 4X4 AT': 0, 'Raptor 2.0L Bi-Turbo 4X4 AT': 0 },
-        [],
-        {
-          '2026': [],
-          '2025': [],
         },
       ),
       createBranchStock(
@@ -3285,14 +3443,32 @@ const RAW_FORD_CARS = [
         { 'Mustang Mach-E Premium AWD': 1 },
         ['Đen Huyền Bí'],
       ),
+      createBranchStock(
+        'my-dinh-ford',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Trắng Ánh Sao', 'Đỏ Thể Thao'],
+      ),
+      createBranchStock(
+        'txf-ha-dong-1s',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Đen Huyền Bí'],
+      ),
+      createBranchStock(
+        'htf-my-dinh-1s',
+        { 'Mustang Mach-E Premium AWD': 1 },
+        ['Xanh Mãnh Liệt'],
+      ),
+      createBranchStock(
+        'thang-long-tay-mo-2s',
+        { 'Mustang Mach-E Premium AWD': 0 },
+        [],
+      ),
       createBranchStock('hai-duong-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
       createBranchStock(
         'dana-ford',
         { 'Mustang Mach-E Premium AWD': 1 },
         ['Đỏ Thể Thao'],
       ),
-      createBranchStock('quang-nam-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
-      createBranchStock('soc-trang-ford', { 'Mustang Mach-E Premium AWD': 0 }, []),
       createBranchStock(
         'hue-ford',
         { 'Mustang Mach-E Premium AWD': 1 },
@@ -3305,11 +3481,17 @@ const RAW_FORD_CARS = [
 export const fordCars = RAW_FORD_CARS.map((car) => ({
   ...car,
   inventory: car.inventory
-    .map((item) => ({
-      ...item,
-      type: item.type || BRANCH_BY_ID[item.branchId]?.type || '3S',
-      city: item.city || BRANCH_BY_ID[item.branchId]?.city || 'TP. Hồ Chí Minh',
-    }))
+    .map((item) => {
+      const branchMeta = BRANCH_BY_ID[item.branchId];
+      const branchType =
+        item.branch_type || item.type || branchMeta?.branch_type || '3S';
+      return {
+        ...item,
+        branch_type: branchType,
+        type: branchType,
+        city: item.city || branchMeta?.city || 'TP. Hồ Chí Minh',
+      };
+    })
     .sort(
       (a, b) =>
         (BRANCH_ORDER[a.branchId] ?? 999) - (BRANCH_ORDER[b.branchId] ?? 999),

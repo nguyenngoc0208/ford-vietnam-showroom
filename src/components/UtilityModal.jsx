@@ -288,14 +288,14 @@ export default function UtilityModal({
                 </div>
               )}
               {filteredDealers.map((branch) => {
-                const isServiceOnly = branch.type === '2S';
+                const branchType = branch.branch_type || branch.type || '3S';
+                const isServiceOnly = branchType === '2S';
                 const branchTotalCars = isServiceOnly
                   ? 0
                   : cars.reduce(
                       (sum, c) => sum + getTotalStock(c, branch.id),
                       0,
                     );
-                const branchType = branch.type || '3S';
                 const { primaryAddress, legacyAddress } = formatBranchAddress(
                   branch.address,
                 );
@@ -322,7 +322,7 @@ export default function UtilityModal({
                           }`}
                         >
                           {isServiceOnly
-                            ? 'Trung tâm dịch vụ 2S'
+                            ? '2S • Dịch vụ'
                             : branchTotalCars > 0
                               ? `${branchTotalCars} xe sẵn kho`
                               : 'Đang nhập lô mới'}
