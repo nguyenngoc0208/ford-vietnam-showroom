@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   COLOR_SWATCHES,
   DEALER_CITIES,
@@ -387,21 +387,25 @@ function recommendConfigurations(cars, answers) {
   });
 }
 
+const DEFAULT_FINDER_ANSWERS = {
+  budget: '800-1100',
+  purpose: 'versatile-work',
+  preference: 'latest-2026',
+  city: 'Tất cả tỉnh/thành',
+};
+
 export default function SmartCarFinderModal({
   isOpen,
   cars,
-  initialCity = 'Tất cả tỉnh/thành',
+  finderState,
+  onStepChange,
+  onHistoryBack,
   onSelectRecommendation,
   onClose,
 }) {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({
-    budget: '800-1100',
-    purpose: 'versatile-work',
-    preference: 'latest-2026',
-    city: initialCity || 'Tất cả tỉnh/thành',
-  });
-  const [showResults, setShowResults] = useState(false);
+  const step = finderState?.step ?? 0;
+  const showResults = Boolean(finderState?.showResults);
+  const answers = finderState?.answers || DEFAULT_FINDER_ANSWERS;
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -424,19 +428,38 @@ export default function SmartCarFinderModal({
 
   if (!isOpen) return null;
 
+  const canGoBackStep = showResults || step > 0;
+
   const handleRestart = () => {
-    setShowResults(false);
-    setStep(0);
+    onStepChange({
+      step: 0,
+      showResults: false,
+      answers,
+    });
   };
 
   const handlePickOption = (field, value, autoAdvance = true) => {
-    setAnswers((prev) => ({ ...prev, [field]: value }));
+    const nextAnswers = { ...answers, [field]: value };
     if (autoAdvance) {
       if (step < 3) {
-        setStep((prev) => prev + 1);
+        onStepChange({
+          step: step + 1,
+          showResults: false,
+          answers: nextAnswers,
+        });
       } else {
-        setShowResults(true);
+        onStepChange({
+          step: 3,
+          showResults: true,
+          answers: nextAnswers,
+        });
       }
+    } else {
+      onStepChange({
+        step,
+        showResults,
+        answers: nextAnswers,
+      });
     }
   };
 
@@ -450,344 +473,393 @@ export default function SmartCarFinderModal({
       aria-modal="true"
       aria-labelledby="finder-modal-title"
     >
-      <div className="modal-content finder-modal-content">
-        <button
-          type="button"
-          className="modal-close"
-          onClick={onClose}
-          aria-label="Đóng tư vấn chọn xe"
-        >
-          ×
-        </button>
+      <div className="modal-content modal-content--shell finder-modal-content">
+        {/* Sticky Top Navigation Bar (iOS One-Hand Friendly >=44px) */}
+        <div className="modal-sticky-header">
+          <div className="modal-sticky-header-left">
+            {canGoBackStep ? (
+              <button
+                type="button"
+                className="modal-header-nav-btn"
+                onClick={onHistoryBack}
+                aria-label="Quay lại bước trước"
+              >
+                ← Quay lại
+              </button>
+            ) : (
+              <span className="modal-sticky-badge">TƯ VẤN CHỌN XE</span>
+            )}
+            <span className="modal-sticky-step-label">
+              {showResults ? 'Kết quả đề xuất' : `Bước ${step + 1}/4`}
+            </span>
+          </div>
 
-        <div className="finder-modal-header">
-          <p className="catalog-eyebrow">SMART CAR &amp; TRIM FINDER</p>
-          <h2 id="finder-modal-title" className="modal-title">
-            {showResults
-              ? 'Cấu Hình Ford Đề Xuất Dành Riêng Cho Bạn'
-              : 'Tư Vấn Chọn Xe & Phiên Bản Ford Phù Hợp'}
-          </h2>
-          {!showResults && (
-            <div className="finder-progress-wrap" aria-label={`Tiến độ bước ${step + 1} trên 4`}>
-              <div className="finder-progress-steps">
-                {[0, 1, 2, 3].map((idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={`finder-step-dot ${idx === step ? 'is-current' : ''} ${
-                      idx < step ? 'is-done' : ''
-                    }`}
-                    onClick={() => setStep(idx)}
-                  >
-                    {idx + 1}
-                  </button>
-                ))}
+          <button
+            type="button"
+            className="modal-close modal-close--pill"
+            onClick={onClose}
+            aria-label="Đóng tư vấn chọn xe"
+          >
+            ✕ Đóng
+          </button>
+        </div>
+
+        <div className="modal-scroll-body">
+          <div className="finder-modal-header">
+            <p className="catalog-eyebrow">SMART CAR &amp; TRIM FINDER</p>
+            <h2 id="finder-modal-title" className="modal-title">
+              {showResults
+                ? 'Cấu Hình Ford Đề Xuất Dành Riêng Cho Bạn'
+                : 'Tư Vấn Chọn Xe & Phiên Bản Ford Phù Hợp'}
+            </h2>
+            {!showResults && (
+              <div
+                className="finder-progress-wrap"
+                aria-label={`Tiến độ bước ${step + 1} trên 4`}
+              >
+                <div className="finder-progress-steps">
+                  {[0, 1, 2, 3].map((idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`finder-step-dot ${idx === step ? 'is-current' : ''} ${
+                        idx < step ? 'is-done' : ''
+                      }`}
+                      onClick={() =>
+                        onStepChange({
+                          step: idx,
+                          showResults: false,
+                          answers,
+                        })
+                      }
+                    >
+                      {idx + 1}
+                    </button>
+                  ))}
+                </div>
+                <div className="finder-progress-bar">
+                  <div
+                    className="finder-progress-fill"
+                    style={{ width: `${((step + 1) / 4) * 100}%` }}
+                  />
+                </div>
               </div>
-              <div className="finder-progress-bar">
-                <div
-                  className="finder-progress-fill"
-                  style={{ width: `${((step + 1) / 4) * 100}%` }}
-                />
+            )}
+          </div>
+
+          {!showResults ? (
+            <div className="finder-step-body">
+              <h3 className="finder-step-question">{STEP_TITLES[step]}</h3>
+
+              {step === 0 && (
+                <div className="finder-options-grid">
+                  {BUDGET_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      className={`finder-option-card ${answers.budget === opt.id ? 'is-selected' : ''}`}
+                      onClick={() => handlePickOption('budget', opt.id, true)}
+                    >
+                      <strong>{opt.label}</strong>
+                      <span>{opt.hint}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {step === 1 && (
+                <div className="finder-options-grid finder-options-grid--single">
+                  {PURPOSE_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      className={`finder-option-card ${answers.purpose === opt.id ? 'is-selected' : ''}`}
+                      onClick={() => handlePickOption('purpose', opt.id, true)}
+                    >
+                      <strong>{opt.label}</strong>
+                      <span>{opt.hint}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="finder-options-grid">
+                  {PREFERENCE_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      className={`finder-option-card ${answers.preference === opt.id ? 'is-selected' : ''}`}
+                      onClick={() => handlePickOption('preference', opt.id, true)}
+                    >
+                      <strong>{opt.label}</strong>
+                      <span>{opt.hint}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {step === 3 && (
+                <div className="finder-options-grid">
+                  {DEALER_CITIES.map((cityName) => {
+                    const displayCity =
+                      cityName === 'Tất cả tỉnh/thành'
+                        ? 'Toàn quốc (25 showroom)'
+                        : cityName;
+                    return (
+                      <button
+                        key={cityName}
+                        type="button"
+                        className={`finder-option-card ${answers.city === cityName ? 'is-selected' : ''}`}
+                        onClick={() =>
+                          onStepChange({
+                            step: 3,
+                            showResults: true,
+                            answers: { ...answers, city: cityName },
+                          })
+                        }
+                      >
+                        <strong>{displayCity}</strong>
+                        <span>
+                          {cityName === 'Tất cả tỉnh/thành'
+                            ? 'Tìm showroom có xe sẵn trên toàn bộ 6 Thành phố trực thuộc TW'
+                            : `Lọc ưu tiên showroom Ford còn xe sẵn tại ${cityName}`}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="finder-results-body">
+              <div className="finder-criteria-summary">
+                <span>
+                  Ngân sách:{' '}
+                  <strong>
+                    {BUDGET_OPTIONS.find((b) => b.id === answers.budget)?.label}
+                  </strong>
+                </span>
+                <span>
+                  Nhu cầu:{' '}
+                  <strong>
+                    {PURPOSE_OPTIONS.find((p) => p.id === answers.purpose)?.label}
+                  </strong>
+                </span>
+                <span>
+                  Khu vực:{' '}
+                  <strong>
+                    {answers.city === 'Tất cả tỉnh/thành' ? 'Toàn quốc' : answers.city}
+                  </strong>
+                </span>
+              </div>
+
+              <div className="finder-results-list">
+                {recommendations.map((rec, index) => {
+                  const isTopPick = index === 0;
+                  const branchesPreview = rec.matchingBranches.slice(0, 3);
+                  return (
+                    <article
+                      key={rec.id}
+                      className={`finder-result-card ${isTopPick ? 'is-top-pick' : ''}`}
+                    >
+                      <div className="finder-result-top-badges">
+                        <span
+                          className={`finder-rank-badge ${isTopPick ? 'is-primary' : 'is-alt'}`}
+                        >
+                          {isTopPick
+                            ? '★ TOP 1 — LỰA CHỌN TỐI ƯU NHẤT'
+                            : `LỰA CHỌN THAY THẾ #${index}`}
+                        </span>
+                        <span className="finder-match-badge">
+                          Phù hợp {rec.matchPercent}%
+                        </span>
+                      </div>
+
+                      <div className="finder-result-main">
+                        <div className="finder-result-media">
+                          <img
+                            src={rec.image}
+                            alt={`${rec.carName} - ${rec.displayConfigName}`}
+                            onError={(event) =>
+                              handleCarImageError(event, rec.carName, rec.car.category)
+                            }
+                          />
+                        </div>
+
+                        <div className="finder-result-info">
+                          <h3 className="finder-result-title">
+                            {rec.carName}
+                            {rec.year ? ` (${rec.year})` : ''} — {rec.displayConfigName}
+                          </h3>
+                          <p className="finder-result-price">
+                            Giá niêm yết: <strong>{formatVND(rec.price)}</strong>
+                          </p>
+
+                          <div className="finder-reasons-box">
+                            <span className="finder-reasons-label">
+                              Vì sao cấu hình này hợp với bạn:
+                            </span>
+                            <ul className="finder-reasons-list">
+                              {rec.reasons.map((reason) => (
+                                <li key={reason}>{reason}</li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="finder-stock-box">
+                            <div className="finder-stock-header">
+                              <span className="finder-stock-title">
+                                Tình trạng sẵn kho tại{' '}
+                                {answers.city === 'Tất cả tỉnh/thành'
+                                  ? 'Toàn quốc'
+                                  : answers.city}
+                                :
+                              </span>
+                              <span
+                                className={`branch-status ${
+                                  rec.totalCityStock > 0 ? 'is-in' : 'is-out'
+                                }`}
+                              >
+                                {rec.totalCityStock > 0
+                                  ? `Còn ${rec.totalCityStock} xe sẵn giao`
+                                  : 'Đặt hàng trước'}
+                              </span>
+                            </div>
+
+                            {branchesPreview.length > 0 && (
+                              <div className="finder-branches-preview">
+                                {branchesPreview.map((branch) => {
+                                  const { primaryAddress, legacyAddress } =
+                                    formatBranchAddress(branch.address);
+                                  return (
+                                    <div
+                                      key={branch.branchId}
+                                      className="finder-branch-mini"
+                                    >
+                                      <div className="finder-branch-mini-top">
+                                        <strong>
+                                          {branch.branch} ({branch.trimQty} chiếc)
+                                        </strong>
+                                        <div className="finder-branch-colors">
+                                          {branch.displayColors.slice(0, 4).map((cName) => (
+                                            <span key={cName} className="color-chip">
+                                              <span
+                                                className="color-dot"
+                                                style={{
+                                                  backgroundColor:
+                                                    COLOR_SWATCHES[cName] || '#94a3b8',
+                                                }}
+                                              />
+                                              {cName}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                      <span className="branch-address-primary">
+                                        {primaryAddress}
+                                      </span>
+                                      {legacyAddress && (
+                                        <span className="branch-address-legacy">
+                                          {legacyAddress}
+                                        </span>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="finder-result-actions">
+                            <button
+                              type="button"
+                              className="pill-btn pill-btn--navy"
+                              onClick={() =>
+                                onSelectRecommendation({
+                                  car: rec.car,
+                                  year: rec.year,
+                                  trimIndex: rec.trimIndex,
+                                  engineIndex: rec.engineIndex,
+                                  color: rec.defaultColor,
+                                  city: answers.city,
+                                })
+                              }
+                            >
+                              Chọn cấu hình &amp; Đặt giữ xe →
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           )}
         </div>
 
-        {!showResults ? (
-          <div className="finder-step-body">
-            <h3 className="finder-step-question">{STEP_TITLES[step]}</h3>
-
-            {step === 0 && (
-              <div className="finder-options-grid">
-                {BUDGET_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    className={`finder-option-card ${answers.budget === opt.id ? 'is-selected' : ''}`}
-                    onClick={() => handlePickOption('budget', opt.id, true)}
-                  >
-                    <strong>{opt.label}</strong>
-                    <span>{opt.hint}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {step === 1 && (
-              <div className="finder-options-grid finder-options-grid--single">
-                {PURPOSE_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    className={`finder-option-card ${answers.purpose === opt.id ? 'is-selected' : ''}`}
-                    onClick={() => handlePickOption('purpose', opt.id, true)}
-                  >
-                    <strong>{opt.label}</strong>
-                    <span>{opt.hint}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="finder-options-grid">
-                {PREFERENCE_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    className={`finder-option-card ${answers.preference === opt.id ? 'is-selected' : ''}`}
-                    onClick={() => handlePickOption('preference', opt.id, true)}
-                  >
-                    <strong>{opt.label}</strong>
-                    <span>{opt.hint}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {step === 3 && (
-              <div className="finder-options-grid">
-                {DEALER_CITIES.map((cityName) => {
-                  const displayCity =
-                    cityName === 'Tất cả tỉnh/thành'
-                      ? 'Toàn quốc (25 showroom)'
-                      : cityName;
-                  return (
-                    <button
-                      key={cityName}
-                      type="button"
-                      className={`finder-option-card ${answers.city === cityName ? 'is-selected' : ''}`}
-                      onClick={() => {
-                        setAnswers((prev) => ({ ...prev, city: cityName }));
-                        setShowResults(true);
-                      }}
-                    >
-                      <strong>{displayCity}</strong>
-                      <span>
-                        {cityName === 'Tất cả tỉnh/thành'
-                          ? 'Tìm showroom có xe sẵn trên toàn bộ 6 Thành phố trực thuộc TW'
-                          : `Lọc ưu tiên showroom Ford còn xe sẵn tại ${cityName}`}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            <div className="finder-step-footer">
+        {/* Sticky Bottom Action Bar (iOS Safe Area & Thumb Zone) */}
+        <div className="modal-sticky-footer finder-sticky-footer">
+          {!showResults ? (
+            <>
               <button
                 type="button"
-                className="pill-btn pill-btn--outline-navy"
+                className="pill-btn pill-btn--outline-navy finder-footer-btn"
                 disabled={step === 0}
-                onClick={() => setStep((prev) => Math.max(0, prev - 1))}
+                onClick={onHistoryBack}
               >
-                ← Quay lại
+                ← Bước trước
               </button>
               {step < 3 ? (
                 <button
                   type="button"
-                  className="pill-btn pill-btn--navy"
-                  onClick={() => setStep((prev) => prev + 1)}
+                  className="pill-btn pill-btn--navy finder-footer-btn"
+                  onClick={() =>
+                    onStepChange({
+                      step: step + 1,
+                      showResults: false,
+                      answers,
+                    })
+                  }
                 >
                   Tiếp tục →
                 </button>
               ) : (
                 <button
                   type="button"
-                  className="pill-btn pill-btn--navy"
-                  onClick={() => setShowResults(true)}
+                  className="pill-btn pill-btn--navy finder-footer-btn"
+                  onClick={() =>
+                    onStepChange({
+                      step: 3,
+                      showResults: true,
+                      answers,
+                    })
+                  }
                 >
                   Xem kết quả đề xuất →
                 </button>
               )}
-            </div>
-          </div>
-        ) : (
-          <div className="finder-results-body">
-            <div className="finder-criteria-summary">
-              <span>
-                Ngân sách:{' '}
-                <strong>
-                  {BUDGET_OPTIONS.find((b) => b.id === answers.budget)?.label}
-                </strong>
-              </span>
-              <span>
-                Nhu cầu:{' '}
-                <strong>
-                  {PURPOSE_OPTIONS.find((p) => p.id === answers.purpose)?.label}
-                </strong>
-              </span>
-              <span>
-                Khu vực:{' '}
-                <strong>
-                  {answers.city === 'Tất cả tỉnh/thành' ? 'Toàn quốc' : answers.city}
-                </strong>
-              </span>
-            </div>
-
-            <div className="finder-results-list">
-              {recommendations.map((rec, index) => {
-                const isTopPick = index === 0;
-                const branchesPreview = rec.matchingBranches.slice(0, 3);
-                return (
-                  <article
-                    key={rec.id}
-                    className={`finder-result-card ${isTopPick ? 'is-top-pick' : ''}`}
-                  >
-                    <div className="finder-result-top-badges">
-                      <span
-                        className={`finder-rank-badge ${isTopPick ? 'is-primary' : 'is-alt'}`}
-                      >
-                        {isTopPick
-                          ? '★ TOP 1 — LỰA CHỌN TỐI ƯU NHẤT'
-                          : `LỰA CHỌN THAY THẾ #${index}`}
-                      </span>
-                      <span className="finder-match-badge">
-                        Phù hợp {rec.matchPercent}%
-                      </span>
-                    </div>
-
-                    <div className="finder-result-main">
-                      <div className="finder-result-media">
-                        <img
-                          src={rec.image}
-                          alt={`${rec.carName} - ${rec.displayConfigName}`}
-                          onError={(event) =>
-                            handleCarImageError(event, rec.carName, rec.car.category)
-                          }
-                        />
-                      </div>
-
-                      <div className="finder-result-info">
-                        <h3 className="finder-result-title">
-                          {rec.carName}
-                          {rec.year ? ` (${rec.year})` : ''} — {rec.displayConfigName}
-                        </h3>
-                        <p className="finder-result-price">
-                          Giá niêm yết: <strong>{formatVND(rec.price)}</strong>
-                        </p>
-
-                        <div className="finder-reasons-box">
-                          <span className="finder-reasons-label">
-                            Vì sao cấu hình này hợp với bạn:
-                          </span>
-                          <ul className="finder-reasons-list">
-                            {rec.reasons.map((reason) => (
-                              <li key={reason}>{reason}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="finder-stock-box">
-                          <div className="finder-stock-header">
-                            <span className="finder-stock-title">
-                              Tình trạng sẵn kho tại{' '}
-                              {answers.city === 'Tất cả tỉnh/thành'
-                                ? 'Toàn quốc'
-                                : answers.city}
-                              :
-                            </span>
-                            <span
-                              className={`branch-status ${
-                                rec.totalCityStock > 0 ? 'is-in' : 'is-out'
-                              }`}
-                            >
-                              {rec.totalCityStock > 0
-                                ? `Còn ${rec.totalCityStock} xe sẵn giao`
-                                : 'Đặt hàng trước'}
-                            </span>
-                          </div>
-
-                          {branchesPreview.length > 0 && (
-                            <div className="finder-branches-preview">
-                              {branchesPreview.map((branch) => {
-                                const { primaryAddress, legacyAddress } =
-                                  formatBranchAddress(branch.address);
-                                return (
-                                  <div
-                                    key={branch.branchId}
-                                    className="finder-branch-mini"
-                                  >
-                                    <div className="finder-branch-mini-top">
-                                      <strong>
-                                        {branch.branch} ({branch.trimQty} chiếc)
-                                      </strong>
-                                      <div className="finder-branch-colors">
-                                        {branch.displayColors.slice(0, 4).map((cName) => (
-                                          <span key={cName} className="color-chip">
-                                            <span
-                                              className="color-dot"
-                                              style={{
-                                                backgroundColor:
-                                                  COLOR_SWATCHES[cName] || '#94a3b8',
-                                              }}
-                                            />
-                                            {cName}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                    <span className="branch-address-primary">
-                                      {primaryAddress}
-                                    </span>
-                                    {legacyAddress && (
-                                      <span className="branch-address-legacy">
-                                        {legacyAddress}
-                                      </span>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="finder-result-actions">
-                          <button
-                            type="button"
-                            className="pill-btn pill-btn--navy"
-                            onClick={() =>
-                              onSelectRecommendation({
-                                car: rec.car,
-                                year: rec.year,
-                                trimIndex: rec.trimIndex,
-                                engineIndex: rec.engineIndex,
-                                color: rec.defaultColor,
-                                city: answers.city,
-                              })
-                            }
-                          >
-                            Chọn cấu hình &amp; Đặt giữ xe →
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="finder-step-footer">
+            </>
+          ) : (
+            <>
               <button
                 type="button"
-                className="pill-btn pill-btn--outline-navy"
+                className="pill-btn pill-btn--outline-navy finder-footer-btn"
+                onClick={onHistoryBack}
+              >
+                ← Bước trước
+              </button>
+              <button
+                type="button"
+                className="pill-btn pill-btn--outline-navy finder-footer-btn"
                 onClick={handleRestart}
               >
                 ↺ Làm lại trắc nghiệm
               </button>
-              <button
-                type="button"
-                className="pill-btn pill-btn--outline-navy"
-                onClick={() => {
-                  setShowResults(false);
-                  setStep(3);
-                }}
-              >
-                Đổi khu vực nhận xe
-              </button>
-            </div>
-          </div>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

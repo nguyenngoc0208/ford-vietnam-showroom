@@ -1641,7 +1641,7 @@
   position: relative;
   width: 100%;
   max-width: 980px;
-  max-height: 92vh;
+  max-height: 92dvh;
   overflow-y: auto;
   background: #ffffff;
   border-radius: 18px;
@@ -1649,27 +1649,131 @@
   box-shadow: 0 24px 60px rgba(0, 9, 91, 0.28);
 }
 
+.modal-content--shell {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eef2f6;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.modal-sticky-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.modal-sticky-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--ford-navy);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-sticky-step-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ford-blue);
+  white-space: nowrap;
+}
+
+.modal-header-nav-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  border: 1.5px solid #cbd5e1;
+  background-color: #ffffff;
+  color: var(--ford-navy);
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.modal-header-nav-btn:hover {
+  background-color: #f1f5f9;
+  border-color: var(--ford-navy);
+}
+
+.modal-scroll-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 24px 24px;
+}
+
+.modal-sticky-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid #eef2f6;
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .utility-modal-content {
   max-width: 720px;
 }
 
 .modal-close {
-  position: sticky;
-  top: 0;
-  float: right;
-  width: 38px;
-  height: 38px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
   border-radius: 9999px;
   border: 1px solid #e2e8f0;
   background: #f8fafc;
   color: var(--ford-navy);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   z-index: 2;
+}
+
+.modal-close--pill {
+  padding: 0 15px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 4px;
 }
 
 .modal-close:hover {
@@ -2316,7 +2420,7 @@
 .account-panel {
   width: 100%;
   max-width: 480px;
-  height: 100vh;
+  height: 100dvh;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -3706,6 +3810,16 @@
   justify-content: flex-end;
 }
 
+.finder-footer-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.finder-sticky-footer button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .nav-finder-btn {
     display: none;
@@ -3722,8 +3836,10 @@
     grid-template-columns: 1fr;
   }
 
-  .finder-step-footer {
-    flex-wrap: wrap;
+  .finder-sticky-footer .finder-footer-btn {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 0.84rem;
   }
 }
 
@@ -3772,13 +3888,29 @@
   }
 
   .modal-overlay {
-    padding: 10px;
+    padding: 8px 8px max(8px, env(safe-area-inset-bottom));
   }
 
   .modal-content {
     padding: 16px;
     border-radius: 14px;
-    max-height: 94vh;
+    max-height: 92dvh;
+  }
+
+  .modal-content--shell {
+    padding: 0;
+  }
+
+  .modal-sticky-header {
+    padding: 8px 12px;
+  }
+
+  .modal-scroll-body {
+    padding: 14px 14px 18px;
+  }
+
+  .modal-sticky-footer {
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   }
 
   .modal-image-wrapper {

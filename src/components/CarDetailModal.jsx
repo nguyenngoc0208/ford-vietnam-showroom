@@ -28,6 +28,8 @@ export default function CarDetailModal({
   initialTrimIndex = 0,
   initialEngineIndex = 0,
   initialCity = 'Tất cả tỉnh/thành',
+  canGoBack = false,
+  onHistoryBack,
   onReserveVehicle,
   onClose,
 }) {
@@ -232,16 +234,35 @@ export default function CarDetailModal({
       aria-modal="true"
       aria-labelledby="modal-car-title"
     >
-      <div className="modal-content">
-        <button
-          type="button"
-          className="modal-close"
-          onClick={onClose}
-          aria-label="Đóng chi tiết xe"
-        >
-          ×
-        </button>
+      <div className="modal-content modal-content--shell">
+        <div className="modal-sticky-header">
+          <div className="modal-sticky-header-left">
+            {canGoBack && onHistoryBack && (
+              <button
+                type="button"
+                className="modal-header-nav-btn"
+                onClick={onHistoryBack}
+                aria-label="Quay lại bước trước"
+              >
+                ← Quay lại
+              </button>
+            )}
+            <span className="modal-sticky-badge">
+              {yearVariant.name}
+              {selectedYear ? ` (${selectedYear})` : ''}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="modal-close modal-close--pill"
+            onClick={onClose}
+            aria-label="Đóng chi tiết xe"
+          >
+            ✕ Đóng
+          </button>
+        </div>
 
+        <div className="modal-scroll-body">
         {/* Overview */}
         <div className="modal-overview">
           <div className="modal-overview-media">
@@ -666,6 +687,7 @@ export default function CarDetailModal({
             )}
           </section>
         )}
+        </div>
       </div>
     </div>
   );

@@ -45,11 +45,11 @@ export default function AccountModal({
           </div>
           <button
             type="button"
-            className="modal-close"
+            className="modal-close modal-close--pill"
             onClick={onClose}
             aria-label="Đóng bảng tài khoản"
           >
-            ×
+            ✕ Đóng
           </button>
         </div>
 

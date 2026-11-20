@@ -79,6 +79,8 @@ function getDefaultDateString() {
 export default function UtilityModal({
   cars,
   mode,
+  canGoBack = false,
+  onHistoryBack,
   onClose,
   onSelectCar,
   onSelectBranchFilter,
@@ -194,16 +196,38 @@ export default function UtilityModal({
       aria-modal="true"
       aria-labelledby="utility-modal-title"
     >
-      <div className="modal-content utility-modal-content">
-        <button
-          type="button"
-          className="modal-close"
-          onClick={onClose}
-          aria-label="Đóng hộp thoại"
-        >
-          ×
-        </button>
+      <div className="modal-content modal-content--shell utility-modal-content">
+        <div className="modal-sticky-header">
+          <div className="modal-sticky-header-left">
+            {canGoBack && onHistoryBack && (
+              <button
+                type="button"
+                className="modal-header-nav-btn"
+                onClick={onHistoryBack}
+                aria-label="Quay lại"
+              >
+                ← Quay lại
+              </button>
+            )}
+            <span className="modal-sticky-badge">
+              {isDealers
+                ? 'TÌM ĐẠI LÝ FORD'
+                : isCalculator
+                  ? 'BẢNG GIÁ & LĂN BÁNH'
+                  : 'ĐĂNG KÝ LÁI THỬ'}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="modal-close modal-close--pill"
+            onClick={onClose}
+            aria-label="Đóng hộp thoại"
+          >
+            ✕ Đóng
+          </button>
+        </div>
 
+        <div className="modal-scroll-body">
         {isDealers ? (
           <div>
             <p className="catalog-eyebrow">HỆ THỐNG ĐẠI LÝ ỦY QUYỀN TOÀN QUỐC</p>
@@ -553,6 +577,7 @@ export default function UtilityModal({
             )}
           </div>
         )}
+        </div>
       </div>
     </div>
   );

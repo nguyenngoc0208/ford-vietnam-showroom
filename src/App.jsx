@@ -80,6 +80,28 @@ function serializeStockMap(carsList) {
   return map;
 }
 
+const EMPTY_MODAL_CAR_STATE = {
+  carId: null,
+  color: '',
+  year: '',
+  trimIndex: 0,
+  engineIndex: 0,
+  city: null,
+};
+
+function createInitialFinderState(city = 'Tất cả tỉnh/thành') {
+  return {
+    step: 0,
+    showResults: false,
+    answers: {
+      budget: '800-1100',
+      purpose: 'versatile-work',
+      preference: 'latest-2026',
+      city: city || 'Tất cả tỉnh/thành',
+    },
+  };
+}
+
 export default function App() {
   const [cars, setCars] = useState(buildInitialCars);
   const [reservations, setReservations] = useState(() =>
@@ -94,39 +116,165 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
   const [selectedCity, setSelectedCity] = useState('Tất cả tỉnh/thành');
   const [selectedBranchId, setSelectedBranchId] = useState('all');
-  const [modalCarState, setModalCarState] = useState({
-    carId: null,
-    color: '',
-    year: '',
-    trimIndex: 0,
-    engineIndex: 0,
-    city: null,
-  });
+  const [modalCarState, setModalCarState] = useState(EMPTY_MODAL_CAR_STATE);
   const [finderOpen, setFinderOpen] = useState(false);
+  const [finderState, setFinderState] = useState(() =>
+    createInitialFinderState('Tất cả tỉnh/thành'),
+  );
   const [utilityModalMode, setUtilityModalMode] = useState(null);
   const [accountOpen, setAccountOpen] = useState(false);
 
   const [compareIds, setCompareIds] = useState([]);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [historyDepth, setHistoryDepth] = useState(0);
   const [toast, setToast] = useState(null);
 
   const catalogRef = useRef(null);
   const searchInputRef = useRef(null);
   const toastTimerRef = useRef(null);
 
+  const resetAllOverlays = () => {
+    setFinderOpen(false);
+    setModalCarState(EMPTY_MODAL_CAR_STATE);
+    setUtilityModalMode(null);
+    setCompareOpen(false);
+    setAccountOpen(false);
+  };
+
   useEffect(() => {
+    // Normalize initial base entry so popping modal depth never exits the app
+    const currentState = window.history.state || {};
+    if (currentState.fordView || currentState.fordDepth) {
+      window.history.replaceState(
+        { ...currentState, fordView: null, fordDepth: 0 },
+        '',
+      );
+    }
+
+    const handlePopState = (event) => {
+      const nextState = event.state;
+      const depth = nextState?.fordDepth || 0;
+      setHistoryDepth(depth);
+      const view = nextState?.fordView || null;
+
+      setFinderOpen(view === 'finder');
+      if (view === 'finder' && nextState.finderState) {
+        setFinderState(nextState.finderState);
+      }
+
+      if (view === 'car' && nextState.carId) {
+        setModalCarState({
+          carId: nextState.carId,
+          color: nextState.color || '',
+          year: nextState.year || '',
+          trimIndex: nextState.trimIndex ?? 0,
+          engineIndex: nextState.engineIndex ?? 0,
+          city: nextState.city || null,
+        });
+      } else {
+        setModalCarState(EMPTY_MODAL_CAR_STATE);
+      }
+
+      setUtilityModalMode(view === 'utility' ? nextState.mode : null);
+      setCompareOpen(view === 'compare');
+      setAccountOpen(view === 'account');
+    };
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 36);
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('popstate', handlePopState);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('popstate', handlePopState);
       if (toastTimerRef.current) {
         window.clearTimeout(toastTimerRef.current);
       }
     };
   }, []);
+
+  const pushHistoryView = (snapshot) => {
+    const nextDepth = (window.history.state?.fordDepth || 0) + 1;
+    window.history.pushState({ ...snapshot, fordDepth: nextDepth }, '');
+    setHistoryDepth(nextDepth);
+  };
+
+  const dismissAllModals = () => {
+    resetAllOverlays();
+    const depth = window.history.state?.fordDepth || 0;
+    if (depth > 0) {
+      setHistoryDepth(0);
+      window.history.go(-depth);
+    }
+  };
+
+  const handleHistoryBack = () => {
+    if ((window.history.state?.fordDepth || 0) > 0) {
+      window.history.back();
+    } else {
+      dismissAllModals();
+    }
+  };
+
+  const openCarModal = ({
+    car,
+    color = '',
+    year = '',
+    trimIndex = 0,
+    engineIndex = 0,
+    city = null,
+  }) => {
+    const resolvedYear = year || car.defaultYear || '';
+    const resolvedColor =
+      color ||
+      getCarYearVariant(car, resolvedYear)?.defaultColor ||
+      car.colors?.[0]?.name ||
+      '';
+    const nextCarState = {
+      carId: car.id,
+      color: resolvedColor,
+      year: resolvedYear,
+      trimIndex,
+      engineIndex,
+      city,
+    };
+    resetAllOverlays();
+    setModalCarState(nextCarState);
+    pushHistoryView({ fordView: 'car', ...nextCarState });
+  };
+
+  const openFinderModal = () => {
+    const initFinder = createInitialFinderState(selectedCity);
+    resetAllOverlays();
+    setFinderState(initFinder);
+    setFinderOpen(true);
+    pushHistoryView({ fordView: 'finder', finderState: initFinder });
+  };
+
+  const handleFinderStepChange = (nextFinderState) => {
+    setFinderState(nextFinderState);
+    pushHistoryView({ fordView: 'finder', finderState: nextFinderState });
+  };
+
+  const openUtilityModal = (mode) => {
+    resetAllOverlays();
+    setUtilityModalMode(mode);
+    pushHistoryView({ fordView: 'utility', mode });
+  };
+
+  const openCompareModal = () => {
+    resetAllOverlays();
+    setCompareOpen(true);
+    pushHistoryView({ fordView: 'compare' });
+  };
+
+  const openAccountModal = () => {
+    resetAllOverlays();
+    setAccountOpen(true);
+    pushHistoryView({ fordView: 'account' });
+  };
 
   const showToast = (title, message, type = 'success') => {
     if (toastTimerRef.current) {
@@ -214,8 +362,8 @@ export default function App() {
 
   const openCarById = (carId) => {
     const found = cars.find((item) => item.id === carId) || cars[0];
-    setModalCarState({
-      carId: found.id,
+    openCarModal({
+      car: found,
       color: found.colors?.[0]?.name || '',
       year: found.defaultYear || '',
     });
@@ -403,19 +551,10 @@ export default function App() {
           scrollToCatalog(false);
         }}
         onOpenSearch={() => scrollToCatalog(true)}
-        onOpenFinder={() => setFinderOpen(true)}
-        onSelectCar={(car, year) =>
-          setModalCarState({
-            carId: car.id,
-            color:
-              getCarYearVariant(car, year)?.defaultColor ||
-              car.colors?.[0]?.name ||
-              '',
-            year: year || car.defaultYear || '',
-          })
-        }
-        onOpenUtilityModal={(mode) => setUtilityModalMode(mode)}
-        onOpenAccountModal={() => setAccountOpen(true)}
+        onOpenFinder={openFinderModal}
+        onSelectCar={(car, year) => openCarModal({ car, year })}
+        onOpenUtilityModal={openUtilityModal}
+        onOpenAccountModal={openAccountModal}
       />
 
       <main>
@@ -426,9 +565,9 @@ export default function App() {
 
         <QuickActionsBar
           onScrollToInventory={() => scrollToCatalog(false)}
-          onOpenPromo={() => setUtilityModalMode('calculator')}
-          onOpenTestDrive={() => setUtilityModalMode('test-drive')}
-          onFocusDealers={() => setUtilityModalMode('dealers')}
+          onOpenPromo={() => openUtilityModal('calculator')}
+          onOpenTestDrive={() => openUtilityModal('test-drive')}
+          onFocusDealers={() => openUtilityModal('dealers')}
         />
 
         <section
@@ -463,7 +602,7 @@ export default function App() {
               <button
                 type="button"
                 className="pill-btn pill-btn--white finder-promo-cta"
-                onClick={() => setFinderOpen(true)}
+                onClick={openFinderModal}
               >
                 Bắt đầu tư vấn →
               </button>
@@ -572,7 +711,7 @@ export default function App() {
                     isCompared={compareIds.includes(car.id)}
                     onToggleCompare={handleToggleCompare}
                     onSelect={(selected, color, year) =>
-                      setModalCarState({ carId: selected.id, color, year })
+                      openCarModal({ car: selected, color, year })
                     }
                   />
                 ))}
@@ -657,28 +796,28 @@ export default function App() {
               <button
                 type="button"
                 className="footer-link-btn"
-                onClick={() => setUtilityModalMode('calculator')}
+                onClick={() => openUtilityModal('calculator')}
               >
                 Bảng giá &amp; Dự toán chi phí lăn bánh
               </button>
               <button
                 type="button"
                 className="footer-link-btn"
-                onClick={() => setUtilityModalMode('test-drive')}
+                onClick={() => openUtilityModal('test-drive')}
               >
                 Đăng ký lái thử xe tại Showroom
               </button>
               <button
                 type="button"
                 className="footer-link-btn"
-                onClick={() => setUtilityModalMode('dealers')}
+                onClick={() => openUtilityModal('dealers')}
               >
                 Tìm {FORD_BRANCHES.length} Showroom toàn quốc &amp; Chỉ đường Maps
               </button>
               <button
                 type="button"
                 className="footer-link-btn"
-                onClick={() => setAccountOpen(true)}
+                onClick={openAccountModal}
               >
                 Quản lý đơn đặt giữ xe ({reservations.length})
               </button>
@@ -705,20 +844,16 @@ export default function App() {
           setCompareIds((prev) => prev.filter((id) => id !== carId))
         }
         onClearAll={() => setCompareIds([])}
-        onOpenCompare={() => setCompareOpen(true)}
+        onOpenCompare={openCompareModal}
       />
 
       <CompareModal
         isOpen={compareOpen}
         cars={compareCars}
-        onSelectCar={(car) =>
-          setModalCarState({
-            carId: car.id,
-            color: car.colors?.[0]?.name || '',
-            year: car.defaultYear || '',
-          })
-        }
-        onClose={() => setCompareOpen(false)}
+        canGoBack={historyDepth > 1}
+        onHistoryBack={handleHistoryBack}
+        onSelectCar={(car) => openCarModal({ car })}
+        onClose={dismissAllModals}
       />
 
       <CarDetailModal
@@ -733,24 +868,18 @@ export default function App() {
         initialTrimIndex={modalCarState.trimIndex ?? 0}
         initialEngineIndex={modalCarState.engineIndex ?? 0}
         initialCity={modalCarState.city || selectedCity}
+        canGoBack={historyDepth > 1}
+        onHistoryBack={handleHistoryBack}
         onReserveVehicle={handleReserveVehicle}
-        onClose={() =>
-          setModalCarState({
-            carId: null,
-            color: '',
-            year: '',
-            trimIndex: 0,
-            engineIndex: 0,
-            city: null,
-          })
-        }
+        onClose={dismissAllModals}
       />
 
       <SmartCarFinderModal
-        key={finderOpen ? 'finder-open' : 'finder-closed'}
         isOpen={finderOpen}
         cars={cars}
-        initialCity={selectedCity}
+        finderState={finderState}
+        onStepChange={handleFinderStepChange}
+        onHistoryBack={handleHistoryBack}
         onSelectRecommendation={({
           car,
           year,
@@ -759,42 +888,30 @@ export default function App() {
           color,
           city,
         }) => {
-          setFinderOpen(false);
           if (city) {
             setSelectedCity(city);
             setSelectedBranchId('all');
           }
-          setModalCarState({
-            carId: car.id,
-            color:
-              color ||
-              getCarYearVariant(car, year)?.defaultColor ||
-              car.colors?.[0]?.name ||
-              '',
-            year: year || car.defaultYear || '',
+          openCarModal({
+            car,
+            year,
             trimIndex: trimIndex ?? 0,
             engineIndex: engineIndex ?? 0,
+            color,
             city: city || selectedCity,
           });
         }}
-        onClose={() => setFinderOpen(false)}
+        onClose={dismissAllModals}
       />
 
       <UtilityModal
         key={utilityModalMode || 'utility-closed'}
         cars={cars}
         mode={utilityModalMode}
-        onClose={() => setUtilityModalMode(null)}
-        onSelectCar={(car, year) =>
-          setModalCarState({
-            carId: car.id,
-            color:
-              getCarYearVariant(car, year)?.defaultColor ||
-              car.colors?.[0]?.name ||
-              '',
-            year: year || car.defaultYear || '',
-          })
-        }
+        canGoBack={historyDepth > 1}
+        onHistoryBack={handleHistoryBack}
+        onClose={dismissAllModals}
+        onSelectCar={(car, year) => openCarModal({ car, year })}
         onSelectBranchFilter={(branchId) => {
           const target = DEALER_BRANCHES.find((b) => b.id === branchId);
           setSelectedCity(target?.city || 'Tất cả tỉnh/thành');
@@ -810,7 +927,7 @@ export default function App() {
         testDrives={testDrives}
         onCancelReservation={handleCancelReservation}
         onResetInventory={handleResetInventory}
-        onClose={() => setAccountOpen(false)}
+        onClose={dismissAllModals}
       />
 
       {toast && (
